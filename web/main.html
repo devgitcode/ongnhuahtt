@@ -1,0 +1,139 @@
+<div class="container">
+  <div id="home" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#home" data-slide-to="0" class="active"></li>
+      <li data-target="#home" data-slide-to="1"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <img src="images/banner-img3.jpg" alt="...">
+
+      </div>
+      <div class="item">
+        <img src="images/banner-img.jpg" alt="...">
+
+      </div>
+
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#home" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Lui</span>
+    </a>
+    <a class="right carousel-control" href="#home" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Tiếp</span>
+    </a>
+  </div>
+</div>
+<!-- end Slider -->
+<!-- Offer Banner  -->
+<br/>
+
+<div class="container" oc-lazy-load="['css/owl.carousel.css','css/owl.theme.css','css/style.css','js/jquery.min.js','js/parallax.js','js/common.js','js/owl.carousel.min.js']">
+  <div class="new_title center">
+    <div class="title-category text-center"><span>Thông tin</span></div>
+  </div>
+  <div class="company-info">
+    <div ng-bind-html="companyInfo.content"></div>
+  </div>
+  <!--<drt-new-arrival ></drt-new-arrival>-->
+
+  <div class="row">
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+      <div class="title-block"><span>Thông tin công ty</span></div>
+      <div class="service">
+        <!--Dịch vụ đầu tiên-->
+        <div class="service-first">
+          <div class="item">
+            <div class="row">
+              <div class="col-md-6">
+                <a href="news/{{headNews.id}}" class="img" style="height: 199px;"><img width="300" height="200" src="{{headNews.image}}"
+                class="attachment-medium size-medium wp-post-image" alt="hoang-tung-khai-truong-show-room-moi" srcset="{{headNews.image}} 300w, {{headNews.image}} 623w"
+                sizes="(max-width: 300px) 100vw, 300px"></a>
+              </div>
+              <div class="col-md-6 infomation">
+                <h3><a href="news/{{headNews.id}}" title="{{headNews.title}}">{{headNews.title}}</a></h3>
+                <div class="info">{{headNews.content}}</div>
+                  <a href="news/{{headNews.id}}" title="Chi tiết" class="view-detail">Chi Tiết »</a>
+                </div>
+              </div>
+          </div>
+        </div>
+        <!--Dịch vụ đầu tiên-->
+        <!--Dịch vụ thứ 2 trở đi-->
+        <div class="service-second">
+          <ul class="row">
+            <li class="col-md-6" ng-repeat="x in headNewsTitles">
+              <h3>
+                <a href="news/{{x.id}}" title="{{x.title}}"><i class="fa fa-angle-double-right"></i>» {{x.title}}</a>
+              </h3>
+            </li>
+          </ul>
+        </div>
+        <!--Dịch vụ thứ 2 trở đi-->
+
+        <div class="clear"></div>
+      </div>
+  </div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+  <div class="block-right">
+    <div class="title-block"><span>Tin tức </span></div>
+    <div class="content-block block-news">
+      <ul>
+          <li ng-repeat="item in news">
+            <div class="item">
+              <a href="news/{{item.id}}" class="img"><img width="150" height="150" src="{{item.image}}"
+                  class="attachment-thumbnail size-thumbnail wp-post-image" alt="{{item.title}}"></a>
+              <h3><a href="news/{{item.id}}" title="{{item.title}}">{{item.title}}</a></h3>
+              <div class="info">
+                {{item.content}}
+              </div>
+            </div>
+          </li>
+      </ul>
+      <div class="clear"></div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+
+<!-- Offer Banner  -->
+
+<!-- main container -->
+
+
+<!-- End main container -->
+
+
+<div class="our-features-box">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <div class="feature-box">
+          <div class="icon-group">&nbsp;</div>
+          <div class="content">TƯ VẤN THIẾT KẾ<span>Dịch vụ tư vấn và thiết kế các công trình ống nước, ống nhựa của công ty Hoàng Anh Tuấn sẽ giúp bạn sắp xếp khoa học, và tối ưu hóa trong vận hành và hoạt động của ngành cấp thoát nước.</span>            </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <div class="feature-box">
+          <div class="icon-check">&nbsp;</div>
+          <div class="content">BẢO HÀNH ĐỊNH KỲ <span>Mở rộng dịch vụ bảo trì, bảo dưỡng kiểm tra các sản phẩm và phụ kiện trước khi đưa đến tay của khách hàng. Nhằm đảm bảo chất lượng và tránh trường hợp xảy ra sự cố.</span></div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4  col-xs-12">
+        <div class="feature-box">
+          <div class="icon-gears">&nbsp;</div>
+          <div class="content">SẢN PHẨM CHÍNH HÃNG <span>Các sản phẩm ốngvà phụ kiện của công ty chúng tôi đều được sản xuất trên công nghệ hiện đại, đảm bảo chất lượng cao. Mang đến cho khách hàng các sản phẩm chính hãng với giá tốt nhất hiện nay.</span>            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "Ong Nhua FrontEnd",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "build": "C:/Users/hao.nguyen/AppData/Roaming/npm/browserify D:/Work/Projects/NodeJS/OngNhuaHMT/frontend/js/ngcontroller/common/Constant.js -o D:/Work/Projects/NodeJS/OngNhuaHMT/frontend/js/runtime.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gitcode2017/ongnhuahmt.git"
+  },
+  "author": "Hao Nguyen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gitcode2017/ongnhuahmt/issues"
+  },
+  "homepage": "https://github.com/gitcode2017/ongnhuahmt#readme",
+  "dependencies": {
+    "angular": "^1.6.2",
+    "angular-route": "^1.6.2",
+    "express": "^4.14.1",
+    "serve": "^3.2.10"
+  }
+}

@@ -1,0 +1,27 @@
+<!-- breadcrumbs -->
+  <div class="breadcrumbs">
+    <div class="container">
+      <div class="row">
+        <ul>
+          <li class="home"> <a href="index.html" title="Go to Home Page">Trang chủ</a><span>&raquo; </span></li>
+          <li class=""> <a ui-sref="catalogue" title="Bảng giá & Catalogue"><strong>Bảng giá & Catalogue</strong></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container" style="min-height:100%;">
+    <h3>Bảng giá & Catalogue</h3>
+    <table class="table table-hover">
+        <th>#</th>
+        <th>Tên tập tin</th>
+        <th></th>
+        <tbody>
+            <tr ng-repeat="c in catalogues">
+                <td>{{$index+1}}</td>
+                <td>{{c.catalogue_name}}</td>
+                <td><a style="text-decoration: underline;" href="{{c.url}}">Tải về</a></td>
+            </tr>
+        </tbody>
+
+    </table>
+  </div>

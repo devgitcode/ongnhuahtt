@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="web.application">
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta charset="utf-8">
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>HOÀN TUẤN THÀNH - PLASTIC</title>
+
+<!-- Favicons Icon -->
+<!--<link rel="icon" href="http://demo.magikthemes.com/skin/frontend/base/default/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="http://demo.magikthemes.com/skin/frontend/base/default/favicon.ico" type="image/x-icon" />-->
+
+<!-- Mobile Specific -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS Style -->
+<!--<link rel="stylesheet" href="css/animate.css" type="text/css">-->
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+<!--<link rel="stylesheet" href="css/slider.css" type="text/css">-->
+<!--<link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
+<link rel="stylesheet" href="css/owl.theme.css" type="text/css">-->
+<link rel="stylesheet" href="css/font-awesome.css" type="text/css">
+<link rel="stylesheet" href="css/style.css" type="text/css">
+<link rel="stylesheet" href="css/site.css" type="text/css">
+
+<!-- Google Fonts -->
+<!--<link href='https://fonts.googleapis.com/css?family=Bitter:400,700,400italic' rel='stylesheet' type='text/css'>-->
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/ui-bootstrap-tpls-2.5.0.min.js"></script>
+<script type="text/javascript" src="js/ocLazyLoad.min.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>-->
+<script src="js/angular-ui-router.js"></script>
+<script src="js/angular-css.min.js"></script>
+<script type="text/javascript" src="js/ngcontroller/app.js"></script>
+<script type="text/javascript" src="js/ngcontroller/services/HomeService.js"></script>
+<script type="text/javascript" src="js/ngcontroller/services/ProductService.js"></script>
+<script type="text/javascript" src="js/ngcontroller/services/NewsService.js"></script>
+<script type="text/javascript" src="js/ngcontroller/services/CategoryService.js"></script>
+<script type="text/javascript" src="js/ngcontroller/services/CatalogueService.js"></script>
+
+<script type="text/javascript" src="js/ngcontroller/controller/HomeController.js"></script>
+<script type="text/javascript" src="js/ngcontroller/controller/ProductController.js"></script>
+<script type="text/javascript" src="js/ngcontroller/controller/CatalogueController.js"></script>
+</head>
+
+<body class="cms-index-index" ng-cloak>
+<div class="page" > 
+  <!-- Header -->
+  <header class="header-container">
+    <div class="header-top">
+      <!--TODO-->
+    </div>
+   
+    <div class="header container">
+      <div class="row">
+        <div class="col-lg-3 col-sm-4 col-md-3"> 
+          <!-- Header Logo -->
+          <div class="logo"> <a title="Hoàn Tuấn Thành" href="index.html"><img alt="Hoàn Tuấn Thành" height="118" src="images/logo.png"></a> </div>
+          <!-- End Header Logo --> 
+        </div>
+        <div class="col-lg-9 col-xs-12">
+            <div class="header-widgets">
+                <div class="widget col-md-12 col-sm-6 col-xs-12">
+                    <span class="title_1">CÔNG TY TNHH MTV SX - TM & XD</span><br>
+                    <span class="title_2">Hoàn Tuấn Thành</span><br>
+                    <span class="title_3" style="color: #e73344;font-weight: bold;">Đem Lại Sự An Tâm Về Chất Lượng Cho Công Trình Của Bạn</span>
+                    <div class="clear"></div>
+                </div>       
+            </div>
+        </div>
+      </div>
+    </div>
+   </header>
+  <!-- end header --> 
+  <!-- Navbar -->
+  <nav>
+    <div class="container">
+      <div class="nav-inner"> 
+        <!-- mobile-menu -->
+        <div class="hidden-desktop" id="mobile-menu">
+          <ul class="navmenu">
+            <li>
+              <div class="menutop">
+                <div class="toggle"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></div>
+              </div>
+              <ul style="display:none;" class="submenu">
+                <li>
+                  <ul class="topnav" ng-controller="HomeController">
+                    <li class="level0 "  ng-repeat="m in menus"> <a ui-sref="{{m.menu}}" ui-sref-opts="{reload: true}" class="level-top"> <span>{{m.label}}</span> </a></li>
+                    
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <!--navmenu--> 
+        </div>
+        
+        <!--End mobile-menu -->
+        <ul id="nav" class="hidden-xs" ng-controller="HomeController">
+          <li class="level0"  ng-repeat="m in menus"> <a  ui-sref="{{m.menu}}" ng-click="homeClick()" ui-sref-opts="{reload: true}" class="level-top"> <span>{{m.label}}</span> </a></li>
+        </ul>
+        <!-- Search-col -->
+        <!--<div class="search-box">
+          <form action="http://htmldemo.magikcommerce.com/ecommerce/accord_html/full-width/red/cat" method="POST" id="search_mini_form" name="Categories">
+            <input type="text" placeholder="Nhập từ khóa cần tìm..." value="" maxlength="70" name="search" id="search">
+            <button  class="btn btn-default  search-btn-bg"> <span class="glyphicon glyphicon-search"></span>&nbsp;</button>
+          </form>
+        </div>-->
+        <!-- End Search-col --> 
+      </div>
+    </div>
+  </nav>
+  <!-- end nav --> 
+  
+  <ui-view name="content" cache-view="false" ></ui-view>
+  <!--<drt-brand-logo></drt-brand-logo>-->
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-middle">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <div class="footer-logo"><a href="index.html" title="Logo"><img src="images/logo.png" height="100" alt="logo"></a></div>
+          </div>
+          <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12" ng-controller="HomeController">
+            <div ng-bind-html="footerInfo"></div>
+          </div>
+          
+          <div class="col-lg-3 col-xs-12">
+            <h3>MẠNG XÃ HỘI</h3>
+            <div class="social" >
+              <ul>
+                <li class="fb"><a href="#"></a></li>
+                <li class="googleplus"><a href="#"></a></li>
+                <li class="youtube"><a href="#"></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4 col-xs-12 coppyright"> &copy; 2017 E-Commerce. Bản quyền thuộc Dev Team.</div>
+          
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer --> 
+  
+</div>
+
+
+
+
+<!-- JavaScript --> 
+<script type="text/javascript" src="js/jquery.min.js"></script> 
+<script type="text/javascript" src="js/bootstrap.min.js"></script> 
+
+<!--<script type="text/javascript" src="js/parallax.js"></script> -->
+<!--<script type="text/javascript" src="js/common.js"></script> -->
+<!--<script type="text/javascript" src="js/slider.js"></script> -->
+<!--<script type="text/javascript" src="js/owl.carousel.min.js"></script> -->
+
+</body>
+
+<!-- Giao dien duoc chia se mien phi tai www.ptheme.net [Free HTML Download]. SKYPE[ptheme.net] - EMAIL[ptheme.net@gmail.com].-->
+</html>
