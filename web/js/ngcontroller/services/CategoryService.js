@@ -1,7 +1,8 @@
 var app = angular.module('web.application');
-app.service('CategoryService', function($filter){
+app.service('CategoryService', function($filter, $http, NodeUrl){
+   
     var categories = [
-            {id: "0", category_name: "Ống CPVC",order: "0"},
+            {id: "1", category_name: "Ống CPVC",order: "0"},
             {id: "2", category_name: "VAN ĐỒNG",order: "2"},
             {id: "3", category_name: "VAN KIM LOẠI",order: "3"},
             {id: "4", category_name: "VAN GANG",order: "4"},
@@ -12,16 +13,21 @@ app.service('CategoryService', function($filter){
             {id: "9", category_name: "PHỤ KIỆN BÌNH MINH",order: "5"},
         ];
     this.getCategories = function(){
+        var categories;
+        $http.get(`${NodeUrl}/categories`).then(function(res){
+            categories = res.data;
+        });
         return categories;
     }
 
    this.getCategoryById = function(cid){
-       var obj = $filter('filter')(categories, {id: cid}, true)[0];
-       if(obj == null){
-           obj = categories[0];
-       }
+       var category;
+       $http.get(`${NodeUrl}/category/${cid}`).then(function(res){
+            category = res.data;
+       });
+       
 
-        return obj;
+        return category;
    }
     
 });

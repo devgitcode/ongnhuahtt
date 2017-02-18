@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 app.use("/", express.static(__dirname + "/"));
-app.listen(80, function(){
-    console.log("SERVER STARTED AT PORT 3005");
-});
+var port = 80;
+app.listen(port, function(){
+    console.log("SERVER STARTED AT PORT " + port);
+});s

@@ -4,6 +4,7 @@ var app = angular.module('web.application',['ui.router', 'oc.lazyLoad', 'ui.boot
 //         $templateCache.removeAll();
 //     });
 // });
+app.constant('NodeUrl', "http://localhost:3000");
 
 app.config(function($stateProvider,$urlRouterProvider){
     // $routeProvider.when('/',{

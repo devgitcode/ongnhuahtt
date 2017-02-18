@@ -25,8 +25,7 @@
             <div class="toolbar" ng-if="products.length > 0">              
               <div class="pager">
                 <div class="pages">
-                  
-                  <ul class="pagination"  uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" items-per-page="4" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                  <ul class="pagination"  uib-pagination total-items="pagination.totalItems" items-per-page="pagination.itemsPerPage" ng-model="pagination.currentPage" ng-change="pageChanged()">
                     <!--<li><a href="#">«</a></li>
                     <li class="active"><a href="#">1</a></li>
                     <li><a href="#">2</a></li>
@@ -36,13 +35,12 @@
                     <li><a href="#">»</a></li>-->
                   </ul>
                 </div>
-                
               </div>
             </div>
             <ul class="products-grid">
-              <li class="item col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-if="products.length > 0" ng-repeat="p in products">
+              <li class="item col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-if="products.length > 0" ng-repeat="p in products | limitTo:pagination.itemsPerPage:(pagination.currentPage-1)*pagination.itemsPerPage">
                 <div class="col-item">
-                  <div class="sale-label sale-top-right">Sale</div>
+                  <!--<div class="sale-label sale-top-right">Sale</div>-->
                   <div class="item-inner">
                     <div class="item-img">
                       <div class="item-img-info"> <a href="product_detail.html" title="Sample Product" class="product-image"> <img src="{{p.image}}" alt="{{p.product_name}}"></a>
@@ -59,13 +57,13 @@
                         <div class="item-content">
                           
                           <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">{{p.price | currency : ""}} đ</span> </span> </div>
+                            <div class="price-box"> <span class="regular-price"> <span ng-if="p.price== 0" class="price">Liên hệ</span> <span ng-if="p.price > 0" class="price">{{p.price | currency : "" : 0}} đ</span> </span> </span> </div>
                           </div>
                         </div>
                       </div>
-                      <div class="actions"><span class="add-to-links"> 
+                      <!--<div class="actions"><span class="add-to-links"> 
                         <button type="button" title="Add to Cart" class="button btn-cart"><span>Add to Cart</span></button>
-                      </div>
+                      </div>-->
                   </div>
                 </div>
               </li>

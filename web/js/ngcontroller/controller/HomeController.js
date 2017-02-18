@@ -1,6 +1,6 @@
 var app = angular.module('web.application');
 
-app.controller('HomeController',function($scope, $sce, $location,$state,$stateParams, HomeService, NewsService, ProductService){
+app.controller('HomeController',function($scope, $sce, $location,$state,$stateParams, HomeService, NewsService){
     /* BEGIN PROPERTY */
 
     //Company Info
@@ -28,9 +28,6 @@ app.controller('HomeController',function($scope, $sce, $location,$state,$statePa
     $scope.news = NewsService.getNews();
     $scope.headNews = NewsService.getHeadCompanyNews();
     $scope.headNewsTitles = NewsService.getCompanyNewsTitles();
-
-    //Product 
-    $scope.newArrivals = ProductService.getNewProducts();
     
     /* END PROPERTY */
 
