@@ -1,0 +1,21 @@
+CategoryController
+	Done
+ProductController
+	1. Update product by ID
+	2. Delete product by ID
+	3. Insert new a product
+	4. Search all products
+	5. Search all products like Product Name
+NewsController 
+	1. Insert new a record
+	2. Update a record by ID
+	3. Delete a record by ID
+	4. Search all records
+	5. Search all records by TYPE
+CatalogueController
+	1. Insert new record
+	2. Update a record by ID
+	3. Delete a record by ID
+	4. Search all records
+FooterController
+	1. Update a record by ID

@@ -40,6 +40,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+
+//Invoke Controller
 categoryController(app);
 productController(app);
 
