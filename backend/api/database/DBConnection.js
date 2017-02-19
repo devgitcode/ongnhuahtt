@@ -1,5 +1,6 @@
 var mysql =  require('mysql');
 var db = require("../../config/db.json")
+var log = require('../log/Logger');
 var pool = mysql.createPool({
     connectionLimit : db.connectionLimit,
     host: db.host,
@@ -14,23 +15,23 @@ module.exports = {
         pool.getConnection(function(err,connection){
             if (err) {
                 console.log(err);
+                log.error(err);
                 res.json({"code" : 100, "status" : "Error in connection database"});
             }   
-
-            console.log('connected as id ' + connection.threadId);
-            
+            log.info('connected as id ' + connection.threadId);
             connection.query(query,function(err,result){
                 connection.release();
                 if(!err) {
+                    log.error(err);
                     res.json(result);
                 }else{
-                    console.log(err);
+                    log.error(err);
                     res.json(err);
                 }           
             });
 
             connection.on('error', function(err) {      
-                console.log(console.log(err));
+                log.error(err);
                 res.json({"code" : 100, "status" : "Error in connection database"});    
             });
         });

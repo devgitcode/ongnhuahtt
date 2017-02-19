@@ -13,6 +13,7 @@ var users = require('./routes/users');
  */
 var categoryAPI= require('./api/services/CategoryAPI');
 var productAPI = require('./api/services/ProductAPI');
+var menuAPI = require('./api/services/MenuAPI');
 
 
 var app = express();
@@ -48,6 +49,7 @@ app.use('/users', users);
  */
 categoryAPI(app);
 productAPI(app);
+menuAPI(app);
 
 
 // catch 404 and forward to error handler
