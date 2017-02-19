@@ -1,0 +1,25 @@
+{
+  "name": "sb-admin-2",
+  "title": "SB Admin 2",
+  "version": "3.3.7",
+  "homepage": "http://startbootstrap.com/template-overviews/sb-admin-2",
+  "author": "Start Bootstrap",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.13.0",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.10",
+    "gulp-header": "^1.8.7",
+    "gulp-less": "^3.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.4"
+  },
+  "description": "[![CDNJS](https://img.shields.io/cdnjs/v/startbootstrap-sb-admin-2.svg)](https://cdnjs.com/libraries/startbootstrap-sb-admin-2)",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.14.1"
+  }
+}

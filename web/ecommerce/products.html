@@ -1,0 +1,107 @@
+
+  <!-- breadcrumbs -->
+  <div class="breadcrumbs">
+    <div class="container">
+      <div class="row">
+        <ul>
+          <li class="home"> <a href="index.html" title="Go to Home Page">Trang chủ</a><span>&raquo; </span></li>
+          <li class=""> <a href="#/products/init" title="Sản phẩm">Sản phẩm</a><span>&raquo; </span></li>
+          <li class=""> <a href="#/products/{{selectedCategory.id}}" title="Go to Home Page"><strong>{{selectedCategory.category_name}}</strong></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- End breadcrumbs --> 
+  <!-- Two columns content -->
+  <div class="main-container col2-left-layout">
+    <div class="main container">
+      <div class="row">
+        <section class="col-main col-sm-9 col-sm-push-3">
+          <div class="category-title">
+            <h1>{{selectedCategory.category_name}}</h1>
+          </div>
+          
+          <div class="category-products">
+            <div class="toolbar" ng-if="products.length > 0">              
+              <div class="pager">
+                <div class="pages">
+                  <ul class="pagination"  uib-pagination total-items="pagination.totalItems" items-per-page="pagination.itemsPerPage" ng-model="pagination.currentPage" ng-change="pageChanged()">
+                    <!--<li><a href="#">«</a></li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">»</a></li>-->
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <ul class="products-grid">
+              <li class="item col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-if="products.length > 0" ng-repeat="p in products | limitTo:pagination.itemsPerPage:(pagination.currentPage-1)*pagination.itemsPerPage">
+                <div class="col-item">
+                  <!--<div class="sale-label sale-top-right">Sale</div>-->
+                  <div class="item-inner">
+                    <div class="item-img">
+                      <div class="item-img-info"> <a href="product_detail.html" title="Sample Product" class="product-image"> <img ng-if="p.image" ng-src="{{p.image}}" alt="{{p.product_name}}"></a>
+                        <div class="item-box-hover">
+                          <div class="box-inner">
+                            <div class="product-detail-bnt"><a href="quick_view.html" class="button detail-bnt"><span>Quick View</span></a></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="item-info">
+                      <div class="info-inner">
+                        <div class="item-title"> <a href="product_detail.html" title="{{p.product_name}}"> {{p.product_name}} </a> </div>
+                        <div class="item-content">
+                          
+                          <div class="item-price">
+                            <div class="price-box"> <span class="regular-price"> <span ng-if="p.price== 0" class="price">Liên hệ</span> <span ng-if="p.price > 0" class="price">{{p.price | currency : "" : 0}} đ</span> </span> </span> </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!--<div class="actions"><span class="add-to-links"> 
+                        <button type="button" title="Add to Cart" class="button btn-cart"><span>Add to Cart</span></button>
+                      </div>-->
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <h4 ng-if="products.length <= 0" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">Không có sản phẩm nào</h4>
+            <div class="toolbar" ng-if="products.length > 0">              
+              <div class="pager">
+                <div class="pages">
+                  <ul class="pagination"  uib-pagination total-items="pagination.totalItems" items-per-page="pagination.itemsPerPage" ng-model="pagination.currentPage" ng-change="pageChanged()">
+                    <!--<li><a href="#">«</a></li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">»</a></li>-->
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <aside class="col-right sidebar col-sm-3 col-xs-12 col-sm-pull-9">
+          <div class="side-nav-categories">
+            <div class="block-title"> DANH MỤC SẢN PHẨM </div>
+            <!--block-title--> 
+            <!-- BEGIN BOX-CATEGORY -->
+            <div class="box-content box-category">
+              <ul>
+                <li ng-repeat="c in categories | orderBy: 'order'"> <a ui-sref="products({cid: c.id})">{{c.category_name | uppercase}}</a> </li>
+              </ul>
+            </div>
+            <!--box-content box-category--> 
+          </div>
+          
+          
+        </aside>
+      </div>
+    </div>
+  </div>
+  <!-- End Two columns content -->
