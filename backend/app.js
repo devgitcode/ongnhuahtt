@@ -8,9 +8,11 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
-/* IMPORT CONTROLLER */
-var categoryController = require('./api/controller/CategoryController');
-var productController = require('./api/controller/ProductController');
+/*
+ * Define những API đã viết trong backend\api\services
+ */
+var categoryAPI= require('./api/services/CategoryAPI');
+var productAPI = require('./api/services/ProductAPI');
 
 
 var app = express();
@@ -41,9 +43,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 
-//Invoke Controller
-categoryController(app);
-productController(app);
+/**
+ * Kích hoạt API để có thể run được từ phía Client
+ */
+categoryAPI(app);
+productAPI(app);
 
 
 // catch 404 and forward to error handler
