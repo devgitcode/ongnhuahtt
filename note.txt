@@ -1,34 +1,35 @@
+Đã sửa tên file XXXController -> XXXAPI
 Nhớ run lại file database để cập nhật database mới
 Nhớ sửa lại file db.json để connect đúng database trên máy local
 Nhớ run lại "npm install"
 
-CategoryController
+CategoryAPI
 	1. Search all categories by Active column
-ProductController
+ProductAPI
 	1. Update product by ID
 	2. Delete product by ID
 	3. Insert new a product
 	4. Search all products by Active column
 	5. Search all products like Product Name and Active column
 	5. Search all products by DISPLAY_MODE and Active column
-NewsController 
+NewsAPI
 	1. Insert new a record
 	2. Update a record by ID
 	3. Delete a record by ID
 	4. Search all records by and Active column
 	5. Search all records by TYPE and and Active column
 	6. Search all records by Title and Active column
-CatalogController
+CatalogAPI
 	1. Insert new record
 	2. Update a record by ID
 	3. Delete a record by ID
 	4. Search all records
-IntroductionController
+IntroductionAPI
 	1. Insert new record
 	2. Update a record by ID
 	3. Delete a record by ID
 	4. Search all records
-ContactController
+ContactAPI
 	1. Update a record by ID
-FooterController
+FooterAPI
 	1. Update a record by ID
