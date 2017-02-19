@@ -1,0 +1,13 @@
+{
+    "file":{
+        "filename": "backend.log",
+        "directory": "/",
+        "logLevel": "info"
+    },
+    "console":{
+        "logLevel": "info",
+        "handleExceptions": false,
+        "json": false,
+        "colorize": true
+    }
+}
