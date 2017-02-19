@@ -23,6 +23,7 @@ var logger = new winston.Logger({
             level: logProp.console.level,
             handleExceptions: logProp.console.handleExceptions,
             filename: logProp.file.filename,
+            json:  logProp.console.json,
             timestamp: function() {
                 return moment().format('DD/MM/YYYY hh:mm:ss');
             },
@@ -35,12 +36,19 @@ var logger = new winston.Logger({
     ],
     exitOnError: false
 });
-
-logger.configure({
-    level: 'verbose',
-    transports: [
-      new (require('winston-daily-rotate-file'))(opts)
-    ]
-  });
+// var options = {
+//     from: new Date - 24 * 60 * 60 * 1000,
+//     until: new Date,
+//     limit: 10,
+//     start: 0,
+//     order: 'desc',
+//     fields: ['message']
+// };
+// logger.configure({
+//     level: 'verbose',
+//     transports: [
+//       new (require('winston-daily-rotate-file'))(opts)
+//     ]
+//   });
 
 module.exports = logger;

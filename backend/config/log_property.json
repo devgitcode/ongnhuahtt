@@ -1,8 +1,8 @@
 {
     "file":{
         "filename": "backend.log",
-        "directory": "/",
-        "logLevel": "info"
+        "logLevel": "debug",
+        "json": false
     },
     "console":{
         "logLevel": "info",
