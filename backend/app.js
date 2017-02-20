@@ -14,8 +14,8 @@ var users = require('./routes/users');
 var categoryAPI= require('./api/services/CategoryAPI');
 var productAPI = require('./api/services/ProductAPI');
 var menuAPI = require('./api/services/MenuAPI');
-
-
+var newsAPI = require('./api/services/NewsAPI');
+var introductionAPI = require('./api/services/IntroductionAPI');
 var app = express();
 
 // view engine setup
@@ -50,8 +50,8 @@ app.use('/users', users);
 categoryAPI(app);
 productAPI(app);
 menuAPI(app);
-
-
+newsAPI(app);
+introductionAPI(app);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
