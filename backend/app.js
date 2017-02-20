@@ -15,7 +15,10 @@ var categoryAPI= require('./api/services/CategoryAPI');
 var productAPI = require('./api/services/ProductAPI');
 var menuAPI = require('./api/services/MenuAPI');
 var newsAPI = require('./api/services/NewsAPI');
+var catalogAPI = require('./api/services/CatalogAPI');
 var introductionAPI = require('./api/services/IntroductionAPI');
+var contactAPI = require('./api/services/ContactAPI');
+var footerAPI = require('./api/services/FooterAPI');
 var app = express();
 
 // view engine setup
@@ -51,7 +54,10 @@ categoryAPI(app);
 productAPI(app);
 menuAPI(app);
 newsAPI(app);
+catalogAPI(app);
 introductionAPI(app);
+contactAPI(app);
+footerAPI(app);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

@@ -7,6 +7,7 @@ module.exports = function(app){
 
     app.get('/news/:title/:type/:active', function(req, res){
          //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+         var query = `SELECT * FROM ongnhuahtt.news WHERE title LIKE '%${req.params.title}%' and type = ${req.params.type} and active = ${req.params.active}`;
          log.info("Preparing SQL: " + query);
          conn.executeQuery(query, req, res);
          log.info("Execute " + query);
@@ -14,6 +15,7 @@ module.exports = function(app){
 
     app.get('/news/:type/:active', function(req, res){
         //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+        var query = `SELECT * FROM ongnhuahtt.news WHERE type = ${req.params.type} and active = ${req.params.active}`;
         log.info("Preparing SQL: " + query);
         conn.executeQuery(query, req, res);
         log.info("Execute " + query);
@@ -21,6 +23,7 @@ module.exports = function(app){
 
     app.get('/news/:title', function(req, res){
         //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+        var query = `SELECT * FROM ongnhuahtt.news WHERE title LIKE '%${req.params.title}%'`;
         log.info("Preparing SQL: " + query);
         conn.executeQuery(query, req, res);
         log.info("Execute " + query);

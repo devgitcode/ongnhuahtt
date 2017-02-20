@@ -30,6 +30,7 @@ module.exports = function (app) {
 
     app.get('/products/:product_name/:active', function (req, res) {
         //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\"database\DBConnection.js
+        var query1 = `SELECT * FROM ongnhuahtt.products WHERE product_name LIKE '%${req.params.product_name}%' and active = ${req.params.active}`;
         log.info("Preparing SQL: " + query1);
         conn.executeQuery(query1, req, res);
         log.info("Execute " + query1);
@@ -37,6 +38,7 @@ module.exports = function (app) {
 
     app.get('/products/:product_name/:display_mode/:active', function (req, res) {
         //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+        var query2 = `SELECT * FROM ongnhuahtt.products WHERE product_name LIKE '%${req.params.product_name}%' and display_mode = ${req.params.display_mode} and active = ${req.params.active}`;
         log.info("Preparing SQL: " + query2);
         conn.executeQuery(query2, req, res);
         log.info("Execute " + query2);
