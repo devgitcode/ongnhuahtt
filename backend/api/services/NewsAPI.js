@@ -7,7 +7,7 @@ module.exports = function(app){
 
     app.get('/news/:title/:type/:active', function(req, res){
          //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
-         var query = `SELECT * FROM ongnhuahtt.news WHERE title LIKE '%${req.params.title}%' and type = ${req.params.type} and active = ${req.params.active}`;
+         var query = `SELECT * FROM news WHERE title LIKE '%${req.params.title}%' and type = ${req.params.type} and active = ${req.params.active}`;
          log.info("Preparing SQL: " + query);
          conn.executeQuery(query, req, res);
          log.info("Execute " + query);
@@ -15,7 +15,7 @@ module.exports = function(app){
 
     app.get('/news/:type/:active', function(req, res){
         //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
-        var query = `SELECT * FROM ongnhuahtt.news WHERE type = ${req.params.type} and active = ${req.params.active}`;
+        var query = `SELECT * FROM news WHERE type = ${req.params.type} and active = ${req.params.active}`;
         log.info("Preparing SQL: " + query);
         conn.executeQuery(query, req, res);
         log.info("Execute " + query);
@@ -23,7 +23,7 @@ module.exports = function(app){
 
     app.get('/news/:title', function(req, res){
         //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
-        var query = `SELECT * FROM ongnhuahtt.news WHERE title LIKE '%${req.params.title}%'`;
+        var query = `SELECT * FROM news WHERE title LIKE '%${req.params.title}%'`;
         log.info("Preparing SQL: " + query);
         conn.executeQuery(query, req, res);
         log.info("Execute " + query);
@@ -37,7 +37,7 @@ module.exports = function(app){
          *    + Phải chỉ định rõ TÊN CỘT cần insert vào để tránh trường hợp sau này BỔ SUNG THÊM CỘT MỚI BỊ SAI INDEX
          * Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
          */
-        var query = "INSERT INTO news(`title`, `content`, `type`, `active`, `created_date`)";
+        var query = "INSERT INTO news (`title`, `content`, `type`, `active`, `created_date`)";
         log.info("Preparing SQL: " + query);
         query += `VALUES ('${req.body.title}', '${req.body.content}', '${req.body.type}', '${req.body.active}', '${moment().format('YYYY-MM-DD HH:mm:ss')}')`;
         conn.executeQuery(query, req, res);

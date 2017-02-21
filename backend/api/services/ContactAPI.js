@@ -1,7 +1,5 @@
 var conn = require('../database/DBConnection');
 var log = require('../log/Logger');
-//Thêm thư viện này để hỗ trợ format Ngày
-var moment = require('moment');
 
 module.exports = function (app) {
     app.put('/contact', function (req, res) {

@@ -30,7 +30,7 @@ module.exports = function (app) {
 
     app.get('/products/:product_name/:active', function (req, res) {
         //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\"database\DBConnection.js
-        var query1 = `SELECT * FROM ongnhuahtt.products WHERE product_name LIKE '%${req.params.product_name}%' and active = ${req.params.active}`;
+        var query1 = `SELECT * FROM products WHERE product_name LIKE '%${req.params.product_name}%' and active = ${req.params.active}`;
         log.info("Preparing SQL: " + query1);
         conn.executeQuery(query1, req, res);
         log.info("Execute " + query1);
@@ -38,7 +38,7 @@ module.exports = function (app) {
 
     app.get('/products/:product_name/:display_mode/:active', function (req, res) {
         //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
-        var query2 = `SELECT * FROM ongnhuahtt.products WHERE product_name LIKE '%${req.params.product_name}%' and display_mode = ${req.params.display_mode} and active = ${req.params.active}`;
+        var query2 = `SELECT * FROM products WHERE product_name LIKE '%${req.params.product_name}%' and display_mode = ${req.params.display_mode} and active = ${req.params.active}`;
         log.info("Preparing SQL: " + query2);
         conn.executeQuery(query2, req, res);
         log.info("Execute " + query2);
@@ -65,7 +65,7 @@ module.exports = function (app) {
          * QUAN TRỌNG: UPDATE thì phải update UPDATED_DATE
          * Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
          */
-        var query = `UPDATE products SET product_name = '${req.body.product_name}', image = 'products-images/p1.jpg', image_list = 'products-images/p1.jpg', description =  '${req.body.description}', price = '${req.body.price}', active = '${req.body.active}', display_mode = '${req.body.display_mode}', category_id = '${req.body.category_id}', updated_date = '${moment().format('YYYY-MM-DD HH:mm:ss')}' WHERE product_id = ${req.body.product_id}`;
+        var query = `UPDATE products SET product_name = '${req.body.product_name}', image = '${req.body.image}', image_list = '${req.body.image_list}', description =  '${req.body.description}', price = '${req.body.price}', active = '${req.body.active}', display_mode = '${req.body.display_mode}', category_id = '${req.body.category_id}', updated_date = '${moment().format('YYYY-MM-DD HH:mm:ss')}' WHERE product_id = ${req.body.product_id}`;
         log.info("Preparing SQL: " + query);
         conn.executeQuery(query, req, res);
         log.info("Execute " + query);
