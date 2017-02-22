@@ -36,9 +36,9 @@ module.exports = function(app){
          *    + Phải chỉ định rõ TÊN CỘT cần insert vào để tránh trường hợp sau này BỔ SUNG THÊM CỘT MỚI BỊ SAI INDEX
          * Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
          */ 
-        var query = "INSERT INTO users (`username`, `password`, `fullname`, `active`)";
-        log.info("Preparing SQL: " + query);
+        var query = "INSERT INTO users (`username`, `password`, `fullname`, `active`)";       
         query += ` VALUES ('${req.body.username}', '${req.body.password}', '${req.body.fullname}', '${req.body.active}')`;
+        log.info("Preparing SQL: " +query);        
         conn.executeQuery(query, req, res);
         log.info("Execute " + query);
     });
