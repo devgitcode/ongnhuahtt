@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `ongnhuahtt` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `ongnhuahtt`;
 -- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
 -- Host: localhost    Database: ongnhuahtt
@@ -163,6 +165,7 @@ CREATE TABLE `menu` (
   `menu_type` int(1) DEFAULT NULL COMMENT '0: Dùng cho ecommerce \n1: Dùng cho admin',
   `order` int(2) DEFAULT NULL,
   `active` int(1) DEFAULT NULL,
+  `icon` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -173,7 +176,7 @@ CREATE TABLE `menu` (
 
 LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
-INSERT INTO `menu` VALUES (1,'homepage','TRANG CHỦ',NULL,0,0,1),(2,'intro','GIỚI THIỆU',NULL,0,1,1),(3,'products','SẢN PHẨM','({cid: \'init\'})',0,2,1),(4,'catalogue','CATALOG',NULL,0,3,1),(5,'project','DỰ ÁN',NULL,0,4,1),(6,'recruitment','TUYỂN DỤNG',NULL,0,5,1),(7,'news','TIN TỨC',NULL,0,6,1),(8,'contact','LIÊN HỆ',NULL,0,7,1),(9,'manage_product','QUẢN LÝ SẢN PHẨM',NULL,1,1,1),(10,'manage_news','QUẢN LÝ TIN TỨC',NULL,1,4,1),(11,'manage_contact','QUẢN LÝ LIÊN HỆ',NULL,1,5,1),(12,'manage_catalog','QUẢN LÝ CATALOG',NULL,1,3,1),(13,'manage_footer','QUẢN LÝ FOOTER',NULL,1,6,1),(14,'manage_introduction','QUẢN LÝ GIỚI THIỆU',NULL,1,2,1),(15,'manage_category','QUẢN LÝ DANH MỤC',NULL,1,0,NULL);
+INSERT INTO `menu` VALUES (1,'homepage','TRANG CHỦ',NULL,0,0,1,NULL),(2,'intro','GIỚI THIỆU',NULL,0,1,1,NULL),(3,'products','SẢN PHẨM','({cid: \'init\'})',0,2,1,NULL),(4,'catalogue','CATALOG',NULL,0,3,1,NULL),(5,'project','DỰ ÁN',NULL,0,4,1,NULL),(6,'recruitment','TUYỂN DỤNG',NULL,0,5,1,NULL),(7,'news','TIN TỨC',NULL,0,6,1,NULL),(8,'contact','LIÊN HỆ',NULL,0,7,1,NULL),(9,'manage_product','QUẢN LÝ SẢN PHẨM',NULL,1,1,1,'fa fa-shopping-cart'),(10,'manage_news','QUẢN LÝ TIN TỨC',NULL,1,4,1,'fa fa-newspaper-o'),(11,'manage_contact','QUẢN LÝ LIÊN HỆ',NULL,1,5,1,'fa fa-phone'),(12,'manage_catalog','QUẢN LÝ CATALOG',NULL,1,3,1,'fa fa-file-pdf-o'),(13,'manage_footer','QUẢN LÝ FOOTER',NULL,1,6,1,'fa fa-home'),(14,'manage_introduction','QUẢN LÝ GIỚI THIỆU',NULL,1,2,1,'fa fa-info-circle'),(15,'manage_category','QUẢN LÝ DANH MỤC',NULL,1,0,1,'fa fa-bars');
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -256,6 +259,7 @@ CREATE TABLE `submenu` (
   `order` int(2) DEFAULT NULL,
   `menu_id` int(11) DEFAULT NULL,
   `active` int(1) DEFAULT NULL,
+  `icon` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -266,7 +270,7 @@ CREATE TABLE `submenu` (
 
 LOCK TABLES `submenu` WRITE;
 /*!40000 ALTER TABLE `submenu` DISABLE KEYS */;
-INSERT INTO `submenu` VALUES (1,'category_add','Thêm danh mục',NULL,1,0,15,1),(2,'category_update','Sửa danh mục',NULL,1,2,15,1),(3,'category_search','Tìm kiếm danh mục',NULL,1,1,15,1),(4,'product_search','Tìm kiếm sản phẩm',NULL,1,1,9,1);
+INSERT INTO `submenu` VALUES (1,'category_add','Thêm danh mục',NULL,1,0,15,1,NULL),(2,'category_update','Sửa danh mục',NULL,1,2,15,1,NULL),(3,'category_search','Tìm kiếm danh mục',NULL,1,1,15,1,NULL),(4,'product_search','Tìm kiếm sản phẩm',NULL,1,1,9,1,NULL);
 /*!40000 ALTER TABLE `submenu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -304,4 +308,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-26 10:31:35
+-- Dump completed on 2017-02-26 16:06:16
