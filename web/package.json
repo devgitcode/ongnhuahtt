@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
+    "start": "node run.js",
     "build": "C:/Users/hao.nguyen/AppData/Roaming/npm/browserify D:/Work/Projects/NodeJS/OngNhuaHMT/frontend/js/ngcontroller/common/Constant.js -o D:/Work/Projects/NodeJS/OngNhuaHMT/frontend/js/runtime.js"
   },
   "repository": {
