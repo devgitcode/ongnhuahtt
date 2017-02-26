@@ -21,6 +21,14 @@ module.exports = function(app){
         log.info("Executing " + query);
     });
 
+    app.get('/menus/menu_type/:type/:active', function(req, res){
+        //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+        var query = `SELECT * FROM menu WHERE menu_type = ${req.params.type} AND active = ${req.params.active} ORDER BY \`order\``;
+        log.info("Preparing " + query);
+        conn.executeQuery(query, req, res);  
+        log.info("Executing " + query);
+    });
+
     app.get('/submenus/:menu_id/:active', function(req, res){
         //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
         var query = `SELECT * FROM submenu WHERE menu_id = ${req.params.menu_id} AND active = ${req.params.active} ORDER BY \`order\``;
@@ -29,9 +37,17 @@ module.exports = function(app){
         log.info("Executing " + query);
     });
 
-    app.get('/submenus/:menu_id', function(req, res){
+    app.get('/submenus/menu_type/:type/:active', function(req, res){
         //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
-        var query = `SELECT * FROM submenu WHERE menu_id = ${req.params.menu_id} ORDER BY \`order\``;
+        var query = `SELECT * FROM submenu WHERE menu_type = ${req.params.type} AND active = ${req.params.active} ORDER BY \`order\``;
+        log.info("Preparing " + query);
+        conn.executeQuery(query, req, res);  
+        log.info("Executing " + query);
+    });
+
+    app.get('/submenus/:active', function(req, res){
+        //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+        var query = `SELECT * FROM submenu WHERE active = ${req.params.active} ORDER BY \`order\``;
         log.info("Preparing " + query);
         conn.executeQuery(query, req, res);  
         log.info("Executing " + query);

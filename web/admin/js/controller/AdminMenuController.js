@@ -1,30 +1,24 @@
 var app = angular.module('web.application');
 
-app.controller('AdminMenuController', function ($scope, $log, $http, NodeUrl, $stateParams, $location) {
+app.controller('AdminMenuController', function ($ocLazyLoad, $scope, $log, $http, NodeUrl, $stateParams, $location, AdminLogService) {
+    /**
+     * Load tất cả Javascript & CSS cho controller
+     */
+    $ocLazyLoad.load("../dist/js/sb-admin-2.js");
     /* BEGIN PROPERTY */
+    AdminLogService.log("info", "Processing AdminMenuController...");
     $scope.menus = [];
-    $http.get(`${NodeUrl}/menus/1`).then(function (menuRes) {
-        console
-        var menus = menuRes.data;
-        for (var i = 0; i < menus.length; i++) {
-            var menu = {
-                "id": menus[i].id,
-                "label": menus[i].label,
-                "param": menus[i].param
-            }
-            $http.get(`${NodeUrl}/submenus/${menus[i].id}/1`).then(function (subMenuRes) {
-                menu["submenus"] = subMenuRes.data;
-                menus[i].subMenus = subMenus;
-            }); 
-        }
-        $scope.menus = menus;
-        console.log( $scope.menus );
+    $scope.subMenus = [];
+
+    $http.get(`${NodeUrl}/menus/menu_type/1/1`).then(function (menuRes) {
+        $scope.menus = menuRes.data;
+        AdminLogService.log("info", "Loaded Admin Menu...");
     });
 
-
-
-
-
+    $http.get(`${NodeUrl}/submenus/menu_type/1/1`).then(function (subMenuRes) {
+        $scope.subMenus = subMenuRes.data;
+        AdminLogService.log("info", "Loaded Admin SubMenu...");
+    });
     /* END PROPERTY */
 
     /* BEGIN FUNCTION */

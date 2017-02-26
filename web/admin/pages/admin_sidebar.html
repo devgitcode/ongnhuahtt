@@ -1,0 +1,22 @@
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav" id="side-menu" ng-controller="AdminMenuController">
+            <li class="sidebar-search">
+                <div class="input-group custom-search-form">
+                   <img src="../../images/logo.png" width="220" />
+                </div>
+
+            </li>
+            <li ng-repeat="menu in menus">
+                <a href="index.html"><i class="{{menu.icon}}" aria-hidden="true"></i> {{menu.label}}</a>
+                <ul ng-if="subMenus.length > 0" class="nav nav-second-level">
+                    <li ng-repeat="submenu in subMenus | filter:{menu_id: menu.id}">
+                        <a href="flot.html">{{submenu.label}}</a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+    <!-- /.sidebar-collapse -->
+</div>
