@@ -48,3 +48,4 @@ Temporary Items
 .apdisk
 backend/config/db.json
 *.log
+*.log
