@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `ongnhuahtt` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `ongnhuahtt`;
 -- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
 -- Host: localhost    Database: ongnhuahtt
@@ -191,6 +189,7 @@ CREATE TABLE `news` (
   `title` varchar(100) DEFAULT NULL COMMENT 'Tiêu đề của: Tin tức, giới thiệu công ty,  thông tin liên hệ',
   `short_content` varchar(250) DEFAULT NULL COMMENT 'Nội dung ngắn hiển thị tại lưới tin tức',
   `long_content` longtext COMMENT 'Nội dung tin tức, thông tin công ty, thông tin liên hệ',
+  `image` varchar(200) DEFAULT NULL COMMENT 'Hình ảnh ban đầu',
   `type` int(1) DEFAULT '1' COMMENT '1: TIN TỨC\n2: THÔNG TIN CÔNG TY\n',
   `active` int(1) DEFAULT '0' COMMENT '0: Không hiển thị trên public website.\n1: Hiển thị trên public website.',
   `created_date` datetime DEFAULT NULL,
@@ -305,4 +304,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-26 10:12:45
+-- Dump completed on 2017-02-26 10:31:35
