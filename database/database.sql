@@ -26,8 +26,8 @@ DROP TABLE IF EXISTS `catalog`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `catalog` (
   `id` int(11) NOT NULL,
-  `title` varchar(500) DEFAULT NULL COMMENT 'Tên của catalog. \nVD: \n+ Bảng giá Joint cao su các loại\n+ Catalogue ống u.PVC cứng hệ mét (ISO 4422:1990)',
-  `url` varchar(250) DEFAULT NULL COMMENT 'Link download bảng giá hoặc catalog',
+  `title` varchar(250) DEFAULT NULL COMMENT 'Tên của catalog. \nVD: \n+ Bảng giá Joint cao su các loại\n+ Catalogue ống u.PVC cứng hệ mét (ISO 4422:1990)',
+  `url` text COMMENT 'Link download bảng giá hoặc catalog',
   `type` int(1) DEFAULT '1' COMMENT '1: Bảng giá\n2: Catalog',
   `active` int(1) DEFAULT '0' COMMENT '0: Không hiển thị trên public website.\n1: Hiển thị trên public website.',
   PRIMARY KEY (`id`)
@@ -58,7 +58,7 @@ CREATE TABLE `categories` (
   `created_date` datetime DEFAULT NULL,
   `updated_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (1,'Ống CPVC',0,NULL,NULL,NULL),(2,'Ống Nhôm',1,NULL,NULL,NULL),(3,'Ống PVC',3,NULL,NULL,NULL);
+INSERT INTO `categories` VALUES (1,'Ống Nhf',3,1,'2017-02-19 01:00:01','2017-02-19 12:02:30'),(2,'Ống Nhôm',1,NULL,'2017-02-19 01:00:01',NULL),(3,'Ống PVC',3,NULL,'2017-02-19 01:00:01',NULL),(4,'Ống Nhôm 1',1,0,'2017-02-19 01:00:01',NULL),(5,'Ống Nhôm 2',3,0,'2017-02-19 01:00:01',NULL),(6,'Ống Nhôm555',2,1,'2017-02-19 01:04:17',NULL),(7,'Ống Nhf',2,1,'2017-02-19 12:02:04',NULL);
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -151,6 +151,35 @@ LOCK TABLES `introduction` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `menu`
+--
+
+DROP TABLE IF EXISTS `menu`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu` varchar(45) DEFAULT NULL,
+  `label` varchar(45) DEFAULT NULL,
+  `parameter` varchar(45) DEFAULT NULL,
+  `menu_type` int(1) DEFAULT NULL COMMENT '0: Dùng cho ecommerce \n1: Dùng cho admin',
+  `order` int(2) DEFAULT NULL,
+  `active` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `menu`
+--
+
+LOCK TABLES `menu` WRITE;
+/*!40000 ALTER TABLE `menu` DISABLE KEYS */;
+INSERT INTO `menu` VALUES (1,'homepage','TRANG CHỦ',NULL,0,0,1),(2,'intro','GIỚI THIỆU',NULL,0,1,1),(3,'products','SẢN PHẨM','({cid: \'init\'})',0,2,1),(4,'catalogue','CATALOG',NULL,0,3,1),(5,'project','DỰ ÁN',NULL,0,4,1),(6,'recruitment','TUYỂN DỤNG',NULL,0,5,1),(7,'news','TIN TỨC',NULL,0,6,1),(8,'contact','LIÊN HỆ',NULL,0,7,1),(9,'manage_product','QUẢN LÝ SẢN PHẨM',NULL,1,1,1),(10,'manage_news','QUẢN LÝ TIN TỨC',NULL,1,4,1),(11,'manage_contact','QUẢN LÝ LIÊN HỆ',NULL,1,5,1),(12,'manage_catalog','QUẢN LÝ CATALOG',NULL,1,3,1),(13,'manage_footer','QUẢN LÝ FOOTER',NULL,1,6,1),(14,'manage_introduction','QUẢN LÝ GIỚI THIỆU',NULL,1,2,1),(15,'manage_category','QUẢN LÝ DANH MỤC',NULL,1,0,NULL);
+/*!40000 ALTER TABLE `menu` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `news`
 --
 
@@ -159,10 +188,11 @@ DROP TABLE IF EXISTS `news`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `news` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(200) DEFAULT NULL COMMENT 'Tiêu đề của: Tin tức, giới thiệu công ty,  thông tin liên hệ',
-  `content` longtext COMMENT 'Nội dung tin tức, thông tin công ty, thông tin liên hệ',
+  `title` varchar(100) DEFAULT NULL COMMENT 'Tiêu đề của: Tin tức, giới thiệu công ty,  thông tin liên hệ',
+  `short_content` varchar(250) DEFAULT NULL COMMENT 'Nội dung ngắn hiển thị tại lưới tin tức',
+  `long_content` longtext COMMENT 'Nội dung tin tức, thông tin công ty, thông tin liên hệ',
   `type` int(1) DEFAULT '1' COMMENT '1: TIN TỨC\n2: THÔNG TIN CÔNG TY\n',
-  `active` int(1) DEFAULT NULL COMMENT '0: Không hiển thị trên public website.\n1: Hiển thị trên public website.',
+  `active` int(1) DEFAULT '0' COMMENT '0: Không hiển thị trên public website.\n1: Hiển thị trên public website.',
   `created_date` datetime DEFAULT NULL,
   `updated_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -198,7 +228,7 @@ CREATE TABLE `products` (
   `created_date` datetime DEFAULT NULL,
   `updated_date` datetime DEFAULT NULL,
   PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,8 +237,38 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Sanr pham1','products-images/p1.jpg',NULL,'asfsdf',0,NULL,NULL,1,NULL,NULL),(2,'sdfsdf2','products-images/p1.jpg',NULL,'ggg',0,NULL,NULL,1,NULL,NULL),(4,'Sanr pham3','products-images/p1.jpg',NULL,'asfsdf',0,NULL,NULL,1,NULL,NULL),(5,'sdfsdf4','products-images/p1.jpg',NULL,'ggg',0,NULL,NULL,1,NULL,NULL),(6,'sdfsdf5','products-images/p1.jpg',NULL,'ggg',0,NULL,NULL,1,NULL,NULL),(7,'Sanr pham6','products-images/p1.jpg',NULL,'asfsdf',0,NULL,NULL,1,NULL,NULL),(8,'sdfsdf7','products-images/p1.jpg',NULL,'ggg',0,NULL,NULL,1,NULL,NULL),(9,'sdfsdf8','products-images/p1.jpg',NULL,'ggg',0,NULL,NULL,1,NULL,NULL),(10,'sdfsdf9','products-images/p1.jpg',NULL,'ggg',0,NULL,NULL,1,NULL,NULL),(11,'sdfsdf10','products-images/p1.jpg',NULL,'ggg',0,NULL,NULL,1,NULL,NULL),(12,'Sanr pham11','products-images/p1.jpg',NULL,'asfsdf',0,NULL,NULL,1,NULL,NULL),(13,'sdfsdf12','products-images/p1.jpg',NULL,'ggg',0,NULL,NULL,1,NULL,NULL),(14,'sdfsdf13','products-images/p1.jpg',NULL,'ggg',0,NULL,NULL,1,NULL,NULL),(15,'sdfsdf14','products-images/p1.jpg',NULL,'ggg',0,NULL,NULL,1,NULL,NULL),(16,'sdfsdf15','products-images/p1.jpg',NULL,'ggg',0,NULL,NULL,2,NULL,NULL),(17,'sdfsdf16','products-images/p1.jpg',NULL,'ggg',0,NULL,NULL,2,NULL,NULL);
+INSERT INTO `products` VALUES (1,'Sanr pham1','products-images/p1.jpg',NULL,'asfsdf',0,0,NULL,1,'2017-02-19 01:00:01',NULL),(2,'sdfsdf2','products-images/p1.jpg',NULL,'ggg',0,1,NULL,1,'2017-02-19 01:00:01',NULL),(4,'Sanr pham3','products-images/p1.jpg',NULL,'asfsdf',0,1,NULL,1,'2017-02-19 01:00:01',NULL),(5,'sdfsdf4','products-images/p1.jpg',NULL,'ggg',0,1,NULL,1,'2017-02-19 01:00:01',NULL),(6,'sdfsdf5','products-images/p1.jpg',NULL,'ggg',0,1,NULL,1,'2017-02-19 01:00:01',NULL),(7,'Sanr pham6','products-images/p1.jpg',NULL,'asfsdf',0,0,NULL,1,'2017-02-19 01:00:01',NULL),(8,'sdfsdf7','products-images/p1.jpg',NULL,'ggg',0,1,NULL,1,'2017-02-19 01:00:01',NULL),(9,'sdfsdf8','products-images/p1.jpg',NULL,'ggg',0,0,NULL,1,'2017-02-19 01:00:01',NULL),(10,'sdfsdf9','products-images/p1.jpg',NULL,'ggg',0,0,NULL,1,'2017-02-19 01:00:01',NULL),(11,'sdfsdf10','products-images/p1.jpg',NULL,'ggg',0,0,NULL,1,'2017-02-19 01:00:01',NULL),(12,'Sanr pham11','products-images/p1.jpg',NULL,'asfsdf',0,0,NULL,1,'2017-02-19 01:00:01',NULL),(13,'sdfsdf12','products-images/p1.jpg',NULL,'ggg',0,0,NULL,1,'2017-02-19 01:00:01',NULL),(14,'sdfsdf13','products-images/p1.jpg',NULL,'ggg',0,1,NULL,1,'2017-02-19 01:00:01',NULL),(15,'sdfsdf14','products-images/p1.jpg',NULL,'ggg',0,0,NULL,1,'2017-02-19 01:00:01',NULL),(16,'sdfsdf15','products-images/p1.jpg',NULL,'ggg',0,1,NULL,2,'2017-02-19 01:00:01',NULL),(17,'sdfsdf16','products-images/p1.jpg',NULL,'ggg',0,1,NULL,2,'2017-02-19 01:00:01',NULL),(18,'sdfsdf167','products-images/p1.jpg',NULL,'ggg',0,1,NULL,2,'2017-02-19 01:00:01',NULL);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `submenu`
+--
+
+DROP TABLE IF EXISTS `submenu`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `submenu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `submenu` varchar(45) DEFAULT NULL,
+  `label` varchar(45) DEFAULT NULL,
+  `param` varchar(45) DEFAULT NULL,
+  `menu_type` int(1) DEFAULT NULL COMMENT '0: Dùng cho ecommerce \n1: Dùng cho admin',
+  `order` int(2) DEFAULT NULL,
+  `menu_id` int(11) DEFAULT NULL,
+  `active` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `submenu`
+--
+
+LOCK TABLES `submenu` WRITE;
+/*!40000 ALTER TABLE `submenu` DISABLE KEYS */;
+INSERT INTO `submenu` VALUES (1,'category_add','Thêm danh mục',NULL,1,0,15,1),(2,'category_update','Sửa danh mục',NULL,1,2,15,1),(3,'category_search','Tìm kiếm danh mục',NULL,1,1,15,1),(4,'product_search','Tìm kiếm sản phẩm',NULL,1,1,9,1);
+/*!40000 ALTER TABLE `submenu` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -245,4 +305,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-19  0:01:15
+-- Dump completed on 2017-02-26 10:12:45
