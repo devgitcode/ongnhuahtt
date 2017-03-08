@@ -11,13 +11,13 @@ app.service('HomeService', function(){
     this.getMenus = function(){
         var menus = [
             {menu: "homepage",label: "TRANG CHỦ"},
-            {menu: "intro",label: "GIỚI THIỆU"},
+            {menu: "introduction({introid: 'init'})",label: "GIỚI THIỆU"},
             {menu: "products({cid: 'init'})",label: "SẢN PHẨM"},
             {menu: "catalogue",label: "BẢNG GIÁ & CATALOGUES"},
             {menu: "project",label: "DỰ ÁN"},
             {menu: "recruitment",label: "TUYỂN DỤNG"},
-            {menu: "news",label: "TIN TỨC"},
-            {menu: "contact",label: "LIÊN HỆ"}
+            {menu: "news({ntype: 'init'})",label: "TIN TỨC"},
+            {menu: "contact({cid: 'init'})",label: "LIÊN HỆ"}
         ];
         return menus;
     }

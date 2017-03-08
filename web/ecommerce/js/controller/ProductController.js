@@ -35,7 +35,7 @@ app.controller('ProductController',function($scope, $log,$http, NodeUrl, $stateP
 
     var countProduct = function(){
         $http.get(`${NodeUrl}/product_count/${cid}`).then(function(res){
-            $scope.pagination.totalItems = res.data[0].product_count;
+            $scope.pagination.totalItems = res.data[0];
             console.log($scope.pagination.totalItems);
         });
     }

@@ -2,32 +2,43 @@ var conn = require('../database/DBConnection');
 var log = require('../log/Logger');
 //Thêm thư viện này để hỗ trợ format Ngày
 var moment = require('moment');
+moment.locale('vi');
 
-module.exports = function(app){
+module.exports = function (app, number, withoutSuffix, key, isFuture) {
 
-    app.get('/news/:title/:type/:active', function(req, res){
-         //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
-         var query = `SELECT * FROM news WHERE title LIKE '%${req.params.title}%' and type = ${req.params.type} and active = ${req.params.active}`;
-         log.info("Preparing SQL: " + query);
-         conn.executeQuery(query, req, res);
-         log.info("Execute " + query);
-    });
 
-    app.get('/news/:type/:active', function(req, res){
-        //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+    app.get('/news/:type/:active', function (req, res) {
+        //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js       
         var query = `SELECT * FROM news WHERE type = ${req.params.type} and active = ${req.params.active}`;
         log.info("Preparing SQL: " + query);
         conn.executeQuery(query, req, res);
         log.info("Execute " + query);
     });
 
-    app.get('/news/:title', function(req, res){
+    app.get('/news/:id', function (req, res) {
         //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
-        var query = `SELECT * FROM news WHERE title LIKE '%${req.params.title}%'`;
+        var query = `SELECT * FROM news WHERE id = ${req.params.id}`;
         log.info("Preparing SQL: " + query);
         conn.executeQuery(query, req, res);
         log.info("Execute " + query);
     });
+
+    app.get('/news/:type_id/:min/:limit', function (req, res) {
+        //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+        var query = `SELECT * FROM news WHERE type = ${req.params.type_id} Order by id asc LIMIT ${req.params.min}, ${req.params.limit}`;
+        log.info("Preparing SQL: " + query);
+        conn.executeQuery(query, req, res);
+        log.info("Execute " + query);
+    });
+
+    app.get('/news_count/:type_id', function(req, res){
+        //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+        var query = `SELECT Count(id) news_count FROM news WHERE type = ${req.params.type_id}`;
+        log.info("Preparing SQL: " + query);
+        conn.executeQuery(query, req, res);
+        log.info("Execute " + query);
+    });
+
 
     app.post('/news', function (req, res) {
         /**
@@ -37,8 +48,8 @@ module.exports = function(app){
          *    + Phải chỉ định rõ TÊN CỘT cần insert vào để tránh trường hợp sau này BỔ SUNG THÊM CỘT MỚI BỊ SAI INDEX
          * Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
          */
-        var query = "INSERT INTO news (`title`, `content`, `type`, `active`, `created_date`)";       
-        query += `VALUES ('${req.body.title}', '${req.body.content}', '${req.body.type}', '${req.body.active}', '${moment().format('YYYY-MM-DD HH:mm:ss')}')`;
+        var query = "INSERT INTO news (`title`,`short_content`,`long_content`,`image`, `type`, `active`, `created_date`)";
+        query += `VALUES ('${req.body.title}','${req.body.short_content}','${req.body.long_content}','${req.body.image}', '${req.body.type}', '${req.body.active}', '${moment().format('YYYY-MM-DD HH:mm:ss')}')`;
         log.info("Preparing SQL: " + query);
         conn.executeQuery(query, req, res);
         log.info("Execute " + query);
@@ -49,7 +60,7 @@ module.exports = function(app){
          * QUAN TRỌNG: UPDATE thì phải update UPDATED_DATE
          * Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
          */
-        var query = `UPDATE news SET title = '${req.body.title}', content =  '${req.body.content}', type = '${req.body.type}', active = '${req.body.active}', updated_date = '${moment().format('YYYY-MM-DD HH:mm:ss')}' WHERE id = ${req.body.id}`;
+        var query = `UPDATE news SET title = '${req.body.title}', short_content = '${req.body.short_content}', long_content = '${req.body.long_content}', image = '${req.body.image}', type = '${req.body.type}', active = '${req.body.active}', updated_date = '${moment().format('YYYY-MM-DD HH:mm:ss')}' WHERE id = ${req.body.id}`;
         log.info("Preparing SQL: " + query);
         conn.executeQuery(query, req, res);
         log.info("Execute " + query);
