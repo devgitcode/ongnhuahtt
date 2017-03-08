@@ -41,9 +41,11 @@
   <div class="company-info">
     <div ng-bind-html="companyInfo.content"></div>
   </div>
+</div>
+<div class="container">
   <!--<drt-new-arrival ></drt-new-arrival>-->
   <div class="row" ng-controller="HomeController">
-    <section class="col-main col-xs-4 col-md-12">
+    <section class="col-main col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <div class="category-products">
         <ul class="products-grid">
           <li class="item col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-if="products.length > 0" ng-repeat="p in products | limitTo:pagination.itemsPerPage:(pagination.currentPage-1)*pagination.itemsPerPage">
@@ -98,6 +100,8 @@
         </div>
     </section>
     </div>
+</div>
+<div class="container">
     <!-- End Two columns content -->
     <div class="row">
       <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
