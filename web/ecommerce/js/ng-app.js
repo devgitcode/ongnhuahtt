@@ -54,6 +54,7 @@ app.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
         }
     })
     $stateProvider.state('products', {
+        params: {reload: true}, //add reload param to a view you want to reload
         url: '/products/:cid',
         views: {
             content: {
@@ -64,6 +65,7 @@ app.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
         resolve: {
             loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                 // you can lazy load files for an existing module
+
                 return $ocLazyLoad.load(
                     ['css/owl.carousel.css', 'css/owl.theme.css', 'css/style.css', 'js/jquery.min.js', 'js/parallax.js', 'js/common.js', 'js/owl.carousel.min.js']);
             }]
@@ -96,8 +98,8 @@ app.directive('drtBrandLogo', function () {
     }
 });
 
-app.directive('drtNewArrival', function () {
+app.directive('drtHomeProduct', function () {
     return {
-        templateUrl: 'new_arrival.html'
+        templateUrl: 'home_product.html'
     }
 });

@@ -4,21 +4,21 @@ var log = require('../log/Logger');
 var moment = require('moment');
 
 module.exports = function (app) {
-    // app.get('/product_count/:product_id', function (req, res) {
-    //     //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
-    //     var query = "SELECT Count(product_id) product_count FROM products WHERE category_id = ${req.params.cate_id}";
-    //     log.info("Preparing SQL: " + query);
-    //     conn.executeQuery(query, req, res);
-    //     log.info("Execute " + query);
-    // });
+    app.get('/product_count/:cate_id', function (req, res) {
+        //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+        var query = `SELECT Count(product_id) product_count FROM products WHERE category_id = ${req.params.cate_id}`;
+        log.info("Preparing SQL: " + query);
+        conn.executeQuery(query, req, res);
+        log.info("Execute " + query);
+    });
 
-    // app.get('/products/:product_id/:min/:limit', function (req, res) {
-    //     //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
-    //     var query = `SELECT * FROM Products WHERE category_id = ${req.params.cate_id} Order By product_id desc LIMIT ${req.params.min}, ${req.params.limit}`;
-    //     log.info("Preparing SQL: " + query);
-    //     conn.executeQuery(query, req, res);
-    //     log.info("Execute " + query);
-    // });
+    app.get('/products/:cate_id/:start/:limit', function (req, res) {
+        //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+        var query = `SELECT * FROM Products WHERE category_id = ${req.params.cate_id} Order By product_id desc LIMIT ${req.params.start}, ${req.params.limit}`;
+        log.info("Preparing SQL: " + query);
+        conn.executeQuery(query, req, res);
+        log.info("Execute " + query);
+    });
 
     app.get('/products/:active', function (req, res) {
         //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
@@ -30,18 +30,32 @@ module.exports = function (app) {
 
     app.get('/products/:product_name/:active', function (req, res) {
         //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\"database\DBConnection.js
-        var query1 = `SELECT * FROM products WHERE product_name LIKE '%${req.params.product_name}%' and active = ${req.params.active}`;
-        log.info("Preparing SQL: " + query1);
-        conn.executeQuery(query1, req, res);
-        log.info("Execute " + query1);
+        var query = `SELECT * FROM products WHERE product_name LIKE '%${req.params.product_name}%' and active = ${req.params.active}`;
+        log.info("Preparing SQL: " + query);
+        conn.executeQuery(query, req, res);
+        log.info("Execute " + query);
     });
 
-    app.get('/products/:product_name/:display_mode/:active', function (req, res) {
+    app.get('/products_mode/:product_name/:display_mode/:active', function (req, res) {
         //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
-        var query2 = `SELECT * FROM products WHERE product_name LIKE '%${req.params.product_name}%' and display_mode = ${req.params.display_mode} and active = ${req.params.active}`;
-        log.info("Preparing SQL: " + query2);
-        conn.executeQuery(query2, req, res);
-        log.info("Execute " + query2);
+        var query = `SELECT * FROM products WHERE product_name LIKE '%${req.params.product_name}%' and display_mode = ${req.params.display_mode} and active = ${req.params.active}`;
+        if(req.params.product_name == 'all'){
+            query = `SELECT * FROM products WHERE display_mode = ${req.params.display_mode} and active = ${req.params.active}`;
+        }
+        log.info("Preparing SQL: " + query);
+        conn.executeQuery(query, req, res);
+        log.info("Execute " + query);
+    });
+
+    app.get('/product_mode_count/:product_name/:display_mode/:active', function (req, res) {
+        //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+        var query = `SELECT count(product_id) product_count FROM products WHERE product_name LIKE '%${req.params.product_name}%' and display_mode = ${req.params.display_mode} and active = ${req.params.active}`;
+        if(req.params.product_name == 'all'){
+            query = `SELECT count(product_id) product_count FROM products WHERE display_mode = ${req.params.display_mode} and active = ${req.params.active}`;
+        }
+        log.info("Preparing SQL: " + query);
+        conn.executeQuery(query, req, res);
+        log.info("Execute " + query);
     });
 
     app.post('/products', function (req, res) {
