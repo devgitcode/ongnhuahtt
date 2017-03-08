@@ -225,12 +225,12 @@ CREATE TABLE `products` (
   `description` longtext COMMENT 'Mô tả chi tiết về sản phẩm ở định dạng HTML',
   `price` double DEFAULT '0' COMMENT 'Nếu giá bằng không là LIÊN HỆ\nNếu giá > 0 thì để giá',
   `active` int(1) DEFAULT '0' COMMENT '0: Không hiển thị trên public website.\n1: Hiển thị trên public website.',
-  `display_mode` int(1) DEFAULT NULL COMMENT '1: Hiển thị ở cả TRANG CHỦ và SẢN PHẨM\n0: Chỉ hiển thị ở trang SẢN PHẨM',
+  `display_mode` int(1) DEFAULT '0' COMMENT '1: Hiển thị ở cả TRANG CHỦ và SẢN PHẨM\n0: Chỉ hiển thị ở trang SẢN PHẨM',
   `category_id` int(11) DEFAULT NULL,
   `created_date` datetime DEFAULT NULL,
   `updated_date` datetime DEFAULT NULL,
   PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -239,7 +239,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Sanr pham1','products-images/p1.jpg',NULL,'asfsdf',0,0,NULL,1,'2017-02-19 01:00:01',NULL),(2,'sdfsdf2','products-images/p1.jpg',NULL,'ggg',0,1,NULL,1,'2017-02-19 01:00:01',NULL),(4,'Sanr pham3','products-images/p1.jpg',NULL,'asfsdf',0,1,NULL,1,'2017-02-19 01:00:01',NULL),(5,'sdfsdf4','products-images/p1.jpg',NULL,'ggg',0,1,NULL,1,'2017-02-19 01:00:01',NULL),(6,'sdfsdf5','products-images/p1.jpg',NULL,'ggg',0,1,NULL,1,'2017-02-19 01:00:01',NULL),(7,'Sanr pham6','products-images/p1.jpg',NULL,'asfsdf',0,0,NULL,1,'2017-02-19 01:00:01',NULL),(8,'sdfsdf7','products-images/p1.jpg',NULL,'ggg',0,1,NULL,1,'2017-02-19 01:00:01',NULL),(9,'sdfsdf8','products-images/p1.jpg',NULL,'ggg',0,0,NULL,1,'2017-02-19 01:00:01',NULL),(10,'sdfsdf9','products-images/p1.jpg',NULL,'ggg',0,0,NULL,1,'2017-02-19 01:00:01',NULL),(11,'sdfsdf10','products-images/p1.jpg',NULL,'ggg',0,0,NULL,1,'2017-02-19 01:00:01',NULL),(12,'Sanr pham11','products-images/p1.jpg',NULL,'asfsdf',0,0,NULL,1,'2017-02-19 01:00:01',NULL),(13,'sdfsdf12','products-images/p1.jpg',NULL,'ggg',0,0,NULL,1,'2017-02-19 01:00:01',NULL),(14,'sdfsdf13','products-images/p1.jpg',NULL,'ggg',0,1,NULL,1,'2017-02-19 01:00:01',NULL),(15,'sdfsdf14','products-images/p1.jpg',NULL,'ggg',0,0,NULL,1,'2017-02-19 01:00:01',NULL),(16,'sdfsdf15','products-images/p1.jpg',NULL,'ggg',0,1,NULL,2,'2017-02-19 01:00:01',NULL),(17,'sdfsdf16','products-images/p1.jpg',NULL,'ggg',0,1,NULL,2,'2017-02-19 01:00:01',NULL),(18,'sdfsdf167','products-images/p1.jpg',NULL,'ggg',0,1,NULL,2,'2017-02-19 01:00:01',NULL);
+INSERT INTO `products` VALUES (1,'Sanr pham1','products-images/p1.jpg',NULL,'asfsdf',0,0,0,1,'2017-02-19 01:00:01',NULL),(2,'sdfsdf2','products-images/p1.jpg',NULL,'ggg',0,1,1,1,'2017-02-19 01:00:01',NULL),(4,'Sanr pham3','products-images/p1.jpg',NULL,'asfsdf',0,1,1,1,'2017-02-19 01:00:01',NULL),(5,'sdfsdf4','products-images/p1.jpg',NULL,'ggg',0,1,1,1,'2017-02-19 01:00:01',NULL),(6,'sdfsdf5','products-images/p1.jpg',NULL,'ggg',0,1,1,1,'2017-02-19 01:00:01',NULL),(7,'Sanr pham6','products-images/p1.jpg',NULL,'asfsdf',0,0,1,1,'2017-02-19 01:00:01',NULL),(8,'sdfsdf7','products-images/p1.jpg',NULL,'ggg',0,1,1,1,'2017-02-19 01:00:01',NULL),(9,'sdfsdf8','products-images/p1.jpg',NULL,'ggg',0,0,1,1,'2017-02-19 01:00:01',NULL),(10,'sdfsdf9','products-images/p1.jpg',NULL,'ggg',0,0,1,1,'2017-02-19 01:00:01',NULL),(11,'sdfsdf10','products-images/p1.jpg',NULL,'ggg',0,0,1,1,'2017-02-19 01:00:01',NULL),(12,'Sanr pham11','products-images/p1.jpg',NULL,'asfsdf',0,0,1,1,'2017-02-19 01:00:01',NULL),(13,'sdfsdf12','products-images/p1.jpg',NULL,'ggg',0,0,1,1,'2017-02-19 01:00:01',NULL),(14,'sdfsdf13','products-images/p1.jpg',NULL,'ggg',0,1,1,1,'2017-02-19 01:00:01',NULL),(15,'sdfsdf14','products-images/p1.jpg',NULL,'ggg',0,0,1,1,'2017-02-19 01:00:01',NULL),(16,'sdfsdf15','products-images/p1.jpg',NULL,'ggg',0,1,1,2,'2017-02-19 01:00:01',NULL),(17,'sdfsdf16','products-images/p1.jpg',NULL,'ggg',0,1,1,2,'2017-02-19 01:00:01',NULL),(18,'sdfsdf167','products-images/p1.jpg',NULL,'ggg',0,1,1,2,'2017-02-19 01:00:01',NULL),(19,NULL,NULL,NULL,NULL,0,0,1,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -308,4 +308,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-26 16:06:16
+-- Dump completed on 2017-03-09  0:42:45
