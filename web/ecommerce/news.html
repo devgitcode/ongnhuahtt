@@ -4,7 +4,6 @@
             position: relative;
             width: 50%;
         }
-
         .image {
             opacity: 1;
             display: block;
@@ -13,7 +12,6 @@
             transition: .5s ease;
             backface-visibility: hidden;
         }
-
         .middle {
             transition: .5s ease;
             opacity: 0;
@@ -26,11 +24,9 @@
         .iframe:hover .image {
             opacity: 0.3;
         }
-
         .iframe:hover .middle {
             opacity: 1;
         }
-
         .text {
             color: black;
             font-size: 16px;
@@ -59,10 +55,10 @@
                             <div class="block-news">
                                 <div class="content-news">
                                     <div class="row">
-                                        <div class="col-md-4 col-sm-4 col-xs-12 item" ng-repeat="n in news">
+                                        <div class="col-md-4 col-sm-4 col-xs-12" ng-repeat="n in news">
                                             <div class="wrap-item">
                                                 <div class="iframe">
-                                                    <a href="news_detail.html" title="{{n.image}}" style="height: 187px; width: 100%">
+                                                    <a href="news_detail.html" title="" style="height: 187px; width: 100%">
                                                         <img width="150" height="150" src="{{n.image}}" class="image">
                                                         <div class="middle">
                                                             <div class="text"></div>
@@ -95,20 +91,20 @@
                         <div class="toolbar" ng-if="news.length > 0">
                             <div class="pager">
                                 <div class="pages">
-                                    <!--<ul class="pagination" uib-pagination total-items="pagination.totalItems" items-per-page="pagination.itemsPerPage" ng-model="pagination.currentPage"
-                                        ng-change="pageChanged()">-->
-                                        <li><a href="">«</a></li>
+                                    <ul class="pagination" uib-pagination total-items="pagination.totalItems" items-per-page="pagination.itemsPerPage" ng-model="pagination.currentPage"
+                                        ng-change="pageChanged()">
+                                        <!--<li><a href="">«</a></li>
                                         <li class="active"><a href="#">1</a></li>
                                         <li><a href="">2</a></li>
                                         <li><a href="">3</a></li>
                                         <li><a href="">4</a></li>
                                         <li><a href="">5</a></li>
-                                        <li><a href="">»</a></li>
+                                        <li><a href="">»</a></li>-->
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <!--<h4 ng-if="news.length <= 0" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">Không có sản phẩm nào</h4>-->
+                        <h4 ng-if="news.length <= 0" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">Không có sản phẩm nào</h4>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12 col-xs-12 col-right">
@@ -121,7 +117,7 @@
                                     <div class="item">
                                         <div class="iframe">
                                             <a href="" class="img"><img width="150" height="150" src="{{n.image}}"
-                                                    class="attachment-thumbnail size-thumbnail wp-post-image" alt="{{n.image}}"></a>
+                                                    class="attachment-thumbnail size-thumbnail wp-post-image" alt="404 error found"></a>
                                         </div>
                                         <h3><a href="" title="{{n.title}}">{{n.title}}</a></h3>
                                     </div>

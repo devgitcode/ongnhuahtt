@@ -1,6 +1,6 @@
 var app = angular.module('web.application');
 
-app.controller('ProductController', function ($scope, $state,$log, $http, NodeUrl, $stateParams, $location) {
+app.controller('ProductController', function ($scope, $state,$log, $http, NodeUrl, $stateParams) {
 
     /* BEGIN PROPERTY */
 
@@ -32,13 +32,13 @@ app.controller('ProductController', function ($scope, $state,$log, $http, NodeUr
         });
     }
 
-    var countProduct = function(){
-        $http.get(`${NodeUrl}/product_count/${cid}`).then(function(res){
-            $scope.pagination.totalItems = res.data[0];
+    // var countProduct = function(){
+    //     $http.get(`${NodeUrl}/product_count/${cid}`).then(function(res){
+    //         $scope.pagination.totalItems = res.data[0];
 
     var countProduct = function () {
         $http.get(`${NodeUrl}/product_count/${cid}`).then(function (res) {
-            $scope.pagination.totalItems = res.data[0].product_count;
+            $scope.pagination.totalItems = res.data[0];
             console.log($scope.pagination.totalItems);
         });
     }

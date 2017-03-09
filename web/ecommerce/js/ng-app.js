@@ -31,140 +31,135 @@ app.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
         }
         return $.param(data);
     }
+    // $routeProvider.when('/',{
+    //     templateUrl: 'main.html',
+    //     controller: 'HomeController',
+    //     css: 'css/slider.css'
+    // })
+    // .when('/grid',{
+    //     templateUrl: 'about_us.html'
+    // });
 
-    app.config(function ($stateProvider, $urlRouterProvider) {
-        // $routeProvider.when('/',{
-        //     templateUrl: 'main.html',
-        //     controller: 'HomeController',
-        //     css: 'css/slider.css'
-        // })
-        // .when('/grid',{
-        //     templateUrl: 'about_us.html'
-        // });
+    $stateProvider.state('homepage', {
+        url: '/',
 
-        $stateProvider.state('homepage', {
-            url: '/',
-
-            views: {
-                content: {
-                    templateUrl: 'main.html',
-                    controller: 'HomeController'
-                }
-            },
-            resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
-                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    // you can lazy load files for an existing module
-                    return $ocLazyLoad.load(
-                        [
-
-                            "css/font-awesome.css"
-
-
-                        ]);
-                }]
+        views: {
+            content: {
+                templateUrl: 'main.html',
+                controller: 'HomeController'
             }
-        })
-        $stateProvider.state('products', {
-            params: { reload: true }, //add reload param to a view you want to reload
-            url: '/products/:cid',
-            views: {
-                content: {
-                    templateUrl: 'products.html',
-                    controller: 'ProductController'
-                }
-            },
-            resolve: {
-                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    // you can lazy load files for an existing module
-                    return $ocLazyLoad.load(
-                        ['css/owl.carousel.css', 'css/owl.theme.css', 'css/style.css', 'js/jquery.min.js', 'js/parallax.js', 'js/common.js', 'js/owl.carousel.min.js']);
-                }]
+        },
+        resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
+            loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                // you can lazy load files for an existing module
+                return $ocLazyLoad.load(
+                    [
+                        "css/font-awesome.css"
+                    ]);
+            }]
+        }
+    })
+    $stateProvider.state('products', {
+        params: { reload: true }, //add reload param to a view you want to reload
+        url: '/products/:cid',
+        views: {
+            content: {
+                templateUrl: 'products.html',
+                controller: 'ProductController'
             }
-        });
-
-        $stateProvider.state('catalogue', {
-            url: '/catalogue',
-            views: {
-                content: {
-                    templateUrl: 'catalogue.html',
-                    controller: 'CatalogueController'
-                }
-            },
-            resolve: {
-                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    // you can lazy load files for an existing module
-                    return $ocLazyLoad.load(
-                        ['css/owl.carousel.css', 'css/owl.theme.css', 'css/style.css', 'js/jquery.min.js', 'js/parallax.js', 'js/common.js', 'js/owl.carousel.min.js']);
-                }]
-            }
-        });
-
-        $stateProvider.state('news', {
-            url: '/news/:ntype',
-            views: {
-                content: {
-                    templateUrl: 'news.html',
-                    controller: 'NewsController'
-                }
-            },
-            resolve: {
-                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    // you can lazy load files for an existing module
-                    return $ocLazyLoad.load(
-                        ['css/owl.carousel.css', 'css/owl.theme.css', 'css/style.css', 'js/jquery.min.js', 'js/parallax.js', 'js/common.js', 'js/owl.carousel.min.js']
-                    );
-                }]
-            }
-        });
-        $stateProvider.state('introduction', {
-            url: '/introduction/:introid',
-            views: {
-                content: {
-                    templateUrl: 'introduction.html',
-                    controller: 'IntroductionController'
-                }
-            },
-            resolve: {
-                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    // you can lazy load files for an existing module
-                    return $ocLazyLoad.load(
-                        ['css/owl.carousel.css', 'css/owl.theme.css', 'css/style.css', 'js/jquery.min.js', 'js/parallax.js', 'js/common.js', 'js/owl.carousel.min.js']
-                    );
-                }]
-            }
-        });
-        $stateProvider.state('contact', {
-            url: '/contact/:cid',
-            views: {
-                content: {
-                    templateUrl: 'contact.html',
-                    controller: 'ContactController'
-                }
-            },
-            resolve: {
-                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    // you can lazy load files for an existing module
-                    return $ocLazyLoad.load(
-                        ['css/owl.carousel.css', 'css/owl.theme.css', 'css/style.css', 'js/jquery.min.js', 'js/parallax.js', 'js/common.js', 'js/owl.carousel.min.js']
-                    );
-                }]
-            }
-        });
-
-        $urlRouterProvider.otherwise('/');
-    });
-
-    app.directive('drtBrandLogo', function () {
-        return {
-            templateUrl: 'brand_logo.html'
+        },
+        resolve: {
+            loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                // you can lazy load files for an existing module
+                return $ocLazyLoad.load(
+                    ['css/owl.carousel.css', 'css/owl.theme.css', 'css/style.css', 'js/jquery.min.js', 'js/parallax.js', 'js/common.js', 'js/owl.carousel.min.js']);
+            }]
         }
     });
 
-    app.directive('drtNewArrival', function () {
-        app.directive('drtHomeProduct', function () {
-            return {
-                templateUrl: 'home_product.html'
+    $stateProvider.state('catalogue', {
+        url: '/catalogue',
+        views: {
+            content: {
+                templateUrl: 'catalogue.html',
+                controller: 'CatalogueController'
             }
-        });
-    })
+        },
+        resolve: {
+            loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                // you can lazy load files for an existing module
+                return $ocLazyLoad.load(
+                    ['css/owl.carousel.css', 'css/owl.theme.css', 'css/style.css', 'js/jquery.min.js', 'js/parallax.js', 'js/common.js', 'js/owl.carousel.min.js']);
+            }]
+        }
+    });
+
+    $stateProvider.state('news', {
+        url: '/news/:ntype',
+        views: {
+            content: {
+                templateUrl: 'news.html',
+                controller: 'NewsController'
+            }
+        },
+        resolve: {
+            loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                // you can lazy load files for an existing module
+                return $ocLazyLoad.load(
+                    ['css/owl.carousel.css', 'css/owl.theme.css', 'css/style.css', 'js/jquery.min.js', 'js/parallax.js', 'js/common.js', 'js/owl.carousel.min.js']
+                );
+            }]
+        }
+    });
+    $stateProvider.state('introduction', {
+        url: '/introduction/:introid',
+        views: {
+            content: {
+                templateUrl: 'introduction.html',
+                controller: 'IntroductionController'
+            }
+        },
+        resolve: {
+            loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                // you can lazy load files for an existing module
+                return $ocLazyLoad.load(
+                    ['css/owl.carousel.css', 'css/owl.theme.css', 'css/style.css', 'js/jquery.min.js', 'js/parallax.js', 'js/common.js', 'js/owl.carousel.min.js']
+                );
+            }]
+        }
+    });
+    $stateProvider.state('contact', {
+        url: '/contact/:cid',
+        views: {
+            content: {
+                templateUrl: 'contact.html',
+                controller: 'ContactController'
+            }
+        },
+        resolve: {
+            loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                // you can lazy load files for an existing module
+                return $ocLazyLoad.load(
+                    ['css/owl.carousel.css', 'css/owl.theme.css', 'css/style.css', 'js/jquery.min.js', 'js/parallax.js', 'js/common.js', 'js/owl.carousel.min.js']
+                );
+            }]
+        }
+    });
+    $urlRouterProvider.otherwise('/');
+});
+
+
+
+app.directive('drtBrandLogo', function () {
+    return {
+        templateUrl: 'brand_logo.html'
+    }
+});
+
+app.directive('drtNewArrival', function () {
+    app.directive('drtHomeProduct', function () {
+        return {
+            templateUrl: 'home_product.html'
+        }
+    });
 })

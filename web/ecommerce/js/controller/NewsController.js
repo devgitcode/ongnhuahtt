@@ -55,14 +55,14 @@ app.controller('NewsController', function ($scope, $log, $http, NodeUrl, $stateP
         $scope.selectedNews = res.data[0].records;
     });
 
-    // $scope.setPage = function (pageNo) {
-    //     $scope.pagination.currentPage = pageNo;
-    // };
+    $scope.setPage = function (pageNo) {
+        $scope.pagination.currentPage = pageNo;
+    };
 
-    // $scope.pageChanged = function () {
-    //     $log.log('Page changed to: ' + $scope.pagination.currentPage);
-    //     start = ($scope.pagination.currentPage - 1) * $scope.pagination.itemPerPage;
-    //     showNews();
-    // };
+    $scope.pageChanged = function () {
+        $log.log('Page changed to: ' + $scope.pagination.currentPage);
+        start = ($scope.pagination.currentPage - 1) * $scope.pagination.itemPerPage;
+        showNews();
+    };
     /* END FUNCTION */
 });
