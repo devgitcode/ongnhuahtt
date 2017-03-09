@@ -49,3 +49,5 @@ Temporary Items
 backend/config/db.json
 *.log
 *.log
+backend/config/db.json
+backend/config/db.json

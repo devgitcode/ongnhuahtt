@@ -6860,6 +6860,10 @@ fieldset {
 .shipping .form-list input.input-text {
 	width: 95%;
 }
+
+.contact-form input.input-text,.contact-form textarea.input-text {
+	width: 100%;
+}
 .cart-collaterals h3 {
  border-bottom: 1px solid #ccc;
     color: #000;
