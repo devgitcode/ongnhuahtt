@@ -1,0 +1,29 @@
+{
+    "ecommerce": {
+        "file": {
+            "filename": "ecommerce/ecommerce.log",
+            "logLevel": "debug",
+            "json": false
+        },
+        "console": {
+            "logLevel": "info",
+            "handleExceptions": false,
+            "json": false,
+            "colorize": true
+        }
+    },
+
+    "admin": {
+        "file": {
+            "filename": "admin/admin.log",
+            "logLevel": "debug",
+            "json": false
+        },
+        "console": {
+            "logLevel": "info",
+            "handleExceptions": false,
+            "json": false,
+            "colorize": true
+        }
+    }
+}

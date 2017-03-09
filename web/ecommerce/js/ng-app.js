@@ -1,3 +1,4 @@
+
 var app = angular.module('web.application', ['ui.router', 'oc.lazyLoad', 'ui.bootstrap']);
 // app.run(function($rootScope, $templateCache) {
 //     $rootScope.$on("$stateChangeStart", function() {
