@@ -51,3 +51,5 @@ backend/config/db.json
 *.log
 backend/config/db.json
 backend/config/db.json
+backend/config/db.json
+web/ecommerce/product_detail.1.html

@@ -24,13 +24,7 @@ app.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
     /**
      * Send request as x-www-form-urlencoded
      */
-    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
-    $httpProvider.defaults.transformRequest = function (data) {
-        if (data === undefined) {
-            return data;
-        }
-        return $.param(data);
-    }
+    
     // $routeProvider.when('/',{
     //     templateUrl: 'main.html',
     //     controller: 'HomeController',
@@ -73,6 +67,21 @@ app.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
                 // you can lazy load files for an existing module
                 return $ocLazyLoad.load(
                     ['css/owl.carousel.css', 'css/owl.theme.css', 'css/style.css', 'js/jquery.min.js', 'js/parallax.js', 'js/common.js', 'js/owl.carousel.min.js']);
+            }]
+        }
+    });
+    $stateProvider.state('product_detail', {
+        url: '/products/:cid/:pid',
+        views: {
+            content: {
+                templateUrl: 'product_detail.html'
+            }
+        },
+        resolve: {
+            loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                // you can lazy load files for an existing module
+                return $ocLazyLoad.load(
+                    ['css/owl.carousel.css','css/owl.theme.css','css/flexslider.css','css/fancybox.css','css/font-awesome.css','js/prototype.js', 'js/jquery.min.js','js/common.js', 'js/owl.carousel.min.js','js/toggle.js','js/pro-img-slider.js','js/jquery.flexslider.js', 'js/cloud-zoom.js']);
             }]
         }
     });

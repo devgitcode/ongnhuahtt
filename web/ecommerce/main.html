@@ -44,29 +44,26 @@
 </div>
 <div class="container">
   <!--<drt-new-arrival ></drt-new-arrival>-->
+  <div class="new_title center">
+    <div class="title-category text-center"><span>Sản phẩm tiêu biểu</span></div>
+  </div>
   <div class="row" ng-controller="HomeController">
     <section class="col-main col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <div class="category-products">
         <ul class="products-grid">
-          <li class="item col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-if="products.length > 0" ng-repeat="p in products | limitTo:pagination.itemsPerPage:(pagination.currentPage-1)*pagination.itemsPerPage">
+          <li class="item col-lg-3 col-md-3 col-sm-6 col-xs-12" ng-if="products.length > 0" ng-repeat="p in products | limitTo:pagination.itemsPerPage:(pagination.currentPage-1)*pagination.itemsPerPage">
             <div class="col-item">
               <!--<div class="sale-label sale-top-right">Sale</div>-->
               <div class="item-inner">
                 <div class="item-img">
                   <div class="item-img-info">
-                    <a href="product_detail.html" title="Sample Product" class="product-image"> <img ng-if="p.image" ng-src="{{p.image}}" alt="{{p.product_name}}"></a>
-                    <div class="item-box-hover">
-                      <div class="box-inner">
-                        <div class="product-detail-bnt"><a href="quick_view.html" class="button detail-bnt"><span>Quick View</span></a></div>
-                      </div>
-                    </div>
+                    <a ui-sref="product_detail({cid: 1, pid: 1})" title="Sample Product" class="product-image"> <img ng-if="p.image" height="50" ng-src="{{p.image}}" alt="{{p.product_name}}"></a>
                   </div>
                 </div>
                 <div class="item-info">
                   <div class="info-inner">
-                    <div class="item-title"> <a href="product_detail.html" title="{{p.product_name}}"> {{p.product_name}} </a> </div>
+                    <div class="item-title"> <a ui-sref="product_detail({cid: 1, pid: 1})" title="{{p.product_name}}"> {{p.product_name}} </a> </div>
                     <div class="item-content">
-
                       <div class="item-price">
                         <div class="price-box">
                           <span class="regular-price"> 
@@ -97,103 +94,103 @@
             </div>
           </div>
         </div>
-        </div>
+      </div>
     </section>
     </div>
-</div>
-<div class="container">
-    <!-- End Two columns content -->
-    <div class="row">
-      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-        <div class="title-block"><span>Thông tin công ty</span></div>
-        <div class="service">
-          <!--Dịch vụ đầu tiên-->
-          <div class="service-first">
-            <div class="item">
-              <div class="row">
-                <div class="col-md-6">
-                  <a href="news/{{headNews.id}}" class="img" style="height: 199px;"><img width="300" height="200" src="{{headNews.image}}" class="attachment-medium size-medium wp-post-image"
-                      alt="hoang-tung-khai-truong-show-room-moi" srcset="{{headNews.image}} 300w, {{headNews.image}} 623w"
-                      sizes="(max-width: 300px) 100vw, 300px"></a>
-                </div>
-                <div class="col-md-6 infomation">
-                  <h3><a href="news/{{headNews.id}}" title="{{headNews.title}}">{{headNews.title}}</a></h3>
-                  <div class="info">{{headNews.content}}</div>
-                  <a href="news/{{headNews.id}}" title="Chi tiết" class="view-detail">Chi Tiết »</a>
+
+    <div class="container">
+      <!-- End Two columns content -->
+      <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+          <div class="title-block"><span>Thông tin công ty</span></div>
+          <div class="service">
+            <!--Dịch vụ đầu tiên-->
+            <div class="service-first">
+              <div class="item">
+                <div class="row">
+                  <div class="col-md-6">
+                    <a href="news/{{headNews.id}}" class="img" style="height: 199px;"><img width="300" height="200" src="{{headNews.image}}" class="attachment-medium size-medium wp-post-image"
+                        alt="hoang-tung-khai-truong-show-room-moi" srcset="{{headNews.image}} 300w, {{headNews.image}} 623w"
+                        sizes="(max-width: 300px) 100vw, 300px"></a>
+                  </div>
+                  <div class="col-md-6 infomation">
+                    <h3><a href="news/{{headNews.id}}" title="{{headNews.title}}">{{headNews.title}}</a></h3>
+                    <div class="info">{{headNews.content}}</div>
+                    <a href="news/{{headNews.id}}" title="Chi tiết" class="view-detail">Chi Tiết »</a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <!--Dịch vụ đầu tiên-->
-          <!--Dịch vụ thứ 2 trở đi-->
-          <div class="service-second">
-            <ul class="row">
-              <li class="col-md-6" ng-repeat="x in headNewsTitles">
-                <h3>
-                  <a href="news/{{x.id}}" title="{{x.title}}"><i class="fa fa-angle-double-right"></i>» {{x.title}}</a>
-                </h3>
-              </li>
-            </ul>
-          </div>
-          <!--Dịch vụ thứ 2 trở đi-->
+            <!--Dịch vụ đầu tiên-->
+            <!--Dịch vụ thứ 2 trở đi-->
+            <div class="service-second">
+              <ul class="row">
+                <li class="col-md-6" ng-repeat="x in headNewsTitles">
+                  <h3>
+                    <a href="news/{{x.id}}" title="{{x.title}}"><i class="fa fa-angle-double-right"></i>» {{x.title}}</a>
+                  </h3>
+                </li>
+              </ul>
+            </div>
+            <!--Dịch vụ thứ 2 trở đi-->
 
-          <div class="clear"></div>
-        </div>
-      </div>
-      <div class="col-md-4 col-sm-12 col-xs-12">
-        <div class="block-right">
-          <div class="title-block"><span>Tin tức </span></div>
-          <div class="content-block block-news">
-            <ul>
-              <li ng-repeat="item in news">
-                <div class="item">
-                  <a href="news/{{item.id}}" class="img"><img width="150" height="150" src="{{item.image}}" class="attachment-thumbnail size-thumbnail wp-post-image"
-                      alt="{{item.title}}"></a>
-                  <h3><a href="news/{{item.id}}" title="{{item.title}}">{{item.title}}</a></h3>
-                  <div class="info">
-                    {{item.content}}
-                  </div>
-                </div>
-              </li>
-            </ul>
             <div class="clear"></div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-
-
-  <!-- Offer Banner  -->
-
-  <!-- main container -->
-
-
-  <!-- End main container -->
-
-
-  <div class="our-features-box">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-          <div class="feature-box">
-            <div class="icon-group">&nbsp;</div>
-            <div class="content">TƯ VẤN THIẾT KẾ<span>Dịch vụ tư vấn và thiết kế các công trình ống nước, ống nhựa của công ty Hoàng Anh Tuấn sẽ giúp bạn sắp xếp khoa học, và tối ưu hóa trong vận hành và hoạt động của ngành cấp thoát nước.</span>              </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-          <div class="feature-box">
-            <div class="icon-check">&nbsp;</div>
-            <div class="content">BẢO HÀNH ĐỊNH KỲ <span>Mở rộng dịch vụ bảo trì, bảo dưỡng kiểm tra các sản phẩm và phụ kiện trước khi đưa đến tay của khách hàng. Nhằm đảm bảo chất lượng và tránh trường hợp xảy ra sự cố.</span></div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4  col-xs-12">
-          <div class="feature-box">
-            <div class="icon-gears">&nbsp;</div>
-            <div class="content">SẢN PHẨM CHÍNH HÃNG <span>Các sản phẩm ốngvà phụ kiện của công ty chúng tôi đều được sản xuất trên công nghệ hiện đại, đảm bảo chất lượng cao. Mang đến cho khách hàng các sản phẩm chính hãng với giá tốt nhất hiện nay.</span>              </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+          <div class="block-right">
+            <div class="title-block"><span>Tin tức </span></div>
+            <div class="content-block block-news">
+              <ul>
+                <li ng-repeat="item in news">
+                  <div class="item">
+                    <a href="news/{{item.id}}" class="img"><img width="150" height="150" src="{{item.image}}" class="attachment-thumbnail size-thumbnail wp-post-image"
+                        alt="{{item.title}}"></a>
+                    <h3><a href="news/{{item.id}}" title="{{item.title}}">{{item.title}}</a></h3>
+                    <div class="info">
+                      {{item.content}}
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <div class="clear"></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+
+
+
+    <!-- Offer Banner  -->
+
+    <!-- main container -->
+
+
+    <!-- End main container -->
+
+
+    <div class="our-features-box">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <div class="feature-box">
+              <div class="icon-group">&nbsp;</div>
+              <div class="content">TƯ VẤN THIẾT KẾ<span>Dịch vụ tư vấn và thiết kế các công trình ống nước, ống nhựa của công ty Hoàng Anh Tuấn sẽ giúp bạn sắp xếp khoa học, và tối ưu hóa trong vận hành và hoạt động của ngành cấp thoát nước.</span>                </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <div class="feature-box">
+              <div class="icon-check">&nbsp;</div>
+              <div class="content">BẢO HÀNH ĐỊNH KỲ <span>Mở rộng dịch vụ bảo trì, bảo dưỡng kiểm tra các sản phẩm và phụ kiện trước khi đưa đến tay của khách hàng. Nhằm đảm bảo chất lượng và tránh trường hợp xảy ra sự cố.</span></div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4  col-xs-12">
+            <div class="feature-box">
+              <div class="icon-gears">&nbsp;</div>
+              <div class="content">SẢN PHẨM CHÍNH HÃNG <span>Các sản phẩm ốngvà phụ kiện của công ty chúng tôi đều được sản xuất trên công nghệ hiện đại, đảm bảo chất lượng cao. Mang đến cho khách hàng các sản phẩm chính hãng với giá tốt nhất hiện nay.</span>                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

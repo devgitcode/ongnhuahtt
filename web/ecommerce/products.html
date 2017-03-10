@@ -44,19 +44,13 @@
                 <div class="item-inner">
                   <div class="item-img">
                     <div class="item-img-info">
-                      <a href="product_detail.html" title="Sample Product" class="product-image"> <img ng-if="p.image" ng-src="{{p.image}}" alt="{{p.product_name}}"></a>
-                      <div class="item-box-hover">
-                        <div class="box-inner">
-                          <div class="product-detail-bnt"><a href="quick_view.html" class="button detail-bnt"><span>Quick View</span></a></div>
-                        </div>
-                      </div>
+                      <a ui-sref="product_detail({cid: 1, pid: 1})" title="{{p.product_name}}" class="product-image"> <img ng-if="p.image" ng-src="{{p.image}}" alt="{{p.product_name}}"></a>
                     </div>
                   </div>
                   <div class="item-info">
                     <div class="info-inner">
-                      <div class="item-title"> <a href="product_detail.html" title="{{p.product_name}}"> {{p.product_name}} </a> </div>
+                      <div class="item-title"> <a ui-sref="product_detail({cid: 1, pid: 1})" title="{{p.product_name}}"> {{p.product_name}} </a> </div>
                       <div class="item-content">
-
                         <div class="item-price">
                           <div class="price-box"> <span class="regular-price"> 
                               <span ng-if="p.price== 0" class="price">Liên hệ</span>
