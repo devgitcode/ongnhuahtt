@@ -14,7 +14,6 @@
 .title_2 {
     font-size: 35px!important;
     font-weight: bold;
-    color:
 }
 
 .company-info{
@@ -289,4 +288,12 @@
     padding: 0;
     float: right;
     width: 100%;
+}
+
+.page-news{
+    margin: 10px 0px;
+}
+
+.news-title{
+    border-bottom: 3px solid rgba(97, 97, 97, 0.62);
 }
