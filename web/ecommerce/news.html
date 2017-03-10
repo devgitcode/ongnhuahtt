@@ -1,133 +1,98 @@
-<head>
-    <style>
-        .iframe {
-            position: relative;
-            width: 50%;
-        }
-        .image {
-            opacity: 1;
-            display: block;
-            width: 180px;
-            height: 180px;
-            transition: .5s ease;
-            backface-visibility: hidden;
-        }
-        .middle {
-            transition: .5s ease;
-            opacity: 0;
-            position: absolute;
-            top: 50%;
-            left: 72%;
-            transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%)
-        }
-        .iframe:hover .image {
-            opacity: 0.3;
-        }
-        .iframe:hover .middle {
-            opacity: 1;
-        }
-        .text {
-            color: black;
-            font-size: 16px;
-            padding: 16px 32px;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="content-page">
-        <div class="container">
-            <div class="block-news">
-                <div class="crumbs">
-                    <span id="breadcrumbs" class="breadcrumbs"><span class="item-home"><a class="bread-link bread-home" href="#/index.html" title="Trang chủ">Trang chủ</a></span>
-                    <span class="separator separator-home"> » </span><span class="item-current item-cat-3 item-cat-tin-tuc"><strong class="bread-current bread-cat-3 bread-cat-tin-tuc">Tin tức</strong></span></span>
-                    <div class="clear"></div>
-                </div>
-            </div>
-            <div class="page-news">
-                <div class="body col-left">
-                    <div class="col-md-9 col-sm-12 col-xs-12 col-left">
-                        <div class="title">
-                            <h3 class="block">Tin tức</h3>
-                        </div>
-                        <div class="content-page-news">
-                            <div class="block-news">
-                                <div class="content-news">
-                                    <div class="row">
-                                        <div class="col-md-4 col-sm-4 col-xs-12" ng-repeat="n in news">
-                                            <div class="wrap-item">
-                                                <div class="iframe">
-                                                    <a href="news_detail.html" title="" style="height: 187px; width: 100%">
-                                                        <img width="150" height="150" src="{{n.image}}" class="image">
-                                                        <div class="middle">
-                                                            <div class="text"></div>
-                                                        </div> <span></span>
-                                                    </a>
-                                                </div>
-                                                <div class="wp-title">
-                                                    <div class="title-detail">
-                                                        <h3><a href="news_detail.html" title="Top 3 loại ống nhựa an toàn cho nguồn nước">{{n.title}}</a></h3>
-                                                    </div>
-                                                    <div class="getTime">
-                                                        <strong><a href="" class="wp-news">Trong nước</a></strong> -
-                                                        <span class="time" id="day_diff" date="date">1 phút trước</span>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="wp-meta">
-                                                <span>{{n.short_content}}</span>
-
-                                            </div>
-                                        </div>
-                                    </div>
+<div class="content-page">
+    <div class="container">
+            <div class="breadcrumbs">
+    <div class="container">
+      <div class="row">
+        <ul>
+          <li class="home"> <a href="index.html" title="Go to Home Page">Trang chủ</a><span>&raquo;</span></li>
+          <li class=""> <a href="products.html" title="Go to Home Page"><strong>Tin tức</strong></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+        
+        <div class="">
+            <div class="body col-left">
+                <div class="col-md-9 col-sm-12 col-xs-12 col-left">
+                    <div class="title" style="font-feature-settings: abvs">
+                        <h3>Tin tức</h3>
+                    </div>
+                    <ul class="block-news clearfix">
+                        <li ng-repeat="n in news">
+                            <div class="item">
+                                <div class="iframe">
+                                    <style>
+                                        .iframe {
+                                            position: relative;
+                                            width: 50%;
+                                            box-sizing: border-box;
+                                        }                         
+                                        .iframe .image:hover {
+                                           display: inline-block;
+                                           opacity: 0.6;
+                                        }
+                                    </style>
+                                    <a href="news_detail.html" title="">
+                                        <img src="{{n.image}}" class="image" style="display: inline-block">
+                                        <div class="middle">
+                                            <div class="text"></div>
+                                        </div> <span></span>
+                                    </a>
+                                </div>
+                                <div class="block-news-title">
+                                    <a href="news_detail.html" title="{{n.title}}">{{n.title}}</a>
                                 </div>
                             </div>
-                            <div class="clear"></div>
-                        </div>
-                        <div class="clear"></div>
-
-                        <div class="toolbar" ng-if="news.length > 0">
-                            <div class="pager">
-                                <div class="pages">
-                                    <ul class="pagination" uib-pagination total-items="pagination.totalItems" items-per-page="pagination.itemsPerPage" ng-model="pagination.currentPage"
-                                        ng-change="pageChanged()">
-                                        <!--<li><a href="">«</a></li>
+                            <div class="block-news-meta">
+                                <strong><a href="" class="wp-news">Trong nước</a></strong> -
+                                <span class="time" id="day_diff" date="date">1 phút trước</span>
+                            </div>
+                            <div class="block-news-content">{{n.short_content}}</div>
+                            <div class="clearfix">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-12 col-xs-12 col-right">
+                <div class="block service-first">
+                    <div class="title-block"><span>Tin tức mới nhất</span></div>
+                    <ul class="block-news clearfix">
+                        <li ng-repeat="n in news">
+                            <div class="item">
+                                <div>
+                                    <a href=""><img width="150" height="150" src="{{n.image}}" class="img" alt="404 error found"></a>
+                                </div>
+                                <div class="clearfix">
+                                    <h3><a href="" title="{{n.title}}">{{n.title}}</a></h3>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="clear"></div>
+<div class="toolbar" ng-if="news.length > 0">
+    <div class="pager">
+        <div class="pages">
+            <ul class="pagination" uib-pagination total-items="pagination.totalItems" items-per-page="pagination.itemsPerPage" ng-model="pagination.currentPage"
+                ng-change="pageChanged()">
+                <!--<li><a href="">«</a></li>
                                         <li class="active"><a href="#">1</a></li>
                                         <li><a href="">2</a></li>
                                         <li><a href="">3</a></li>
                                         <li><a href="">4</a></li>
                                         <li><a href="">5</a></li>
                                         <li><a href="">»</a></li>-->
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <h4 ng-if="news.length <= 0" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">Không có sản phẩm nào</h4>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-12 col-xs-12 col-right">
-                    <div class="block">
-                        <div class="title-block"><span>Tin tức mới nhất</span></div>
-                        <div class="block-content block-hot" >
-                            <ul ng-repeat="n in news">
-
-                                <li >
-                                    <div class="item">
-                                        <div class="iframe">
-                                            <a href="" class="img"><img width="150" height="150" src="{{n.image}}"
-                                                    class="attachment-thumbnail size-thumbnail wp-post-image" alt="404 error found"></a>
-                                        </div>
-                                        <h3><a href="" title="{{n.title}}">{{n.title}}</a></h3>
-                                    </div>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </ul>
         </div>
     </div>
-</body>
+</div>
+<h4 ng-if="news.length <= 0" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">Sản phẩm bạn tìm hiện không có</h4>
+
+</div>
