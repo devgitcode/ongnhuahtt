@@ -18,62 +18,55 @@
                         <h3>Tin tức</h3>
                     </div>
                     <ul class="block-news clearfix">
-                        <li ng-repeat="n in news">
+                        <li ng-repeat="n in news">                    
                             <div class="item">
-                                <div class="iframe">
-                                    <style>
-                                        .iframe {
-                                            position: relative;
-                                            width: 50%;
-                                            box-sizing: border-box;
-                                        }
-                                        
-                                        .iframe .image:hover {
-                                            display: inline-block;
-                                            opacity: 0.6;
-                                        }
-                                    </style>
-                                    <a href="news_detail.html" title="">
-                                        <img src="{{n.image}}" class="image" style="display: inline-block">
-                                        <div class="middle">
-                                            <div class="text"></div>
-                                        </div> <span></span>
-                                    </a>
+                                <div class="item-img">
+                                    <div class="item-img-info">
+                                        <a  ui-sref="news_detail({ntype: 1})" title="{{n.title}}" class="news-image">
+                                            <img src="{{n.image}}" class="image" style="display: inline-block">
+                                        </a>
+                                    </div>
                                 </div>
                                 <div class="block-news-title">
-                                    <a href="news_detail.html" title="{{n.title}}">{{n.title}}</a>
+                                    <h3><a href="news_detail.html" title="{{n.title}}">{{n.title}}</a></h3>
                                 </div>
-                            </div>
+                          
                             <div class="block-news-meta">
-                                <strong><a href="" class="wp-news">Trong nước</a></strong> -
-                                <span class="time" id="day_diff" date="date">1 phút trước</span>
+                                <strong><a href="">Trong nước</a></strong> -
+                                <span>1 phút trước</span>
                             </div>
                             <div class="block-news-content">{{n.short_content}}</div>
-                            <div class="clearfix">
-                            </div>
-                        </li>
-                    </ul>
                 </div>
+                            
+                <div class="clearfix">
+                </div>
+                </li>
+                </ul>
             </div>
-            <div class="col-md-3 col-sm-12 col-xs-12 col-right">
-                <div class="block service-first">
-                    <div class="title-block"><span>Tin tức mới nhất</span></div>
-                    <ul class="block-news clearfix">
-                        <li ng-repeat="n in news">
-                            <div class="item">
-                                <div>
-                                    <a href=""><img width="150" height="150" src="{{n.image}}" class="img" alt="404 error found"></a>
-                                </div>
-                                <div class="clearfix">
-                                    <h3><a href="" title="{{n.title}}">{{n.title}}</a></h3>
-                                </div>
+        </div>
+        <div class="col-md-3 col-sm-12 col-xs-12 col-right">
+            <div class="block">
+                <div class="title-block"><span>Tin tức mới nhất</span></div>
+                <ul class="block-news clearfix">
+                    <li ng-repeat="n in news">
+                        <div class="item">
+                            <div>
+                                <a href=""><img width="150" height="150" src="{{n.image}}" class="img" alt="404 error found"></a>
                             </div>
-                        </li>
-                    </ul>
-                </div>
+                            
+                           <div>
+                                <a href="" title="{{n.title}}"><strong>{{n.title}}</strong></a>
+                            </div>
+                                                         <div class="clearfix">
+
+                        </div>
+                        
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
+</div>
 </div>
 <div class="clear"></div>
 </div>
@@ -94,6 +87,6 @@
         </div>
     </div>
 </div>
-<h4 ng-if="news.length <= 0" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">Sản phẩm bạn tìm hiện không có</h4>
+<h4 ng-if="news.length <= 0" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">Tin tức bạn tìm hiện không có</h4>
 
 </div>
