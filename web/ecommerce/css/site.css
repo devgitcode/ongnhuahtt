@@ -269,12 +269,12 @@
 .block-news li .item .image{
     display: block;
     float: left;
-    width: 200px;
+    width: 100px;
     overflow: hidden;
     border: 0 solid #ddd;
     padding: 1px;
     margin-right: 10px;
-    height: 150px;
+    height: 80px;
     font-feature-settings: "abvs";
     text-decoration:  #f3b719;
     
@@ -282,13 +282,13 @@
 .block-news li .item .img{
     display: block;
     float: left;
-    width: 100px;
+    width: 200px;
     overflow: hidden;
     border: 0 solid #ddd;
     padding: 1px;
     margin-right: 10px;
-    height: 80px;
-    text-transform: uppercase;
+    height: 150px;
+    
 }
 .block-news li .item .img img{
 	min-width: 100%;
