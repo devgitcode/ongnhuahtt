@@ -10,7 +10,7 @@ app.controller('HomeController', function ($scope, $sce, $location, $state, $htt
         maxSize: 5,
         totalItems: 0,
         currentPage: 1,
-        itemsPerPage: 6
+        itemsPerPage: 8
     };
     var start = ($scope.pagination.currentPage - 1) * $scope.pagination.itemPerPage;
 

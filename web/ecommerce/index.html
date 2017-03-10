@@ -56,7 +56,7 @@
 </head>
 
 <body class="cms-index-index" ng-cloak>
-  <div class="page">
+  <div id="main-page" class="page">
     <!-- Header -->
     <header class="header-container">
       <div class="header-top">
@@ -130,11 +130,10 @@
       </div>
     </nav>
     <!-- end nav -->
-
+    <div id="htt-ui-view">
     <ui-view name="content" cache-view="false"></ui-view>
+    </div>
     <!--<drt-brand-logo></drt-brand-logo>-->
-
-
     <!-- Footer -->
     <footer class="footer">
       <div class="footer-middle">
@@ -179,7 +178,6 @@
     <!-- End Footer -->
 
   </div>
-
 
 
   <!-- JavaScript -->
