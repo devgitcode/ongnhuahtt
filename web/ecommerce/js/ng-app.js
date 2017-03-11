@@ -120,6 +120,21 @@ app.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
             }]
         }
     });
+     $stateProvider.state('news_detail', {
+        url: '/news/:ntype/:nid',
+        views: {
+            content: {
+                templateUrl: 'news_detail.html'
+            }
+        },
+        resolve: {
+            loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                // you can lazy load files for an existing module
+                return $ocLazyLoad.load(
+                    ['css/owl.carousel.css','css/owl.theme.css','css/flexslider.css','css/fancybox.css','css/font-awesome.css','js/prototype.js', 'js/jquery.min.js','js/common.js', 'js/owl.carousel.min.js','js/toggle.js','js/pro-img-slider.js','js/jquery.flexslider.js', 'js/cloud-zoom.js']);
+            }]
+        }
+    });
     $stateProvider.state('introduction', {
         url: '/introduction/:introid',
         views: {

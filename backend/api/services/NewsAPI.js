@@ -38,6 +38,27 @@ module.exports = function (app, number, withoutSuffix, key, isFuture) {
         conn.executeQuery(query, req, res);
         log.info("Execute " + query);
     });
+     app.get('/news_mode/:title/:type/:active', function (req, res) {
+        //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+        var query = `SELECT * FROM news WHERE title LIKE '%${req.params.title}%' and type = ${req.params.type} and active = ${req.params.active}`;
+        if(req.params.title == 'all'){
+            query = `SELECT * FROM news WHERE type = ${req.params.display_mode} and active = ${req.params.active}`;
+        }
+        log.info("Preparing SQL: " + query);
+        conn.executeQuery(query, req, res);
+        log.info("Execute " + query);
+    });
+
+    app.get('/news_mode_count/:title/:type/:active', function (req, res) {
+        //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+        var query = `SELECT count(id) news_count FROM news WHERE title LIKE '%${req.params.title}%' and type = ${req.params.type} and active = ${req.params.active}`;
+        if(req.params.title == 'all'){
+            query = `SELECT count(id) news_count FROM news WHERE type = ${req.params.type} and active = ${req.params.active}`;
+        }
+        log.info("Preparing SQL: " + query);
+        conn.executeQuery(query, req, res);
+        log.info("Execute " + query);
+    });
 
 
     app.post('/news', function (req, res) {

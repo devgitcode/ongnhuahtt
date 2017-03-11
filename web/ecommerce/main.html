@@ -144,9 +144,9 @@
               <ul>
                 <li ng-repeat="item in news">
                   <div class="item">
-                    <a href="news/{{item.id}}" class="img"><img width="150" height="150" src="{{item.image}}" class="attachment-thumbnail size-thumbnail wp-post-image"
+                    <a href="news/{{item.id}}" class="image"><img width="150" height="150" src="{{item.image}}" class="attachment-thumbnail size-thumbnail wp-post-image"
                         alt="{{item.title}}"></a>
-                    <h3><a href="news/{{item.id}}" title="{{item.title}}">{{item.title}}</a></h3>
+                    <a href="news/{{item.id}}" title="{{item.title}}"><strong>{{item.title}}</strong></a>
                     <div class="info">
                       {{item.content}}
                     </div>
