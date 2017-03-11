@@ -88,7 +88,20 @@ app.controller('HomeController', function ($scope, $sce,$rootScope, $location, $
 
 
 });
+app.run(function ($rootScope, $state) {
 
+    $rootScope.sillyQA = function() {
+        if($state.current.name === 'products') {
+
+        }
+        $state.go($state.current.name, {}, {reload: true});
+    }
+
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+        console.log('toState:   ' + toState.name )
+        console.log('fromState: ' + (fromState.name || 'Just got there! click again!'))
+    })
+});
 /* BEGIN NEW DIRECTIVE */
 
 /* END NEW DIRECTIVE */

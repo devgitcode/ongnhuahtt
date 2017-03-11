@@ -8,7 +8,7 @@ app.controller('ProductController', function ($scope, $rootScope, $state, $log, 
         maxSize: 5,
         totalItems: 0,
         currentPage: 1,
-        itemsPerPage: 6
+        itemsPerPage: 9
     };
     var start = ($scope.pagination.currentPage - 1) * $scope.pagination.itemPerPage;
     var cid = 1;
@@ -41,7 +41,7 @@ app.controller('ProductController', function ($scope, $rootScope, $state, $log, 
     var countProduct = function () {
         $http.get(`${NodeUrl}/product_count/${cid}`).then(function (res) {
             $scope.pagination.totalItems = res.data[0].product_count;
-            console.log($scope.pagination.totalItems);
+           
         });
     }
 
@@ -61,8 +61,9 @@ app.controller('ProductController', function ($scope, $rootScope, $state, $log, 
     $http.get(`${NodeUrl}/categories/${cid}`).then(function (res) {
         $scope.selectedCategory = res.data[0];
         $scope.selectedCategory.description = $sce.trustAsHtml($scope.selectedCategory.description);
+        console.log( $scope.selectedCategory);
     });
-
+    
     $scope.setPage = function (pageNo) {
         $scope.pagination.currentPage = pageNo;
     };
