@@ -51,13 +51,13 @@
     <section class="col-main col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <div class="category-products">
         <ul class="products-grid">
-          <li class="item col-lg-3 col-md-3 col-sm-6 col-xs-12" ng-if="products.length > 0" ng-repeat="p in products | limitTo:pagination.itemsPerPage:(pagination.currentPage-1)*pagination.itemsPerPage">
+          <li class="item col-lg-3 col-md-3 col-sm-3 col-xs-6" ng-if="products.length > 0" ng-repeat="p in products | limitTo:pagination.itemsPerPage:(pagination.currentPage-1)*pagination.itemsPerPage">
             <div class="col-item">
               <!--<div class="sale-label sale-top-right">Sale</div>-->
               <div class="item-inner">
                 <div class="item-img">
                   <div class="item-img-info">
-                    <a ui-sref="product_detail({cid: 1, pid: 1})" title="Sample Product" class="product-image"> <img ng-if="p.image" height="50" ng-src="{{p.image}}" alt="{{p.product_name}}"></a>
+                    <a ui-sref="product_detail({cid: 1, pid: 1})" title="Sample Product" class="product-image"> <img ng-if="p.image" style="width: 200px; height:185px;" ng-src="{{p.image}}" alt="{{p.product_name}}"></a>
                   </div>
                 </div>
                 <div class="item-info">

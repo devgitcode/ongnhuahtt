@@ -77,7 +77,17 @@ Text Domain: Accord
 34.	Responsive
 
 /* 1. Body */
-
+@font-face {
+	font-family: 'bebas';
+	src: url('../fonts/bebasf/bebas.eot');
+	src: url('../fonts/bebasf/bebas.eot?#iefix') format('embedded-opentype'), url('../fonts/bebasf/bebas.woff') format('woff'), url('../fonts/bebasf/bebas.ttf') format('truetype');
+	font-weight: 400;
+	font-smooth: always;
+	-webkit-font-smoothing: subpixel-antialiased!important;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-ms-backface-visibility: hidden
+}
 body {
 	/*border-top: 4px solid #000;*/
 	color: #333;
@@ -892,7 +902,7 @@ nav {
 	height: 56px;
 	border-top: 1px solid #efefef;
 	border-bottom: 1px solid #efefef;
-	background-color: rgb(243, 184, 28);
+	background-color: #2c2c2c;
 }
 .nav-inner {
 	margin: auto;
@@ -900,9 +910,12 @@ nav {
 	text-align: center
 }
 #nav > li > a:hover:nth-child(1), #nav > li > a.active:nth-child(1) {
-	background: #fff;
-	color: #333 !important;
-	border: 1px #F0F0F0 solid;
+	color: rgb(243, 184, 28) !important;
+	border: 1px #2c2c2c solid;	
+	border-bottom: 3px rgb(243, 184, 28) solid;	
+}
+#nav > li > a:nth-child(1) > span:hover {
+	color: rgb(243, 184, 28) !important;
 }
 #nav > li > a:first-child {
 	margin-left: 0px;
@@ -915,9 +928,7 @@ nav {
 	margin: 0px auto 0
 }
 #nav > li:hover > a, .vertnav-top li > a:hover {
-	color: #333;
-	background: #fff;
-	border: 1px #F0F0F0 solid;
+	color: rgb(243, 184, 28);
 	border-bottom: none;
 	padding: 14px 0px 15px;
 }
@@ -926,12 +937,13 @@ nav {
 	background: rgb(243, 184, 28);
 }
 .cms-index-index #nav #nav-home > a, #nav > li.active > a, .vertnav-top li.current > a:hover {
-	color: #fff!important;
+	color: #fff !important;
 	background: rgb(243, 184, 28);;
 	border-color: rgb(243, 184, 28);
 }
 .cms-index-index #nav #nav-home > a span, #nav > li.active > a span, .vertnav-top li.current > a span {
-	border-right: none
+	border-right: none;
+
 }
 /* Drop-down menu (horizontal)*/
 #nav {
@@ -951,6 +963,7 @@ nav {
 	text-decoration: none;
 }
 #nav li a span {
+	color: #fff;
 }
 #nav li ul a span {
 }
@@ -971,8 +984,9 @@ nav {
 #nav > li > a > span {
 	display: inline-block;
 	padding: 0px 15px;
+	font-family: bebas, Arial, Helvetica, sans-serif;
+	font-size: 20px;
 	line-height: 17px;
-	font-weight: bold;
 }
 	/* Drop-down boxes:
 	wide:    2nd-level category drop-down box + custom block drop-down box
@@ -1009,6 +1023,7 @@ nav {
 }
 #nav li:hover a.level-top .icon {
 	padding: 3px;
+	
 }
 	/* Single icon as home link */
 #nav #homelink-icon {
@@ -1083,6 +1098,8 @@ nav {
 	/* 1st level */
 li.level0 > a > span {
 	position: relative;
+	font-family: bebas, Arial, Helvetica, sans-serif;
+	font-size: 20px;
 }
 li.level0 > a > span > .cat-label {
 	position: absolute;
@@ -1669,6 +1686,10 @@ li.level0 > a:hover > span > .pin-bottom:before, #nav li.level0:hover > a > span
 	display: inline-block;
 	overflow: hidden;
 }
+.icon-bar{
+	background: #fff !important;
+}
+
 #mobile-menu ul.navmenu .menutop h2 {
 	float: left;
 	margin: 0;
@@ -3217,8 +3238,7 @@ a.button.detail-bnt span {
 /* 14. BREADCRUMBS  */
 
 .breadcrumbs {
-	font-size: 11px;
-	padding: 10px 0px 0;
+	padding: 25px 0px 0;
 }
 .breadcrumbs ul {
 	margin: 0px 0px 0px 15px;
@@ -3226,9 +3246,12 @@ a.button.detail-bnt span {
 }
 .breadcrumbs li {
 	display: inline;
+	font-family: bebas, "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 15px;
 }
 .breadcrumbs a {
 	color: #666;
+	
 }
 .breadcrumbs strong {
 	color: #333 !important;
@@ -3302,12 +3325,13 @@ a.button.detail-bnt span {
 .side-nav-categories .block-title {
 	background-color: #fff;
 	border-bottom: 1px solid #efefef;
-	color: #000;
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-	font-size: 20px;
+	font-size: 30px;
 	font-weight: normal;
 	margin: 0;
 	padding: 0 0 6px;
+	font-family: bebas, Arial, Helvetica, sans-serif;
+    margin-bottom: 15px;
+    color: #ffc000;
 }
 .side-nav-categories {
 	color: #fff;
@@ -3409,7 +3433,7 @@ color: #000;
 }
 .category-title h1 {
 	color: #000;
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-family: bebas, "Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-size: 26px;
 	font-weight: normal;
 	margin: 0;
@@ -3427,10 +3451,26 @@ color: #000;
 }
 .box-category > ul > li {
 	display: block;
-	position: relative;
-	margin: 0;
-	box-shadow: 0 1px 0 #eee, 0 2px 0 #ffffff;
+    padding: 5px 20px;
+	font-family: bebas, Arial, Helvetica, sans-serif;
+    color: #808080;
+    font-size: 20px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    background: #fafafa;
+    border: 1px solid #f2f2f2;
+    margin-bottom: 10px;
 }
+
+.box-category > ul > li:hover{
+
+}
+
+.box-category > ul > li > a:hover{
+	color: rgb(243, 184, 28);
+}
+
 .box-category > ul > li:last-child {
 	display: block;
 	position: relative;
@@ -3461,6 +3501,7 @@ color: #000;
 	display: block;
 	font-weight: bold;
 	padding: 6px 0;
+	font-size: 20px;
 }
 .box-category ul li.double a {
 	display: inline-block;
@@ -3473,7 +3514,7 @@ color: #000;
 	color: #333;
 	text-transform: none;
 	display: block;
-	font-size: 13px;
+	font-size: 18px;
 	font-weight: normal;
 }
 .box-category > ul > li ul {
@@ -3577,7 +3618,7 @@ color: #000;
 	font-size: 12px;
 }
 .block-tags .actions a.view-all:hover {
-	color: rgb(243, 184, 28);;
+	color: rgb(243, 184, 28);
 }
 .sidebar .link-cart:hover, .sidebar .link-wishlist:hover, .sidebar .link-reorder:hover, .sidebar .link-compare:hover, .sidebar .link-cart:focus, .sidebar .link-wishlist:focus, .sidebar .link-reorder:focus, .sidebar .link-compare:focus, .block .actions a:hover, .block .actions a:focus {
 	color: #333;
@@ -3594,6 +3635,7 @@ color: #000;
 	/* Block: Account */
 
 .block-account .block-title {
+
 }
 .block-account {
 }

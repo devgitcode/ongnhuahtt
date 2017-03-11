@@ -8,6 +8,7 @@
         <li class=""> <a href="#/products/{{selectedCategory.id}}" title="Go to Home Page"><strong>{{selectedCategory.category_name}}</strong></a></li>
       </ul>
     </div>
+    <div class="line"></div>
   </div>
 </div>
 <!-- End breadcrumbs -->
@@ -38,13 +39,13 @@
             </div>
           </div>
           <ul class="products-grid">
-            <li class="item col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-if="products.length > 0" ng-repeat="p in products | limitTo:pagination.itemsPerPage:(pagination.currentPage-1)*pagination.itemsPerPage">
+            <li class="item col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-if="products.length > 0" ng-repeat="p in products | limitTo:pagination.itemsPerPage:(pagination.currentPage-1)*pagination.itemsPerPage">
               <div class="col-item">
                 <!--<div class="sale-label sale-top-right">Sale</div>-->
                 <div class="item-inner">
                   <div class="item-img">
                     <div class="item-img-info">
-                      <a ui-sref="product_detail({cid: 1, pid: 1})" title="{{p.product_name}}" class="product-image"> <img ng-if="p.image" ng-src="{{p.image}}" alt="{{p.product_name}}"></a>
+                      <a ui-sref="product_detail({cid: 1, pid: 1})" title="{{p.product_name}}" class="product-image"> <img ng-if="p.image" style="width: 370px; height:310px;" ng-src="{{p.image}}" alt="{{p.product_name}}"></a>
                     </div>
                   </div>
                   <div class="item-info">
