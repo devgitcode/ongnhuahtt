@@ -1,6 +1,6 @@
 var app = angular.module('web.application');
 
-app.controller('ProductController', function ($scope, $state,$log,$sce, $http, NodeUrl, $stateParams) {
+app.controller('ProductController', function ($scope, $rootScope, $state, $log, $sce, $http, NodeUrl, $stateParams) {
 
     /* BEGIN PROPERTY */
 
@@ -16,7 +16,7 @@ app.controller('ProductController', function ($scope, $state,$log,$sce, $http, N
         cid = $stateParams.cid;
     }
 
-   /* END PROPERTY */
+    /* END PROPERTY */
 
     /* BEGIN FUNCTION */
 
@@ -25,11 +25,13 @@ app.controller('ProductController', function ($scope, $state,$log,$sce, $http, N
             $scope.products = res.data;
         });
     }
-
     var showCategories = function () {
-        $http.get(`${NodeUrl}/categories`).then(function (res) {
-            $scope.categories = res.data;
-        });
+        if ($rootScope.categories == undefined) {
+            $http.get(`${NodeUrl}/categories`).then(function (res) {
+                $scope.categories = res.data;
+                $rootScope.categories = $scope.categories
+            });
+        }    
     }
 
     // var countProduct = function(){
@@ -73,5 +75,8 @@ app.controller('ProductController', function ($scope, $state,$log,$sce, $http, N
 
     /* END FUNCTION */
 
-
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+        console.log('toState:   ' + toState.name)
+        console.log('fromState: ' + (fromState.name || 'Just got there! click again!'))
+    })
 });

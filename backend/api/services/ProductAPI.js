@@ -13,7 +13,7 @@ module.exports = function (app) {
     });
     app.get('/products/:cate_id/:start/:limit', function (req, res) {
         //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
-        var query = `SELECT * FROM Products WHERE category_id = ${req.params.cate_id} Order By product_id desc LIMIT ${req.params.start}, ${req.params.limit}`;
+        var query = `SELECT * FROM products WHERE category_id = ${req.params.cate_id} Order By product_id desc LIMIT ${req.params.start}, ${req.params.limit}`;
         log.info("Preparing SQL: " + query);
         conn.executeQuery(query, req, res);
         log.info("Execute " + query);

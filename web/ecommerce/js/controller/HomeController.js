@@ -1,10 +1,10 @@
 var app = angular.module('web.application');
 
-app.controller('HomeController', function ($scope, $sce, $location, $state, $http, $stateParams, ECommerceLogService, HomeService, NewsService, NodeUrl) {
-   
+app.controller('HomeController', function ($scope, $sce,$rootScope, $location, $state, $http, $stateParams, ECommerceLogService, HomeService, NewsService, NodeUrl) {
+
 
     /* BEGIN PROPERTY */
-    ECommerceLogService.log("info","Accessing ECommerce Website...")
+    ECommerceLogService.log("info", "Accessing ECommerce Website...")
 
     $scope.pagination = {
         maxSize: 5,
@@ -44,6 +44,11 @@ app.controller('HomeController', function ($scope, $sce, $location, $state, $htt
 
     /* BEGIN FUNCTION */
 
+    if ($rootScope.categories == undefined) {
+        $http.get(`${NodeUrl}/categories`).then(function (res) {
+            $rootScope.categories = res.data
+        });
+    }
     var showProducts = function () {
         $http.get(`${NodeUrl}/products_mode/all/1/1`).then(function (res) {
             $scope.products = res.data;

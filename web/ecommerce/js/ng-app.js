@@ -5,6 +5,7 @@ var app = angular.module('web.application', ['ui.router', 'oc.lazyLoad', 'ui.boo
 //         $templateCache.removeAll();
 //     });
 // });
+
 app.constant('NodeUrl', "http://localhost:3000");
 app.factory('ECommerceLogService', function ($http) {
     return {
@@ -20,11 +21,11 @@ app.factory('ECommerceLogService', function ($http) {
         }
     }
 });
-app.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
+app.config(function ($httpProvider, $stateProvider, $urlRouterProvider ) {
     /**
      * Send request as x-www-form-urlencoded
      */
-    
+
     // $routeProvider.when('/',{
     //     templateUrl: 'main.html',
     //     controller: 'HomeController',
@@ -33,6 +34,8 @@ app.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
     // .when('/grid',{
     //     templateUrl: 'about_us.html'
     // });
+
+    
 
     $stateProvider.state('homepage', {
         url: '/',
@@ -81,7 +84,7 @@ app.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
             loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                 // you can lazy load files for an existing module
                 return $ocLazyLoad.load(
-                    ['css/owl.carousel.css','css/owl.theme.css','css/flexslider.css','css/fancybox.css','css/font-awesome.css','js/prototype.js', 'js/jquery.min.js','js/common.js', 'js/owl.carousel.min.js','js/toggle.js','js/pro-img-slider.js','js/jquery.flexslider.js', 'js/cloud-zoom.js']);
+                    ['css/owl.carousel.css', 'css/owl.theme.css', 'css/flexslider.css', 'css/fancybox.css', 'css/font-awesome.css', 'js/prototype.js', 'js/jquery.min.js', 'js/common.js', 'js/owl.carousel.min.js', 'js/toggle.js', 'js/pro-img-slider.js', 'js/jquery.flexslider.js', 'js/cloud-zoom.js']);
             }]
         }
     });
@@ -120,7 +123,7 @@ app.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
             }]
         }
     });
-     $stateProvider.state('news_detail', {
+    $stateProvider.state('news_detail', {
         url: '/news/:ntype/:nid',
         views: {
             content: {
@@ -131,7 +134,7 @@ app.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
             loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                 // you can lazy load files for an existing module
                 return $ocLazyLoad.load(
-                    ['css/owl.carousel.css','css/owl.theme.css','css/flexslider.css','css/fancybox.css','css/font-awesome.css','js/prototype.js', 'js/jquery.min.js','js/common.js', 'js/owl.carousel.min.js','js/toggle.js','js/pro-img-slider.js','js/jquery.flexslider.js', 'js/cloud-zoom.js']);
+                    ['css/owl.carousel.css', 'css/owl.theme.css', 'css/flexslider.css', 'css/fancybox.css', 'css/font-awesome.css', 'js/prototype.js', 'js/jquery.min.js', 'js/common.js', 'js/owl.carousel.min.js', 'js/toggle.js', 'js/pro-img-slider.js', 'js/jquery.flexslider.js', 'js/cloud-zoom.js']);
             }]
         }
     });
@@ -171,6 +174,20 @@ app.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
     });
     $urlRouterProvider.otherwise('/');
 });
+// app.run(function ($rootScope, $state) {
+
+//     $rootScope.sillyQA = function() {
+//         if($state.current.name === 'products') {
+
+//         }
+//         $state.go($state.current.name, {}, {reload: true});
+//     }
+
+//     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+//         console.log('toState:   ' + toState.name )
+//         console.log('fromState: ' + (fromState.name || 'Just got there! click again!'))
+//     })
+// });
 
 
 
