@@ -5,6 +5,7 @@ var pool = mysql.createPool({
     connectionLimit : db.connectionLimit,
     host: db.host,
     user: db.user,
+    port: db.port,
     password: db.password,
     database: db.database,
     debug    :  false
