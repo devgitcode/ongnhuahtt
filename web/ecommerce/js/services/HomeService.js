@@ -14,8 +14,8 @@ app.service('HomeService', function(){
             {menu: "introduction({introid: 'init'})",label: "GIỚI THIỆU"},
             {menu: "products({cid: 'init'})",label: "SẢN PHẨM"},
             {menu: "catalogue",label: "BẢNG GIÁ & CATALOGUES"},
-            {menu: "project",label: "DỰ ÁN"},
-            {menu: "recruitment",label: "TUYỂN DỤNG"},
+            // {menu: "project",label: "DỰ ÁN"},
+            // {menu: "recruitment",label: "TUYỂN DỤNG"},
             {menu: "news({ntype: 'init'})",label: "TIN TỨC"},
             {menu: "contact({cid: 'init'})",label: "LIÊN HỆ"}
         ];

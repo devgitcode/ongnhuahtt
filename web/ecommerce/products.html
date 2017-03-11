@@ -20,12 +20,16 @@
         <div class="category-title">
           <h1>{{selectedCategory.category_name}}</h1>
         </div>
+        <div class="category-description">
+          <div ng-bind-html="selectedCategory.description"></div>
 
+        </div>
+        <div class="line"></div>
         <div class="category-products">
           <div class="toolbar" ng-if="products.length > 0">
             <div class="pager">
               <div class="pages">
-                <ul class="pagination" uib-pagination total-items="pagination.totalItems" items-per-page="pagination.itemsPerPage" ng-model="pagination.currentPage"
+                <ul class="pagination" uib-pagination  total-items="pagination.totalItems" previous-text="Trở về" next-text="Tiếp" items-per-page="pagination.itemsPerPage" ng-model="pagination.currentPage"
                   ng-change="pageChanged()">
                   <!--<li><a href="#">«</a></li>
                     <li class="active"><a href="#">1</a></li>
@@ -69,11 +73,11 @@
               </div>
             </li>
           </ul>
-          <h4 ng-if="products.length <= 0" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">Không có sản phẩm nào</h4>
+          <h4 ng-if="products.length <= 0" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">Sản phẩm đang cập nhật</h4>
           <div class="toolbar" ng-if="products.length > 0">
             <div class="pager">
               <div class="pages">
-                <ul class="pagination" uib-pagination total-items="pagination.totalItems" items-per-page="pagination.itemsPerPage" ng-model="pagination.currentPage"
+                <ul class="pagination" uib-pagination total-items="pagination.totalItems" previous-text="Trở về" next-text="Tiếp" items-per-page="pagination.itemsPerPage" ng-model="pagination.currentPage"
                   ng-change="pageChanged()">
                   <!--<li><a href="#">«</a></li>
                     <li class="active"><a href="#">1</a></li>

@@ -1,6 +1,6 @@
 var app = angular.module('web.application');
 
-app.controller('ProductController', function ($scope, $state,$log, $http, NodeUrl, $stateParams) {
+app.controller('ProductController', function ($scope, $state,$log,$sce, $http, NodeUrl, $stateParams) {
 
     /* BEGIN PROPERTY */
 
@@ -38,7 +38,7 @@ app.controller('ProductController', function ($scope, $state,$log, $http, NodeUr
 
     var countProduct = function () {
         $http.get(`${NodeUrl}/product_count/${cid}`).then(function (res) {
-            $scope.pagination.totalItems = res.data[0];
+            $scope.pagination.totalItems = res.data[0].product_count;
             console.log($scope.pagination.totalItems);
         });
     }
@@ -58,6 +58,7 @@ app.controller('ProductController', function ($scope, $state,$log, $http, NodeUr
 
     $http.get(`${NodeUrl}/categories/${cid}`).then(function (res) {
         $scope.selectedCategory = res.data[0];
+        $scope.selectedCategory.description = $sce.trustAsHtml($scope.selectedCategory.description);
     });
 
     $scope.setPage = function (pageNo) {

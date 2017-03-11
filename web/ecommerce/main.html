@@ -81,7 +81,7 @@
         <div class="toolbar" ng-if="products.length > 0">
           <div class="pager">
             <div class="pages">
-              <ul class="pagination" uib-pagination total-items="pagination.totalItems" items-per-page="pagination.itemsPerPage" ng-model="pagination.currentPage"
+              <ul class="pagination" uib-pagination total-items="pagination.totalItems" previous-text="Trở về" next-text="Tiếp" items-per-page="pagination.itemsPerPage" ng-model="pagination.currentPage"
                 ng-change="pageChanged()">
                 <!--<li><a href="#">«</a></li>
                     <li class="active"><a href="#">1</a></li>
