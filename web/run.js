@@ -7,7 +7,12 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/", express.static(__dirname + "/ecommerce"));
 app.use("/admin-cp", express.static(__dirname + "/admin"));
-var port = server.port;
+if(server.port == ""){
+    port = process.env.PORT;
+}else{
+    port = server.port;
+}
+
 
 var writeLog = function (logger, level, msg) {
     logger.log(level, msg);

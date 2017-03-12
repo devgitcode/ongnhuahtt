@@ -1,14 +1,5 @@
 var app = angular.module('web.application');
-app.service('NewsService', function(){
-    this.getNews = function(){
-        var news = [
-            {id: 1, title: "Mách bạn những cách sửa ống nước tiết kiệm tiền nhất", image: "news-images/1.jpg", content: "Nếu hệ thống ống nước nhà bạn gặp phải các vấn đề rò rỉ hay tắt nghẽn đường ống có thể dẫn tới những rắc rối nghiêm trọng. Việc đầu…"},
-            {id: 2, title: "Nghiên cứu cho thấy dùng ống nước bằng đồng dễ gây ung thư", image: "news-images/2.jpg", content: "Dưới đây là những tổng hợp các nghiên cứu liên quan đến việc sử dụng ống nước bằng đồng có khả năng gây ung thư ca…"},
-            {id: 3, title: "Mách bạn những cách sửa ống nước tiết kiệm tiền nhất", image: "news-images/3.jpg", content: "Ống nước có tác dụng giúp truyền dẫn hệ thống nước sạch, tưới tiêu hay dẫn nước thải nhanh chóng và hiệu quả hơn. Tuy …"},
-        ];
-
-        return news;
-    }
+app.service('NewsService', function(NodeUrl, $http){
 
     this.getHeadCompanyNews = function(){
         var news = {
@@ -27,5 +18,17 @@ app.service('NewsService', function(){
             {id: 3, title: "Hoàng Tuấn Thành khai trương Showroom"}
         ];
         return titles;
+    }
+
+    this.getNews = function(ntype){
+        return $http.get(`${NodeUrl}/news/${ntype}/1`)
+    }
+
+    this.getNewsLimit = function(ntype, start, numOfRows){
+        return $http.get(`${NodeUrl}/news/${ntype}/${start}/${numOfRows}`);
+    }
+
+    this.getNewsCount = function(ntype){
+        return $http.get(`${NodeUrl}/news_count/${ntype}`);
     }
 });

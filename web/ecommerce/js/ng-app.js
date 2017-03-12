@@ -6,7 +6,7 @@ var app = angular.module('web.application', ['ui.router', 'oc.lazyLoad', 'ui.boo
 //     });
 // });
 
-app.constant('NodeUrl', "http://localhost:3000");
+app.constant('NodeUrl', "https://htt-backend.herokuapp.com");
 app.factory('ECommerceLogService', function ($http) {
     return {
         log: function (logLevel, logMsg) {

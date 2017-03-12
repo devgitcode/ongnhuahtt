@@ -46,8 +46,10 @@
   <script type="text/javascript" src="js/ng-app.js"></script>
   <script type="text/javascript" src="js/services/HomeService.js"></script>
   <script type="text/javascript" src="js/services/NewsService.js"></script>
-
+  <script type="text/javascript" src="js/services/CategoryService.js"></script>
+  <script type="text/javascript" src="js/services/ProductService.js"></script>
   <script type="text/javascript" src="js/services/CatalogueService.js"></script>
+
   <script type="text/javascript" src="js/controller/NewsController.js"></script>
   <script type="text/javascript" src="js/controller/HomeController.js"></script>
   <script type="text/javascript" src="js/controller/ProductController.js"></script>
@@ -57,154 +59,177 @@
 </head>
 
 <body class="cms-index-index">
-  <nav class="hotline-nav">
-    <div class="container" style="height: 35px;">
-      <div class="navbar-header">
-        <span class="pull-right">Hotline: 090 8155 838 </span>
+  <div ng-show="loaded">
+    <nav class="hotline-nav">
+      <div class="container" style="height: 35px;">
+        <div class="navbar-header">
+          <span class="pull-right">Hotline: 090 8155 838 </span>
+        </div>
       </div>
-    </div>
-  </nav>
-  <div id="main-page" class="page">
-    <!-- Header -->
-    <header class="header-container">
-      <div class="header-top">
-        <!--TODO-->
-      </div>
+    </nav>
+    <div id="main-page" class="page">
+      <!-- Header -->
+      <header class="header-container">
+        <div class="header-top">
+          <!--TODO-->
+        </div>
 
-      <div class="header container">
-        <div class="row">
-          <div class="col-lg-3 col-sm-4 col-md-3">
-            <!-- Header Logo -->
-            <div class="logo">
-              <a title="Hoàn Tuấn Thành" href="index.html"><img alt="Hoàn Tuấn Thành" height="118" src="images/logo.png"></a>
+        <div class="header container">
+          <div class="row">
+            <div class="col-lg-3 col-sm-4 col-md-3">
+              <!-- Header Logo -->
+              <div class="logo">
+                <a title="Hoàn Tuấn Thành" href="index.html"><img alt="Hoàn Tuấn Thành" height="118" src="images/logo.png"></a>
+              </div>
+              <!-- End Header Logo -->
             </div>
-            <!-- End Header Logo -->
-          </div>
-          <div class="col-lg-9 col-xs-12">
-            <div class="header-widgets">
-              <div class="widget col-md-12 col-sm-6 col-xs-12">
-                <span class="title_1">CÔNG TY TNHH MTV SX - TM & XD</span><br>
-                <span class="title_2">Hoàn Tuấn Thành</span><br>
-                <span class="title_3" style="color: #e73344;font-weight: bold;">Đem Lại Sự An Tâm Về Chất Lượng Cho Công Trình Của Bạn</span>
-                <div class="clear"></div>
+            <div class="col-lg-9 col-xs-12">
+              <div class="header-widgets">
+                <div class="widget col-md-12 col-sm-6 col-xs-12">
+                  <span class="title_1">CÔNG TY TNHH MTV SX - TM & XD</span><br>
+                  <span class="title_2">Hoàn Tuấn Thành</span><br>
+                  <span class="title_3" style="color: #e73344;font-weight: bold;">Đem Lại Sự An Tâm Về Chất Lượng Cho Công Trình Của Bạn</span>
+                  <div class="clear"></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </header>
-    <!-- end header -->
-    <!-- Navbar -->
-    <nav>
-      <div class="container">
-        <div class="nav-inner">
-          <!-- mobile-menu -->
-          <div class="hidden-desktop" id="mobile-menu">
-            <ul class="navmenu">
-              <li>
-                <div class="menutop">
-                  <div class="toggle"> <span style="color: #fff;" class="icon-bar"></span> <span style="color: #fff;" class="icon-bar"></span>                    <span style="color: #fff;" class="icon-bar"></span></div>
-                </div>
-                <ul style="display:none;" class="submenu">
-                  <li>
-                    <ul class="topnav" ng-controller="HomeController">
-                      <li class="level0 " ng-repeat="m in menus">
-                        <a ui-sref="{{m.menu}}" ui-sref-opts="{reload: true}" class="level-top"> <span>{{m.label}}</span> </a>
-                      </li>
+      </header>
+      <!-- end header -->
+      <!-- Navbar -->
+      <nav>
+        <div class="container">
+          <div class="nav-inner">
+            <!-- mobile-menu -->
+            <div class="hidden-desktop" id="mobile-menu">
+              <ul class="navmenu">
+                <li>
+                  <div class="menutop">
+                    <div class="toggle"> <span style="color: #fff;" class="icon-bar"></span> <span style="color: #fff;" class="icon-bar"></span>                      <span style="color: #fff;" class="icon-bar"></span></div>
+                  </div>
+                  <ul style="display:none;" class="submenu">
+                    <li>
+                      <ul class="topnav" ng-controller="HomeController">
+                        <li class="level0 " ng-repeat="m in menus">
+                          <a ui-sref="{{m.menu}}" onclick="hideMenu()" ui-sref-opts="{reload: true}" class="level-top"> <span>{{m.label}}</span> </a>
+                        </li>
 
-                    </ul>
-                  </li>
-                </ul>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <!--navmenu-->
+            </div>
+
+            <!--End mobile-menu -->
+            <ul id="nav" class="hidden-xs" ng-controller="HomeController">
+              <li class="level0" ng-repeat="m in menus">
+                <a ui-sref="{{m.menu}}" ui-sref-opts="{reload: true}" class="level-top"> <span>{{m.label}}</span> </a>
               </li>
             </ul>
-            <!--navmenu-->
-          </div>
-
-          <!--End mobile-menu -->
-          <ul id="nav" class="hidden-xs" ng-controller="HomeController">
-            <li class="level0" ng-repeat="m in menus">
-              <a ui-sref="{{m.menu}}" ng-click="homeClick()" ui-sref-opts="{reload: true}" class="level-top"> <span>{{m.label}}</span> </a>
-            </li>
-          </ul>
-          <!-- Search-col -->
-          <!--<div class="search-box">
+            <!-- Search-col -->
+            <!--<div class="search-box">
           <form action="http://htmldemo.magikcommerce.com/ecommerce/accord_html/full-width/red/cat" method="POST" id="search_mini_form" name="Categories">
             <input type="text" placeholder="Nhập từ khóa cần tìm..." value="" maxlength="70" name="search" id="search">
             <button  class="btn btn-default  search-btn-bg"> <span class="glyphicon glyphicon-search"></span>&nbsp;</button>
           </form>
         </div>-->
-          <!-- End Search-col -->
+            <!-- End Search-col -->
+          </div>
         </div>
+      </nav>
+      <div class="clear"></div>
+      <!-- end nav -->
+      <div id="htt-ui-view">
+        <ui-view name="content" cache-view="false"></ui-view>
       </div>
-    </nav>
-    <!-- end nav -->
-    <div id="htt-ui-view">
-      <ui-view name="content" cache-view="false"></ui-view>
+      <!--<drt-brand-logo></drt-brand-logo>-->
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-middle">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <div class="footer-logo">
+                  <a href="index.html" title="Logo"><img src="images/logo.png" height="100" alt="logo"></a>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12" ng-controller="HomeController">
+                <div ng-bind-html="footerInfo"></div>
+              </div>
+
+              <div class="col-lg-3 col-xs-12">
+                <h3>MẠNG XÃ HỘI</h3>
+                <div class="social">
+                  <ul>
+                    <li class="fb">
+                      <a href="#"></a>
+                    </li>
+                    <li class="googleplus">
+                      <a href="#"></a>
+                    </li>
+                    <li class="youtube">
+                      <a href="#"></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4 col-xs-12 coppyright"> &copy; 2017 E-Commerce. Bản quyền thuộc Dev Team.</div>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!-- End Footer -->
+
     </div>
-    <!--<drt-brand-logo></drt-brand-logo>-->
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-middle">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-              <div class="footer-logo">
-                <a href="index.html" title="Logo"><img src="images/logo.png" height="100" alt="logo"></a>
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12" ng-controller="HomeController">
-              <div ng-bind-html="footerInfo"></div>
-            </div>
-
-            <div class="col-lg-3 col-xs-12">
-              <h3>MẠNG XÃ HỘI</h3>
-              <div class="social">
-                <ul>
-                  <li class="fb">
-                    <a href="#"></a>
-                  </li>
-                  <li class="googleplus">
-                    <a href="#"></a>
-                  </li>
-                  <li class="youtube">
-                    <a href="#"></a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-4 col-xs-12 coppyright"> &copy; 2017 E-Commerce. Bản quyền thuộc Dev Team.</div>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <!-- End Footer -->
-
-  </div>
 
 
-  <!-- JavaScript -->
-  <script type="text/javascript" src="js/jquery.min.js"></script>
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="please-wait/build/please-wait.min.js"></script>
-  <script type="text/javascript">
+    <!-- JavaScript -->
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="please-wait/build/please-wait.min.js"></script>
+    <script>
+     var hideMenu = function(){
+       $('.submenu').slideUp();
+     }
+    </script>
+    <!--<script type="text/javascript">
     var loading_screen = pleaseWait({
       logo: "images/loading.gif",
       backgroundColor: '#fff',
       loadingHtml: "<p class='loading-message' style='font-size:20pt;'>ĐANG TẢI TRANG...</p>"
     });
-    setTimeout('3000', loading_screen.finish());
-  </script>
-  <!--<script type="text/javascript" src="js/parallax.js"></script> -->
-  <!--<script type="text/javascript" src="js/common.js"></script> -->
-  <!--<script type="text/javascript" src="js/slider.js"></script> -->
-  <!--<script type="text/javascript" src="js/owl.carousel.min.js"></script> -->
-
+    setTimeout('100', loading_screen.finish());
+  </script>-->
+    <!--<script type="text/javascript" src="js/parallax.js"></script> -->
+    <!--<script type="text/javascript" src="js/common.js"></script> -->
+    <!--<script type="text/javascript" src="js/slider.js"></script> -->
+    <!--<script type="text/javascript" src="js/owl.carousel.min.js"></script> -->
+  </div>
+  <div ng-show="!loaded">
+    
+    <div class="container-fluid">
+      <div class="text-center">
+        <img src="images/loading.gif"/>
+        <h1 class="">ĐANG TẢI...</1>
+      </div>
+    </div>
+    <!--<script type="text/javascript">
+      var loading_screen = pleaseWait({
+        logo: "images/loading.gif",
+        backgroundColor: '#fff',
+        loadingHtml: "<p class='loading-message' style='font-size:20pt;'>ĐANG TẢI TRANG...</p>"
+      });
+    </script>-->
+  </div>
 </body>
 
 <!-- Giao dien duoc chia se mien phi tai www.ptheme.net [Free HTML Download]. SKYPE[ptheme.net] - EMAIL[ptheme.net@gmail.com].-->

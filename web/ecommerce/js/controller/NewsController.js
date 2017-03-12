@@ -1,7 +1,8 @@
 var app = angular.module('web.application');
 
-app.controller('NewsController', function ($scope, $log, $http, NodeUrl, $stateParams) {
+app.controller('NewsController', function ($rootScope, $scope, $log, $http, NodeUrl, $stateParams, NewsService) {
     /* BEGIN PROPERTY */
+    $rootScope.loaded = false;
     $scope.pagination = {
         maxSize: 5,
         totalItems: 0,
@@ -20,29 +21,34 @@ app.controller('NewsController', function ($scope, $log, $http, NodeUrl, $stateP
     /* BEGIN FUNCTION */
 
     var showNews = function () {
-        $http.get(`${NodeUrl}/news/${ntype}/1`).then(function (res) {
+        $rootScope.loaded = false;
+        NewsService.getNews(ntype).then(function (res) {
             $scope.news = res.data;
+            $rootScope.loaded = true;
         });
     }
 
-    var shownewLimit = function () {
-        $http.get(`${NodeUrl}/news/${ntype}/0/10`).then(function (res) {
+    var showNewLimit = function () {
+        $rootScope.loaded = false;
+        NewsService.getNewsLimit(ntype,0,10).then(function (res) {
             $scope.news = res.data;
+            $rootScope.loaded = true;
         });
     }
 
 
     var newCount = function(){
-        $http.get(`${NodeUrl}/news_count/${ntype}`).then(function(res){
+        $rootScope.loaded = false;
+        NewsService.getNewsCount(ntype).then(function(res){
             $scope.pagination.totalItems = res.data[0];
-            console.log($scope.pagination.totalItems);
+            $rootScope.loaded = true;
         });
     }
 
     var initData = function () {
-        showNews();
         newCount();
-        shownewLimit();
+        showNews();        
+        showNewLimit();
     }
 
     initData();
@@ -51,9 +57,9 @@ app.controller('NewsController', function ($scope, $log, $http, NodeUrl, $stateP
      *  Load các dữ liệu khởi tạo trên trang
      * + Thông tin News
      * */
-    $http.get(`${NodeUrl}/news/${ntype}`).then(function (res) {
-        $scope.selectedNews = res.data[0].records;
-    });
+    // $http.get(`${NodeUrl}/news/${ntype}`).then(function (res) {
+    //     $scope.selectedNews = res.data[0].records;
+    // });
 
     $scope.setPage = function (pageNo) {
         $scope.pagination.currentPage = pageNo;

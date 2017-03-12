@@ -1,6 +1,6 @@
 var app = angular.module('web.application');
 
-app.controller('ProductController',function($scope, $log,$http, NodeUrl, $stateParams, $location){
+app.controller('AdminMainController',function($scope, $log,$http, NodeUrl, $stateParams, $location){
     /* BEGIN PROPERTY */
 
 

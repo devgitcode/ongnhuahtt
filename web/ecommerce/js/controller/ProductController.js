@@ -1,9 +1,9 @@
 var app = angular.module('web.application');
 
-app.controller('ProductController', function ($scope, $rootScope, $state, $log, $sce, $http, NodeUrl, $stateParams) {
+app.controller('ProductController', function ($scope, $rootScope, $state, $log, $sce, $http, NodeUrl, $stateParams, ProductService, CategoryService) {
 
     /* BEGIN PROPERTY */
-
+    $rootScope.loaded = false;
     $scope.pagination = {
         maxSize: 5,
         totalItems: 0,
@@ -21,27 +21,39 @@ app.controller('ProductController', function ($scope, $rootScope, $state, $log, 
     /* BEGIN FUNCTION */
 
     var showProducts = function () {
-        $http.get(`${NodeUrl}/products/${cid}/0/20`).then(function (res) {
+        $rootScope.loaded = false;
+
+        getCategory(cid);
+        ProductService.getProductsByCateId(cid).then(function (res) {
             $scope.products = res.data;
         });
     }
+
     var showCategories = function () {
-        if ($rootScope.categories == undefined) {
-            $http.get(`${NodeUrl}/categories`).then(function (res) {
-                $scope.categories = res.data;
-                $rootScope.categories = $scope.categories
-            });
-        }    
+        $rootScope.loaded = false;
+
+        CategoryService.getCategories().then(function (res) {
+            $scope.categories = res.data;
+            $rootScope.loaded = true;
+        });
+
     }
 
-    // var countProduct = function(){
-    //     $http.get(`${NodeUrl}/product_count/${cid}`).then(function(res){
-    //         $scope.pagination.totalItems = res.data[0];
-
     var countProduct = function () {
-        $http.get(`${NodeUrl}/product_count/${cid}`).then(function (res) {
+        $rootScope.loaded = false;
+        ProductService.getProductCount(cid).then(function (res) {
             $scope.pagination.totalItems = res.data[0].product_count;
-           
+            $rootScope.loaded = true;
+        });
+    }
+
+    var getCategory = function(){
+        $rootScope.loaded = false;
+
+        CategoryService.getCategory(cid).then(function(res){
+            $scope.selectedCategory = res.data[0];
+            $scope.selectedCategory.description = $sce.trustAsHtml($scope.selectedCategory.description);
+            $rootScope.loaded = true;
         });
     }
 
@@ -57,13 +69,10 @@ app.controller('ProductController', function ($scope, $rootScope, $state, $log, 
      * */
     initData();
 
+    $scope.clickCategory = function(){
+        getCategory();
+    }
 
-    $http.get(`${NodeUrl}/categories/${cid}`).then(function (res) {
-        $scope.selectedCategory = res.data[0];
-        $scope.selectedCategory.description = $sce.trustAsHtml($scope.selectedCategory.description);
-        console.log( $scope.selectedCategory);
-    });
-    
     $scope.setPage = function (pageNo) {
         $scope.pagination.currentPage = pageNo;
     };

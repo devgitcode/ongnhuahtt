@@ -4,6 +4,7 @@ var app = angular.module('web.application', ['ui.router', 'oc.lazyLoad', 'ui.boo
 //         $templateCache.removeAll();
 //     });
 // });
+
 app.constant('NodeUrl', "http://localhost:3000");
 /**
  * Ghi log lại trên server
@@ -24,6 +25,7 @@ app.factory('AdminLogService', function ($http) {
 });
 
 app.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
+    
     /**
      * Send request as x-www-form-urlencoded
      */
@@ -42,11 +44,11 @@ app.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
     // .when('/grid',{
     //     templateUrl: 'about_us.html'
     // });
-    $stateProvider.state('dashboard', {
-        url: '/dashboard',
+    $stateProvider.state('admin-cp', {
+        url: '/admin-cp',
         views: {
             content: {
-                template: 'test'
+                template: 'MainController'
             }
         },
         resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
@@ -54,17 +56,12 @@ app.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
                 // you can lazy load files for an existing module
                 return $ocLazyLoad.load(
                     [
-                        "/dist/js/sb-admin-2.js"
+                        '../vendor/metisMenu/metisMenu.min.js'
                     ]);
             }]
         }
     });
 
-
-    // $urlRouterProvider.otherwise('/');
-});
-app.directive("adminSidebar", function(){
-    return {
-        templateUrl: "admin_sidebar.html"
-    }
+    console.log('LOD')
+    $urlRouterProvider.otherwise('/admin-cp');
 });

@@ -4,7 +4,7 @@ app.controller('AdminMenuController', function ($ocLazyLoad, $scope, $log, $http
     /**
      * Load tất cả Javascript & CSS cho controller
      */
-    $ocLazyLoad.load("../dist/js/sb-admin-2.js");
+    
     /* BEGIN PROPERTY */
     AdminLogService.log("info", "Processing AdminMenuController...");
     $scope.menus = [];
@@ -32,10 +32,14 @@ app.controller('AdminMenuController', function ($ocLazyLoad, $scope, $log, $http
 
 
     /* END FUNCTION */
-
+    $ocLazyLoad.load(['../vendor/metisMenu/metisMenu.min.css','../dist/css/sb-admin-2.css','../vendor/jquery/jquery.min.js','../vendor/metisMenu/metisMenu.min.js','../dist/js/sb-admin-2.js']);
 
 });
 
 /* BEGIN NEW DIRECTIVE */
-
+app.directive("adminSideBar", function () {
+    return {
+        templateUrl: "side-menu.html"
+    }
+});
 /* END NEW DIRECTIVE */

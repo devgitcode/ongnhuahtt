@@ -1,7 +1,7 @@
 var app = angular.module('web.application');
 
-app.controller('HomeController', function ($scope, $sce,$rootScope, $location, $state, $http, $stateParams, ECommerceLogService, HomeService, NewsService, NodeUrl) {
-
+app.controller('HomeController', function ($scope, $sce, $rootScope, $location, $state, $http, $stateParams, ECommerceLogService, HomeService, NewsService, ProductService, NodeUrl) {
+    $rootScope.loaded = true;
 
     /* BEGIN PROPERTY */
     ECommerceLogService.log("info", "Accessing ECommerce Website...")
@@ -36,36 +36,56 @@ app.controller('HomeController', function ($scope, $sce,$rootScope, $location, $
     $scope.footerInfo = $sce.trustAsHtml(HomeService.getFooterInfo());
 
     //Tin Tức Panel
-    $scope.news = NewsService.getNews();
-    $scope.headNews = NewsService.getHeadCompanyNews();
-    $scope.headNewsTitles = NewsService.getCompanyNewsTitles();
+    
+    var showNews = function () {
+        $rootScope.loaded = false;
+        NewsService.getNews(1).then(function (res) {
+            $scope.news = res.data;
+            $rootScope.loaded = true;
+        });
+    }
+    
+    var showCompanyNews = function(){
+        $rootScope.loaded = false;
+        $scope.headNews = NewsService.getHeadCompanyNews();
+        $rootScope.loaded = true;
+    }
+
+    var showCompanyNewsTitles = function(){
+        $rootScope.loaded = false;
+        $scope.headNewsTitles = NewsService.getCompanyNewsTitles();
+        $rootScope.loaded = true;
+    }
+
 
     /* END PROPERTY */
 
     /* BEGIN FUNCTION */
 
-    if ($rootScope.categories == undefined) {
-        $http.get(`${NodeUrl}/categories`).then(function (res) {
-            $rootScope.categories = res.data
-        });
-    }
+
     var showProducts = function () {
-        $http.get(`${NodeUrl}/products_mode/all/1/1`).then(function (res) {
+        $rootScope.loaded = false;
+
+        ProductService.getProductHomePage().then(function (res) {
             $scope.products = res.data;
-            console.log($scope.products);
+            $rootScope.loaded = true;
         });
     }
 
     var countProduct = function () {
-        $http.get(`${NodeUrl}/product_mode_count/all/1/1`).then(function (res) {
+        $rootScope.loaded = false;
+        ProductService.getProductCountHomePage().then(function (res) {
             $scope.pagination.totalItems = res.data[0].product_count;
-            console.log($scope.pagination.totalItems);
+            $rootScope.loaded = true;
         });
     }
 
     var initData = function () {
         countProduct();
         showProducts();
+        showNews();
+        showCompanyNews();
+        showCompanyNewsTitles();
     }
 
     /**
@@ -90,15 +110,15 @@ app.controller('HomeController', function ($scope, $sce,$rootScope, $location, $
 });
 app.run(function ($rootScope, $state) {
 
-    $rootScope.sillyQA = function() {
-        if($state.current.name === 'products') {
+    $rootScope.sillyQA = function () {
+        if ($state.current.name === 'products') {
 
         }
-        $state.go($state.current.name, {}, {reload: true});
+        $state.go($state.current.name, {}, { reload: true });
     }
 
-    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-        console.log('toState:   ' + toState.name )
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+        console.log('toState:   ' + toState.name)
         console.log('fromState: ' + (fromState.name || 'Just got there! click again!'))
     })
 });
