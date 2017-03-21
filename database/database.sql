@@ -232,7 +232,7 @@ CREATE TABLE `products` (
   `created_date` datetime DEFAULT NULL,
   `updated_date` datetime DEFAULT NULL,
   PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -272,7 +272,7 @@ CREATE TABLE `submenu` (
 
 LOCK TABLES `submenu` WRITE;
 /*!40000 ALTER TABLE `submenu` DISABLE KEYS */;
-INSERT INTO `submenu` VALUES (1,'category_add','Thêm danh mục',NULL,1,0,15,1,NULL),(2,'category_update','Sửa danh mục',NULL,1,2,15,1,NULL),(3,'category_search','Tìm kiếm danh mục',NULL,1,1,15,1,NULL),(4,'product_search','Tìm kiếm sản phẩm',NULL,1,1,9,1,NULL);
+INSERT INTO `submenu` VALUES (1,'category_add','Thêm danh mục',NULL,1,0,15,1,NULL),(3,'category','Tìm kiếm danh mục',NULL,1,1,15,1,NULL),(4,'product_search','Tìm kiếm sản phẩm',NULL,1,1,9,1,NULL);
 /*!40000 ALTER TABLE `submenu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -310,4 +310,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-11 11:52:28
+-- Dump completed on 2017-03-21 22:00:40

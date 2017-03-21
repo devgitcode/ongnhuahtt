@@ -42,20 +42,7 @@
         <admin-side-bar ></admin-side-bar>
 
         <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Dashboard</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            
-            <!-- /.row -->
-            <div class="row">
-                
-                
-            </div>
-            <!-- /.row -->
+            <ui-view name="content" cache-view="false"></ui-view>
         </div>
         <!-- /#page-wrapper -->
 
@@ -83,6 +70,7 @@
     <script type="text/javascript" src="../js/ui-bootstrap-tpls-2.5.0.min.js"></script>
     <script type="text/javascript" src="../js/ocLazyLoad.min.js"></script>
     <script src="../js/angular-ui-router.js"></script>
+    <script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
     <script src="../js/ng-app.js"></script>
 
     <!--Controller-->

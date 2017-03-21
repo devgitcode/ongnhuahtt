@@ -44,11 +44,47 @@ app.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
     // .when('/grid',{
     //     templateUrl: 'about_us.html'
     // });
-    $stateProvider.state('admin-cp', {
-        url: '/admin-cp',
+    $stateProvider.state('dashboard', {
+        url: '/dashboard',
         views: {
             content: {
-                template: 'MainController'
+                templateUrl: 'dashboard.html'
+            }
+        },
+        resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
+            loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                // you can lazy load files for an existing module
+                return $ocLazyLoad.load(
+                    [
+                        '../vendor/metisMenu/metisMenu.min.js'
+                    ]);
+            }]
+        }
+    });
+
+    $stateProvider.state('category_add', {
+        url: '/category-add',
+        views: {
+            content: {
+                templateUrl: 'category/category-add.html'
+            }
+        },
+        resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
+            loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                // you can lazy load files for an existing module
+                return $ocLazyLoad.load(
+                    [
+                        '../vendor/metisMenu/metisMenu.min.js'
+                    ]);
+            }]
+        }
+    });
+
+    $stateProvider.state('category', {
+        url: '/category',
+        views: {
+            content: {
+                templateUrl: 'category/category-search.html'
             }
         },
         resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
@@ -63,5 +99,5 @@ app.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
     });
 
     console.log('LOD')
-    $urlRouterProvider.otherwise('/admin-cp');
+    
 });

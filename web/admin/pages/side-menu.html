@@ -228,7 +228,7 @@
         <ul class="nav" id="side-menu">
             <li class="sidebar-search">
                 <div class="input-group custom-search-form">
-                   <img src="../../images/logo.png" width="220" />
+                   <img src="../images/logo.png" width="220" />
                 </div>
 
             </li>
@@ -236,7 +236,7 @@
                 <a href="index.html"><i class="{{menu.icon}}" aria-hidden="true"></i> {{menu.label}}</a>
                 <ul ng-if="subMenus.length > 0" class="nav nav-second-level">
                     <li ng-repeat="submenu in subMenus | filter:{menu_id: menu.id}">
-                        <a href="flot.html">{{submenu.label}}</a>
+                        <a ui-sref="{{submenu.submenu}}">{{submenu.label}}</a>
                     </li>
                 </ul>
             </li>
