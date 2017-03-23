@@ -1,0 +1,247 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Quản Lý Danh Mục</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+
+<!-- /.row -->
+<div class="container-fluid">
+
+    <!--START ADD GROUP-->
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div id="add-group" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <button id="btnAddCate" data-toggle="modal" data-target="#add-modal" class="btn btn-primary" value="">Thêm Danh Mục</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--END ADD GROUP-->
+
+    <!--START ADD GROUP-->
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <div id="search-group" class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <input type="text" class="form-control" style="width: 400px;" id="txtSearchInput" placeholder="Nhập từ khóa tìm kiếm">
+                        </div>
+
+                        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Tìm kiếm</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--END ADD GROUP-->
+
+    <div id="result-group" class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Danh mục</th>
+                    <th>Mô Tả</th>
+                    <th>Thứ tự</th>
+                    <th>Ngày tạo</th>
+                    <th>Ngày sửa</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td ng-show="categories.length == null" colspan="8">
+                        <content-loading></content-loading>
+                    </td>
+                </tr>
+                <tr ng-repeat="c in categories">
+                    <td scope="row">{{$index + 1}}</td>
+                    <td>{{c.category_name}}</td>
+                    <td align="center">
+                        <button ng-click="getDescription(c.id)" data-toggle="modal" data-target="#description-modal" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-list-alt"></span> Xem chi tiết</button>
+                    </td>
+                    <td>{{c.order}}</td>
+                    <td>{{c.created_date | date:'dd/MM/yyyy'}}</td>
+                    <td>
+                        <span ng-show="c.updated_date.length > 0">{{c.updated_date | date:'dd/MM/yyyy'}}</span>
+                        <span ng-show="c.updated_date.length == null">Chưa cập nhật</span>
+                    </td>
+                    <td align="center">
+                        <span ng-show="c.active == 1" style="color: #5fba7d; font-weight:bold;">Đã kích hoạt</span>
+                        <span ng-show="c.active != 1" style="color: #d43f3a; font-weight:bold;">Chưa kích hoạt</span>
+                    </td>
+                    <td>
+
+                        <button ng-click="getCategory(c.id)" data-toggle="modal" data-target="#edit-modal" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Sửa</button>
+                        <button ng-click="deleteCategory(c.id)" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Xóa</button>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+
+<div id="add-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Thêm Danh Mục</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="lblCateName" class="col-sm-3 control-label">Tên Danh Mục:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="txtCateName" placeholder="Tên Danh Mục">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lblCateOrder" class="col-sm-3 control-label">Thứ tự:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="txtCateOrder" placeholder="Thứ tự danh mục hiển thị trên web">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lblCateDesc" class="col-sm-3 control-label">Mô tả:</label>
+                                <div class="col-sm-9">
+                                    <textarea type="text" class="form-control" id="txtCateDesc"></textarea>
+                                    <script>
+                                        // Replace the <textarea id="txtCateDesc"> with a CKEditor
+                                        // instance, using default configuration.
+
+                                        CKEDITOR.replace('txtCateDesc');
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" id="chkActive"> Kích hoạt</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="description-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    <span ng-show="descriptionObject != null">Mô tả - {{descriptionObject.category_name}}</span>
+                    <span ng-show="descriptionObject == null"><content-loading-inline></content-loading-inline></span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div ng-show="descriptionObject != null" ng-bind-html="descriptionObject.description | unsafe" class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                    </div>
+                    <div ng-show="descriptionObject == null" class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                        <content-loading-inline></content-loading-inline>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="edit-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Sửa Danh Mục</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div ng-show="categoryLoaded == false" class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                        <content-loading-inline></content-loading-inline>
+                    </div>
+                    <div ng-show="categoryLoaded == true" class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="lblCateName" class="col-sm-3 control-label">Tên Danh Mục:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" ng-model="category.category_name" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lblCateOrder" class="col-sm-3 control-label">Thứ tự:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" ng-model="category.order" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lblCateDesc" class="col-sm-3 control-label">Mô tả:</label>
+                                <div class="col-sm-9">
+                                    <textarea type="text" ng-model="category.description" data-ck-editor class="form-control" id="txtEditCateDesc"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" ng-model="category.active" parse-int ng-true-value="1" ng-false-value="0" id="chkActive"> Kích hoạt</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lblCateDesc" class="col-sm-3 control-label">Ngày tạo:</label>
+                                <div class="col-sm-9">
+                                    <label type="text" class="control-label">{{category.created_date | date: 'dd/MM/yyyy'}}</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lblCateDesc" class="col-sm-3 control-label">Ngày sửa:</label>
+                                <div class="col-sm-9">
+                                    <label ng-show="category.updated_date != null" type="text" class="control-label">{{category.updated_date | date: 'dd/MM/yyyy'}}</label>
+                                    <label ng-show="category.updated_date == null" type="text" class="control-label">Chưa cập nhật</label>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.row -->
