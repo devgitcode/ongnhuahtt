@@ -13,4 +13,8 @@ app.service('AdminCategoryService', function ($http, NodeUrl) {
         return $http.get(`${NodeUrl}/admin/categories/getDescription/${cid}`);
     }
 
+    this.addCategory = function(category){
+         return $http.post(`${NodeUrl}/admin/categories`,category);
+    }
+
 });

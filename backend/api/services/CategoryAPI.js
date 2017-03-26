@@ -63,8 +63,9 @@ module.exports = function(app){
          *    + Phải chỉ định rõ TÊN CỘT cần insert vào để tránh trường hợp sau này BỔ SUNG THÊM CỘT MỚI BỊ SAI INDEX
          * Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
          */ 
-        var query = "INSERT INTO categories (`category_name`, `order`, `active`,`created_date`)";       
-        query += ` VALUES ('${req.body.category_name}', '${req.body.order}', '${req.body.active}', '${moment().format('YYYY-MM-DD HH:mm:ss')}')`;
+        
+        var query = "INSERT INTO categories (`category_name`, `description`, `order`, `active`,`created_date`)";       
+        query += ` VALUES ('${req.body.category_name}','${req.body.description}', '${req.body.order}', ${req.body.active}, '${moment().format('YYYY-MM-DD HH:mm:ss')}')`;
         log.info("Preparing SQL: " + query);
         conn.executeQuery(query, req, res);  
         log.info("Execute " + query);

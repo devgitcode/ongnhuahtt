@@ -99,51 +99,58 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Thêm Danh Mục</h4>
             </div>
+            <form name="CategoryForm" class="form-horizontal" novalidate>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                        <form class="form-horizontal">
+                
+                    <div class="row">
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                            <div class="alert alert-danger" role="alert" ng-show="CategoryForm.$dirty && CategoryForm.$invalid">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <span class="sr-only">Error:</span> Tên Danh Mụcd không được bỏ trống.
+                            </div>
+                            <div class="alert alert-danger" role="alert" ng-show="CategoryForm.categoryOrder.$dirty && CategoryForm.categoryOrder.$invalid">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <span class="sr-only">Error:</span> Tên Danh Mục không được bỏ trống.
+                            </div>
+
                             <div class="form-group">
                                 <label for="lblCateName" class="col-sm-3 control-label">Tên Danh Mục:</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="txtCateName" placeholder="Tên Danh Mục">
+                                    <input type="text" name="categoryName" ng-model="category.category_name" class="form-control" required placeholder="Tên Danh Mục">
+
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="lblCateOrder" class="col-sm-3 control-label">Thứ tự:</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="txtCateOrder" placeholder="Thứ tự danh mục hiển thị trên web">
+                                    <input type="number" name="categoryOrder" min="0" ng-model="category.order" required class="form-control" placeholder="Thứ tự danh mục hiển thị trên web">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="lblCateDesc" class="col-sm-3 control-label">Mô tả:</label>
                                 <div class="col-sm-9">
-                                    <textarea type="text" class="form-control" id="txtCateDesc"></textarea>
-                                    <script>
-                                        // Replace the <textarea id="txtCateDesc"> with a CKEditor
-                                        // instance, using default configuration.
+                                    <textarea type="text" ng-model="category.description" data-ck-editor class="form-control" id="txtCateDesc"></textarea>
 
-                                        CKEDITOR.replace('txtCateDesc');
-                                    </script>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-9">
                                     <div class="checkbox">
-                                        <label><input type="checkbox" id="chkActive"> Kích hoạt</label>
+                                        <label><input type="checkbox" ng-model="category.active" ng-true-value="1" ng-false-value="0" ng-checked="checkbox == 1"  id="chkActive"> Kích hoạt</label>
                                     </div>
                                 </div>
                             </div>
 
-                        </form>
+
+                        </div>
                     </div>
-                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Lưu</button>
+                <button ng-click="addCategory()" ng-disabled="CategoryForm.categoryName.$invalid || CategoryForm.categoryOrder.$invalid" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Lưu</button>
             </div>
+            </form>
         </div>
     </div>
 </div>

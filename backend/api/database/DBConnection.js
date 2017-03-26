@@ -21,17 +21,17 @@ module.exports = {
             }   
             log.info('connected as id ' + connection.threadId);
             connection.query(query,function(err,result){
-                connection.release();
+                connection.release();  
                 if(!err) {
-                    log.error(err);
                     res.json(result);
                 }else{
                     log.error(err);
                     res.json(err);
-                }           
+                }  
+                       
             });
-
-            connection.on('error', function(err) {      
+            connection.on('error', function(err) { 
+                connection.release();             
                 log.error(err);
                 res.json({"code" : 100, "status" : "Error in connection database"});    
             });

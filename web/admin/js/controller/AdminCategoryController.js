@@ -39,6 +39,15 @@ app.controller('AdminCategoryController', function ($scope, $rootScope, $state, 
         });
     };
 
+    $scope.isCategoryAdded = false;
+    $scope.addCategory = function(){
+        $scope.isCategoryAdded = false;
+        
+        AdminCategoryService.addCategory($scope.category).then(function (res) {
+            $scope.isCategoryAdded = true;
+        });
+    }
+
 
     var initData = function () {
         showCategories();
