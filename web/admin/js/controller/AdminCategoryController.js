@@ -5,7 +5,9 @@ app.controller('AdminCategoryController', function ($scope, $rootScope, $state, 
     /* BEGIN PROPERTY */
     $rootScope.loaded = false;
     $scope.categoryLoaded = false;
-
+    $scope.category = {
+        active: 0
+    }
     /* END PROPERTY */
 
     /* BEGIN FUNCTION */

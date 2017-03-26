@@ -94,6 +94,8 @@ app.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
                 return $ocLazyLoad.load(
                     [
                         '../vendor/jquery/jquery.min.js',
+                        '../vendor/jquery/jquery.validate.min.js',
+                        '../vendor/jquery/additional-methods.min.js',
                         '../vendor/metisMenu/metisMenu.min.js',
                         '../vendor/bootstrap/js/bootstrap.min.js',
 

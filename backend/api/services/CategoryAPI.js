@@ -7,7 +7,7 @@ module.exports = function(app){
     
     app.get('/categories', function(req, res){
         //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
-        var query = "SELECT * FROM categories";
+        var query = "SELECT * FROM categories where active = 1";
         log.info("Preparing SQL: " + query);
         conn.executeQuery(query, req, res);  
         log.info("Get data from Categories " + query);
