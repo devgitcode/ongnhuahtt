@@ -60,6 +60,12 @@ module.exports = function (app, number, withoutSuffix, key, isFuture) {
         log.info("Execute " + query);
     });
 
+    app.get('/news/:type_id/:created_date', function(req, res){
+        var query = `SELECT TOP 4 * FROM news WHERE created_date = ${moment().format('YYYY-MM-DD HH:mm:ss')} orderBy created_date desc`;
+        log.info("Preparing SQL: " + query);
+        conn.executeQuery(query, req, res);
+        log.info("Execute: " +query);
+    });
 
     app.post('/news', function (req, res) {
         /**

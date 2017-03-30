@@ -21,9 +21,10 @@
                     <ul class="block-news clearfix">
                         <li ng-repeat="n in news | limitTo:pagination.itemsPerPage:(pagination.currentPage-1)*pagination.itemsPerPage">
                             <div class="item">
+
                                 <div class="item-img">
                                     <div class="item-img-info">
-                                        <a ui-sref="news_detail({ntype: 1, nid: 1})" title="{{n.title}}" class="img"> <img ng-if="n.image" ng-src="{{n.image}}" alt="{{n.title}}"></a>
+                                        <a ui-sref="news_detail({ntype: 1, nid: 1})" title="{{n.title}}" class="img"> <img ng-if="n.image" style="width: 180px; height: 180px" ng-src="{{n.image}}" alt="{{n.title}}"></a>
                                     </div>
                                 </div>
                                 <div class="block-news-title">
@@ -35,6 +36,7 @@
                                     <span>1 phút trước</span>
                                 </div>
                                 <div class="block-news-content">{{n.short_content}}</div>
+
                             </div>
 
                             <div class="clearfix">
@@ -45,21 +47,23 @@
             </div>
             <div class="col-md-3 col-sm-12 col-xs-12 col-right">
                 <div class="block">
-                    <div class="title-block"><span>Tin tức mới nhất</span></div>
-                    <ul class="content-block block-news">
-                        <li ng-repeat="n in news">
-                            <div class="item">
-                                <div>
-                                    <a href=""><img width="150" height="150" src="{{n.image}}" class="image" alt="404 error found"></a>
+                    <div class="new-title-header"><i class="glyphicon glyphicon-time" style="margin-right: 5px; color: #f3b719;"></i><span>Tin tức mới nhất</span></div>
+                    <div class="new-title-content">
+                    <ul class="content-block block-news clearfix">
+                        <li ng-repeat="n in news | limitTo: 5: -5 ">
+                            <div class="">
+                                <div class="item">
+                                    <div class="new-img">
+                                        <a ui-sref="news_detail({ntype: 1, nid: 1})" title="{{n.title}}" class="images"><img  ng-if="n.image" ng-src="{{n.image}}" alt="{{n.title}}"></a>
+                                    </div>
                                 </div>
-
-                                <div>
-                                    <a href="" title="{{n.title}}"><strong>{{n.title}}</strong></a>
+                                <div class="news-title">
+                                    <a hui-sref="news_detail({ntype: 1, nid: 1})" title="{{n.title}}"><strong>{{n.title}}</strong></a>
                                 </div>
-                                <div class="clearfix">
-                                </div>
+                                <div class="clearfix"></div>
                         </li>
                     </ul>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -71,8 +75,8 @@
 <div class="toolbar" ng-if="news.length > 0">
     <div class="pager">
         <div class="pages">
-            <ul class="pagination" uib-pagination total-items="pagination.totalItems" previous-text="Trở về" next-text="Tiếp" items-per-page="pagination.itemsPerPage" ng-model="pagination.currentPage"
-                ng-change="pageChanged()">
+            <ul class="pagination" uib-pagination total-items="pagination.totalItems" previous-text="Trở về" next-text="Tiếp" items-per-page="pagination.itemsPerPage"
+                ng-model="pagination.currentPage" ng-change="pageChanged()">
                 <!--<li><a href="">«</a></li>
                                         <li class="active"><a href="#">1</a></li>
                                         <li><a href="">2</a></li>

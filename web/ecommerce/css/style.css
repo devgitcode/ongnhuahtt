@@ -526,7 +526,7 @@ a.block-currency:focus {
 	color: #666 !important;
 }
 .block-company-wrapper .dropdown-menu a:hover {
-	color: rgb(243, 184, 28); !important;
+	color: rgb(243, 184, 28) !important;
 	background: none;
 }
 .block-company-wrapper .dropdown-menu li:last-child {
@@ -1244,7 +1244,7 @@ li.level0 > a:hover > span > .pin-bottom:before, #nav li.level0:hover > a > span
 #nav .level0-wrapper, #nav.classic .parent > ul {
 	background: #fff;
 	border-top: none;
-	border-bottom: 5px rgb(243, 184, 28); solid;
+	border-bottom: 5px rgb(243, 184, 28) solid;
 	box-shadow: 0 0 20px -5px;
 }
 #nav .level0-wrapper, #nav.classic ul.level0 {
@@ -1522,7 +1522,7 @@ li.level0 > a:hover > span > .pin-bottom:before, #nav li.level0:hover > a > span
 	border: 1px solid #ddd;
 	background: #fff;
 	border-top: none;
-	border-bottom: 5px rgb(243, 184, 28); solid;
+	border-bottom: 5px rgb(243, 184, 28) solid;
 	box-shadow: 0 0 20px -5px;
 }
 #nav > li.drop-menu ul li ul {
@@ -3096,6 +3096,7 @@ small {
 	display: inline-block;
 	width: 100%;
 }
+
 .item .item-inner .item-img .item-img-info a.product-image img {
 	width: 100%;
 	height: 100%;
@@ -3187,7 +3188,7 @@ small {
 
 
 .product-detail-bnt a.button.detail-bnt:hover {
-	background: rgb(243, 184, 28); !important;
+	background: rgb(243, 184, 28) !important;
 	margin: 0 11px 0 8px;
 	padding: 10px 10px 10px 8px;
 	color: #FFFFFF !important;
@@ -4496,7 +4497,7 @@ select#billing-address-select:focus {
 .one-page-checkout .allow .step-title .number {
 }
 .one-page-checkout .active .step-title h3 {
-	color: rgb(243, 184, 28); !important;
+	color: rgb(243, 184, 28) !important;
 	border-bottom: 0px #222 solid !important;
 	font-size: 14px;
 	font-family: 'Bitter',serif;
@@ -4801,7 +4802,7 @@ input.radio {
 .pager .pages li a {
 	box-shadow: none;
 	border: 1px solid #F3F3F3;
-	padding: 5px 10px;
+	padding: 5px 20px;
 	border-radius: 2px;
 	color: #333;
 }
@@ -4809,8 +4810,8 @@ input.radio {
 	z-index: 2;
 	color: #333;
 	cursor: default;
-	background-color: #f8f8f8;
-	border-color: #f3f3f3;
+	background-color: rgb(243, 184, 28);
+	border-color: #f5f5f5;
 }
 .pager .pages li > a:hover, .pager .pages li > a:focus {
 	background-color: rgb(243, 184, 28);
@@ -7519,10 +7520,10 @@ button.button.btn-proceed-checkout span {
 	margin-bottom: 0.75em;
 }
 .page-not-found .btn-home {
-	background-color:rgb(243, 184, 28);;
+	background-color:rgb(243, 184, 28);
 	border: medium none;
 	border-radius: 2px 2px 2px 2px;
-	box-shadow: 0 -4px 0 0 rgb(243, 184, 28); inset;
+	box-shadow: 0 -4px 0 0 rgb(243, 184, 28) inset;
 	color: #fff;
 	cursor: pointer;
 	font-family: Arial, Helvetica, sans-serif;
@@ -8286,12 +8287,12 @@ button.subscribe:before {
 		z-index: 100;
 		/* padding-left: 85px; */
 		box-shadow: 0 0 20px -5px;
-		border-left: 72px rgb(243, 184, 28); solid;
+		border-left: 72px rgb(243, 184, 28) solid;
 	}
 	.right-side-content>div.active {
 	}
 	.right-side-content .slider-chat, .right-side-content .slider-phone {
-		width: 212px
+		width: 212px;
 	}
 	.right-side-content .slider-email {
 		width: 602px
@@ -11558,4 +11559,5 @@ ul.slideshow {
 #ppslider-leftarrow:hover {
   background-position: 15px -121px;
 }
+
 }

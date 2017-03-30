@@ -22,6 +22,7 @@ app.controller('NewsController', function ($rootScope, $scope, $log, $http, Node
 
     var showNews = function () {
         $rootScope.loaded = false;
+        
         NewsService.getNews(ntype).then(function (res) {
             $scope.news = res.data;
             $rootScope.loaded = true;
@@ -30,7 +31,7 @@ app.controller('NewsController', function ($rootScope, $scope, $log, $http, Node
 
     var showNewLimit = function () {
         $rootScope.loaded = false;
-        NewsService.getNewsLimit(ntype,0,10).then(function (res) {
+        NewsService.getNewsLimit(ntype,0,6).then(function (res) {
             $scope.news = res.data;
             $rootScope.loaded = true;
         });
@@ -40,7 +41,7 @@ app.controller('NewsController', function ($rootScope, $scope, $log, $http, Node
     var newCount = function(){
         $rootScope.loaded = false;
         NewsService.getNewsCount(ntype).then(function(res){
-            $scope.pagination.totalItems = res.data[0];
+            $scope.pagination.totalItems = res.data[0].news_count;
             $rootScope.loaded = true;
         });
     }
@@ -71,4 +72,8 @@ app.controller('NewsController', function ($rootScope, $scope, $log, $http, Node
         showNews();
     };
     /* END FUNCTION */
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+        console.log('toState:   ' + toState.name)
+        console.log('fromState: ' + (fromState.name || 'Just got there! click again!'))
+    })
 });
