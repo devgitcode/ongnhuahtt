@@ -63,23 +63,7 @@ app.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
         }
     });
 
-    $stateProvider.state('category_add', {
-        url: '/category-add',
-        views: {
-            content: {
-                templateUrl: 'category/category-add.html'
-            }
-        },
-        resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
-            loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                // you can lazy load files for an existing module
-                return $ocLazyLoad.load(
-                    [
-                        '../vendor/metisMenu/metisMenu.min.js'
-                    ]);
-            }]
-        }
-    });
+    
 
     $stateProvider.state('category', {
         url: '/category',
@@ -97,15 +81,14 @@ app.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
                         '../vendor/jquery/jquery.min.js',
                         '../vendor/jquery/jquery.validate.min.js',
                         '../vendor/jquery/additional-methods.min.js',
-                        '../vendor/metisMenu/metisMenu.min.js',
                         '../vendor/bootstrap/js/bootstrap.min.js',
+                        '../vendor/metisMenu/metisMenu.min.js'
+                        
 
                     ]);
             }]
         }
     });
-
-    console.log('LOD')
 
 });
 

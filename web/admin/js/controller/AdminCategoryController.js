@@ -37,12 +37,14 @@ app.controller('AdminCategoryController', function ($scope, $rootScope, $state, 
             AdminCategoryService.searchCategories($scope.keyword, start, $scope.pagination.itemsPerPage).then(function (res) {
                 $scope.categories = res.data;
                 $scope.isCategoriesLoaded = true;
+                $rootScope.loaded = true;
             });
         } else {
             countCategories();
             AdminCategoryService.getCategories(start, $scope.pagination.itemsPerPage).then(function (res) {
                 $scope.categories = res.data;
                 $scope.isCategoriesLoaded = true;
+                $rootScope.loaded = true;
             });
         }
 
