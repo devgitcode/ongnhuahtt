@@ -16,7 +16,7 @@ var appInfo = require('../config/app_info.json');
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
-
+process.setMaxListeners(0);
 /**
  * Create HTTP server.
  */
@@ -29,7 +29,7 @@ var server = http.createServer(app);
 
 server.listen(port, function(){
   log.info("SERVER STARTED AT http://%s:%s", appInfo.host, appInfo.port);
-  process.setMaxListeners(0);
+  
 });
 server.on('error', onError);
 server.on('listening', onListening);

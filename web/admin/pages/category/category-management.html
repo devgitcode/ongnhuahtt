@@ -29,10 +29,10 @@
                 <div id="search-group" class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                     <form class="form-inline">
                         <div class="form-group">
-                            <input type="text" class="form-control" style="width: 400px;" id="txtSearchInput" placeholder="Nhập từ khóa tìm kiếm">
+                            <input type="text" ng-model="keyword" class="form-control" style="width: 400px;" id="txtSearchInput" placeholder="Nhập từ khóa tìm kiếm">
                         </div>
 
-                        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Tìm kiếm</button>
+                        <button type="button" ng-click="searchCategories()" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Tìm kiếm</button>
                     </form>
                 </div>
             </div>
@@ -81,7 +81,7 @@
                     <td>
 
                         <button ng-click="getCategory(c.id)" data-toggle="modal" data-target="#edit-modal" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Sửa</button>
-                        <button ng-click="deleteCategory(c.id)" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Xóa</button>
+                        <button ng-click="showDeleteModal(c)" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Xóa</button>
                     </td>
                 </tr>
 
@@ -206,7 +206,7 @@
                         <content-loading-inline></content-loading-inline>
                     </div>
                     <div ng-show="categoryLoaded == true" class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" id="editCategoryForm">
                             <div class="form-group">
                                 <label for="lblCateName" class="col-sm-3 control-label">Tên Danh Mục:</label>
                                 <div class="col-sm-6">
@@ -223,7 +223,7 @@
                             <div class="form-group">
                                 <label for="lblCateDesc" class="col-sm-3 control-label">Mô tả:</label>
                                 <div class="col-sm-9">
-                                    <textarea type="text" ng-model="category.description" data-ck-editor class="form-control" id="txtEditCateDesc"></textarea>
+                                    <textarea type="text" ng-model="category.description" ck-editor class="form-control" id="txtEditCateDesc"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -255,8 +255,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                <button type="button" onclick="validateForm()" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Lưu</button>
+                <button type="button" id="btnUpdateClose" class="btn btn-default" data-dismiss="modal">Không, cảm ơn</button>
+                <button type="button" onclick="updateCategory()" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Lưu</button>
                 <button type="button" style="display: none;" ng-click="addCategory()" id="btnAddCategory" />
             </div>
         </div>
@@ -272,20 +272,15 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">
                     <span>Xác nhận</span>
-                    
                 </h4>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div ng-show="descriptionObject != null" ng-bind-html="descriptionObject.description | unsafe" class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                    </div>
-                    <div ng-show="descriptionObject == null" class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                        <content-loading-inline></content-loading-inline>
-                    </div>
-                </div>
+                <span id="deleteName"></span>
+                <input type="hidden" id="deleteId" value=""/>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <button type="button" id="btnDeleteNo" class="btn btn-default" data-dismiss="modal">Không, cảm ơn</button>
+                <button ng-click="deleteCategory()" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Xóa</button>
             </div>
         </div>
     </div>
@@ -337,6 +332,25 @@
             angular.element($('#addCategoryForm')).scope().addCategory();
             $('#btnClose').click();
         }
+    }
+
+    var updateCategory = function (formId) {
+        if ($("#editCategoryForm").valid()) {
+            angular.element($('#editCategoryForm')).scope().updateCategory();
+            $('#btnUpdateClose').click();
+        }
+    }
+
+    var showDeleteModal = function(category){
+        $('#deleteName').html(`Bạn chắc chắn muốn xóa <b>${category.category_name}</b>`);
+        $('#deleteId').val(category.id);
+        $('#delete-modal').modal();
+    }
+
+    var deleteCategory = function(){
+        //var id = $('#deleteId').val();
+        angular.element($('#delete-modal')).scope().deleteCategory();
+        
     }
 </script>
 <!-- /.row -->

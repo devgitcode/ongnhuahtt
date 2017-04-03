@@ -18,11 +18,23 @@ app.service('AdminCategoryService', function ($http, NodeUrl) {
     }
 
     this.addCategory = function(category){
-         return $http.post(`${NodeUrl}/admin/categories`,category);
+         return $http.post(`${NodeUrl}/admin/categories`, category);
     }
 
     this.deleteCategory = function(cid){
          return $http.delete(`${NodeUrl}/admin/categories/${cid}`);
+    }
+
+    this.updateCategory = function(category){
+        return $http.put(`${NodeUrl}/admin/categories`, category);
+    }
+
+    this.searchCategories = function(keyword,start, limit){
+        return $http.get(`${NodeUrl}/admin/categories/search/${keyword}/${start}/${limit}`);
+    }
+
+    this.countSearchCategories = function (keyword) {
+        return $http.get(`${NodeUrl}/admin/categories/count/search/${keyword}`);
     }
 
 });

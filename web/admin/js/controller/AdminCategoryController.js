@@ -1,6 +1,6 @@
 var app = angular.module('web.application');
 
-app.controller('AdminCategoryController', function ($scope, $rootScope, $state, $log, $sce, $http, $element, NodeUrl, $stateParams, AdminCategoryService) {
+app.controller('AdminCategoryController', function ($scope, $rootScope, $state, $log, $sce, $window, $http, $element, NodeUrl, $stateParams, AdminCategoryService) {
 
     /* BEGIN PROPERTY */
     $rootScope.loaded = false;
@@ -8,7 +8,8 @@ app.controller('AdminCategoryController', function ($scope, $rootScope, $state, 
     $scope.category = {
         active: 0
     }
-    
+    $scope.keyword = "";
+
     $scope.pagination = {
         maxSize: 5,
         totalItems: 0,
@@ -29,18 +30,34 @@ app.controller('AdminCategoryController', function ($scope, $rootScope, $state, 
 
     var showCategories = function () {
         $scope.isCategoriesLoaded = false;
-        AdminCategoryService.getCategories(start, $scope.pagination.itemsPerPage).then(function (res) {
-            $scope.categories = res.data;
-            console.log($scope.pagination.totalItems);
-            $scope.isCategoriesLoaded = true;
-        });
+        if ($scope.keyword.length > 0) {
+            AdminCategoryService.countSearchCategories($scope.keyword).then(function (res) {
+                $scope.pagination.totalItems = res.data[0].cate_count;
+            });
+            AdminCategoryService.searchCategories($scope.keyword, start, $scope.pagination.itemsPerPage).then(function (res) {
+                $scope.categories = res.data;
+                $scope.isCategoriesLoaded = true;
+            });
+        } else {
+            countCategories();
+            AdminCategoryService.getCategories(start, $scope.pagination.itemsPerPage).then(function (res) {
+                $scope.categories = res.data;
+                $scope.isCategoriesLoaded = true;
+            });
+        }
+
 
     }
 
-    var goToFirstPage = function(){
+    $scope.searchCategories = function () {
+        goToFirstPage();
+        showCategories();
+    }
+
+    var goToFirstPage = function () {
         $scope.pagination.currentPage = 1;
         $scope.pageChanged();
-    }    
+    }
 
     $scope.getCategory = function (cid) {
         $scope.category = null;
@@ -59,22 +76,35 @@ app.controller('AdminCategoryController', function ($scope, $rootScope, $state, 
         });
     };
 
-    $scope.deleteCategory = function(id){
-        AdminCategoryService.deleteCategory(id).then(function (res) {
-            console.log('Deleted');
+    $scope.showDeleteModal = function (category) {
+        $scope.category = category;
+        showDeleteModal(category);
+    }
+
+    $scope.deleteCategory = function () {
+        AdminCategoryService.deleteCategory($scope.category.id).then(function (res) {
+            $window.btnDeleteNo.click();
             showCategories();
         });
     }
 
     $scope.isCategoryAdded = false;
-    $scope.addCategory = function(){
+    $scope.addCategory = function () {
         $scope.isCategoryAdded = false;
         AdminCategoryService.addCategory($scope.category).then(function (res) {
             $scope.isCategoryAdded = true;
             goToFirstPage();
             showCategories();
-            
+
         });
+        $scope.category = null;
+    }
+
+    $scope.updateCategory = function () {
+        AdminCategoryService.updateCategory($scope.category).then(function (res) {
+            showCategories();
+        });
+        $scope.category = null;
     }
 
 
@@ -100,9 +130,9 @@ app.controller('AdminCategoryController', function ($scope, $rootScope, $state, 
         console.log(start);
         showCategories();
     };
-    
+
 
     /* END FUNCTION */
 
-    
+
 });

@@ -29,13 +29,14 @@ app.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
     /**
      * Send request as x-www-form-urlencoded
      */
-    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
-    $httpProvider.defaults.transformRequest = function (data) {
-        if (data === undefined) {
-            return data;
-        }
-        return $.param(data);
-    }
+    // $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+    // $httpProvider.defaults.transformRequest = function (data) {
+    //     if (data === undefined) {
+    //         return data;
+    //     }
+    //     console.log($.param(data));
+    //     return $.param(data);
+    // }
     // $routeProvider.when('/',{
     //     templateUrl: 'main.html',
     //     controller: 'HomeController',
@@ -138,24 +139,20 @@ app.directive('ckEditor', function () {
         require: '?ngModel',
         link: function (scope, elm, attr, ngModel) {
             var ck = CKEDITOR.replace(elm[0]);
+
             if (!ngModel) return;
-            ck.on('instanceReady', function () {
-                ck.setData(ngModel.$viewValue);
-            });
-            function updateModel() {
+
+            ck.on('pasteState', function () {
                 scope.$apply(function () {
                     ngModel.$setViewValue(ck.getData());
                 });
-            }
-            ck.on('change', updateModel);
-            ck.on('key', updateModel);
-            ck.on('dataReady', updateModel);
+            });
 
             ngModel.$render = function (value) {
                 ck.setData(ngModel.$viewValue);
             };
         }
-    }
+    };
 });
 
 /* END NEW DIRECTIVE */
