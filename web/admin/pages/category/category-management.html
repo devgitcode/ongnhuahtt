@@ -41,6 +41,7 @@
     <!--END ADD GROUP-->
 
     <div id="result-group" class="table-responsive">
+        
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -56,15 +57,16 @@
             </thead>
             <tbody>
                 <tr>
-                    <td ng-show="categories.length == null" colspan="8">
+                    <td ng-show="isCategoriesLoaded == false" colspan="8">
                         <content-loading></content-loading>
                     </td>
                 </tr>
-                <tr ng-repeat="c in categories">
-                    <td scope="row">{{$index + 1}}</td>
+                <tr ng-show="isCategoriesLoaded == true" ng-repeat="c in categories">
+                    <td scope="row">{{$index + start + 1}}</td>
                     <td>{{c.category_name}}</td>
                     <td align="center">
-                        <button ng-click="getDescription(c.id)" data-toggle="modal" data-target="#description-modal" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-list-alt"></span> Xem chi tiết</button>
+                        <span ng-hide="c.description != null && c.description.length > 0">Chưa có mô tả</span>             
+                        <button ng-show="c.description != null && c.description.length > 0" ng-click="getDescription(c.id)" data-toggle="modal" data-target="#description-modal" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-list-alt"></span> Xem chi tiết</button>
                     </td>
                     <td>{{c.order}}</td>
                     <td>{{c.created_date | date:'dd/MM/yyyy'}}</td>
@@ -85,7 +87,15 @@
 
             </tbody>
         </table>
-
+        <div class="toolbar" ng-if="categories.length > 0">
+            <div class="pager">
+                <div class="pages">
+                    <ul class="pagination" uib-pagination total-items="pagination.totalItems" previous-text="Trở về" next-text="Tiếp" items-per-page="pagination.itemsPerPage"
+                        ng-model="pagination.currentPage" ng-change="pageChanged()">                       
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
@@ -119,10 +129,11 @@
 
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="lblCateOrder" class="col-sm-3 control-label">Thứ tự:</label>
                                 <div class="col-sm-6">
-                                    <input type="number" name="categoryOrder" min="0" ng-model="category.order" class="form-control" placeholder="Thứ tự danh mục hiển thị trên web">
+                                    <input type="text" name="categoryOrder" ng-model="category.order" class="form-control" placeholder="Thứ tự danh mục hiển thị trên web">
                                 </div>
                             </div>
 
@@ -136,7 +147,7 @@
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-9">
                                     <div class="checkbox">
-                                        <label><input type="checkbox" name="categoryActive" ng-model="category.active" ng-true-value="1" ng-false-value="0" ng-checked="checkbox == 1"  id="chkActive"> Kích hoạt</label>                                        {{category.active}}
+                                        <label><input type="checkbox" name="categoryActive" ng-model="category.active" ng-true-value="1" ng-false-value="0" ng-checked="checkbox == 1"  id="chkActive"> Kích hoạt</label>
                                     </div>
                                 </div>
                             </div>
@@ -146,8 +157,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                    <button ng-click="addCategory()" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Lưu</button>
+                    <button type="button" id="btnClose" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    <button onclick="addCategory()" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Lưu</button>
                 </div>
             </form>
         </div>
@@ -251,6 +262,35 @@
         </div>
     </div>
 </div>
+
+<!-- Delete confirm modal-->
+<div id="delete-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    <span>Xác nhận</span>
+                    
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div ng-show="descriptionObject != null" ng-bind-html="descriptionObject.description | unsafe" class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                    </div>
+                    <div ng-show="descriptionObject == null" class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                        <content-loading-inline></content-loading-inline>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Delete confirm modal-->
 <script>
     var getErrorMessage = function (message) {
         var errorIcon = `<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> `;
@@ -263,7 +303,7 @@
         categoryOrder: {
             required: true,
             digits: true,
-            min: 0
+            min: 1
         }
 
     }
@@ -274,12 +314,12 @@
         },
         categoryOrder: {
             required: getErrorMessage(`Thứ tự không được bỏ trống.`),
-            digits: getErrorMessage(`Thứ tự phải là kiểu số.`),
-            min: getErrorMessage(`Thứ tự phải là số dương.`)
+            digits: getErrorMessage(`Thứ tự phải là số. (VD: 1,2,3,...)`),
+            min: getErrorMessage(`Thứ tự phải là số lớn hơn 0.`)
         }
     }
 
-    var validator = $("#addCategoryForm").validate({
+    var form = $("#addCategoryForm").validate({
         errorLabelContainer: "#addErrorContainer",
         wrapper: 'div',
         //set this to false if you don't what to set focus on the first invalid input
@@ -290,14 +330,13 @@
         onfocusout: false,
         rules: customRules,
         messages: customMessages
-
     });
 
-    var validateForm = function () {
-        if (validator.valid()) {
-            $('#btnAddCategory').click();
+    var addCategory = function (formId) {
+        if ($("#addCategoryForm").valid()) {
+            angular.element($('#addCategoryForm')).scope().addCategory();
+            $('#btnClose').click();
         }
     }
-
 </script>
 <!-- /.row -->

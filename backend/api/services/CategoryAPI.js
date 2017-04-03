@@ -39,9 +39,17 @@ module.exports = function(app){
 
 
     //ADMIN
-    app.get('/admin/categories', function(req, res){
+    app.get('/admin/categories/limit/:start/:limit', function(req, res){
         //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
-        var query = "SELECT * FROM categories";
+        var query = `SELECT * FROM categories order by id desc limit ${req.params.start},${req.params.limit}`;
+        log.info("Preparing SQL: " + query);
+        conn.executeQuery(query, req, res);  
+        log.info("Get data from Categories " + query);
+    });
+
+    app.get('/admin/categories/count', function(req, res){
+        //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+        var query = `SELECT count(id) cate_count FROM categories`;
         log.info("Preparing SQL: " + query);
         conn.executeQuery(query, req, res);  
         log.info("Get data from Categories " + query);
@@ -65,7 +73,7 @@ module.exports = function(app){
          */ 
         
         var query = "INSERT INTO categories (`category_name`, `description`, `order`, `active`,`created_date`)";       
-        query += ` VALUES ('${req.body.category_name}','${req.body.description}', '${req.body.order}', ${req.body.active}, '${moment().format('YYYY-MM-DD HH:mm:ss')}')`;
+        query += ` VALUES ('${req.body.category_name}','${req.body.description}', ${req.body.order}, ${req.body.active}, '${moment().format('YYYY-MM-DD HH:mm:ss')}')`;
         log.info("Preparing SQL: " + query);
         conn.executeQuery(query, req, res);  
         log.info("Execute " + query);

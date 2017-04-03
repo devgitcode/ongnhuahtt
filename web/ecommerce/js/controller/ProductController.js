@@ -10,7 +10,7 @@ app.controller('ProductController', function ($scope, $rootScope, $state, $log, 
         currentPage: 1,
         itemsPerPage: 9
     };
-    var start = ($scope.pagination.currentPage - 1) * $scope.pagination.itemPerPage;
+    var start = ($scope.pagination.currentPage - 1) * $scope.pagination.itemsPerPage;
     var cid = 1;
     if ($stateParams.cid != "init") {
         cid = $stateParams.cid;
