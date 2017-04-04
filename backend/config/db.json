@@ -1,8 +1,9 @@
 {
     "connectionLimit": "100",
-    "host"     : "db4free.net",
-    "user"     : "ongnhuahtt",
-    "port"     : "3307",
+    
+    "host"     : "localhost",
+    "user"     : "root",
+    "port"     : "3306",
     "password" : "123456",
     "database" : "ongnhuahtt"
 }

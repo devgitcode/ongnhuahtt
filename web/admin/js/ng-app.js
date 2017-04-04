@@ -65,7 +65,7 @@ app.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
 
     
 
-    $stateProvider.state('category', {
+    $stateProvider.state('manage_category', {
         url: '/category',
         views: {
             content: {
@@ -83,6 +83,33 @@ app.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
                         '../vendor/jquery/additional-methods.min.js',
                         '../vendor/bootstrap/js/bootstrap.min.js',
                         '../vendor/metisMenu/metisMenu.min.js'
+                        
+
+                    ]);
+            }]
+        }
+    });
+
+    $stateProvider.state('manage_product', {
+        url: '/product',
+        views: {
+            content: {
+                templateUrl: 'product/product-management.html',
+                controller: 'AdminProductController'
+            }
+        },
+        resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
+            loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                // you can lazy load files for an existing module
+                return $ocLazyLoad.load(
+                    [
+                        '../vendor/jquery/jquery.min.js',
+                        '../vendor/jquery/jquery.validate.min.js',
+                        '../vendor/jquery/additional-methods.min.js',
+                        '../vendor/bootstrap/js/bootstrap.min.js',
+                        '../vendor/metisMenu/metisMenu.min.js',
+                        '../css/dropzone.css',
+                        '../js/dropzone.js'
                         
 
                     ]);

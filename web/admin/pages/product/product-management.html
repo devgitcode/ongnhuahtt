@@ -1,0 +1,308 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Quản Lý Sản Phẩm</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+
+<!-- /.row -->
+<div class="container-fluid">
+
+    <!--START ADD GROUP-->
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div id="add-group" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <button id="btnAdd" data-toggle="modal" data-target="#add-modal" class="btn btn-primary" value="">Thêm Sản Phẩm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--END ADD GROUP-->
+
+    <!--START ADD GROUP-->
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <div id="search-group" class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <input type="text" ng-model="keyword" class="form-control" style="width: 400px;" id="txtSearchInput" placeholder="Nhập từ khóa tìm kiếm">
+                        </div>
+
+                        <button type="button" ng-click="searchItems()" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Tìm kiếm</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--END ADD GROUP-->
+
+    <div id="result-group" class="table-responsive">
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Hình ảnh</th>
+                    <th>Sản phẩm</th>
+                    <th>Mô Tả</th>
+                    <th>Nơi hiển thị</th>
+                    <th>Ngày tạo</th>
+                    <th>Ngày sửa</th>
+                    <th>Danh mục</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td ng-show="isItemsLoaded == false" colspan="8">
+                        <content-loading></content-loading>
+                    </td>
+                </tr>
+                <tr ng-show="isItemsLoaded == true" ng-repeat="item in items">
+                    <td scope="row">{{$index + start + 1}}</td>
+                    <td align="center"><img height="100" src="../../{{item.image}}" /></td>
+                    <td>{{item.product_name}}</td>
+                    <td align="center" valign="middle">
+                        <span ng-hide="item.description != null && item.description.length > 0">Chưa có mô tả</span>
+                        <button ng-show="item.description != null && item.description.length > 0" ng-click="getDescription(item.product_id)" data-toggle="modal"
+                            data-target="#description-modal" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-list-alt"></span> Xem chi tiết</button>
+                    </td>
+                    <td style="color: #5fba7d; font-weight:bold;">
+                        <span ng-show="item.display_mode == 1" style="color: #5fba7d; font-weight:bold;">TRANG CHỦ</span><br>
+                        <span ng-show="item.display_mode == 1" style="color: #d43f3a; font-weight:bold;">TRANG SẢN PHẨM</span>
+                        <span ng-show="item.display_mode == 0" style="color: #d43f3a; font-weight:bold;">TRANG SẢN PHẨM</span>
+                    </td>
+                    <td>{{item.created_date | date:'dd/MM/yyyy'}}</td>
+                    <td>
+                        <span ng-show="item.updated_date.length > 0">{{item.updated_date | date:'dd/MM/yyyy'}}</span>
+                        <span ng-show="item.updated_date.length == null">Chưa cập nhật</span>
+                    </td>
+                    <td align="center">
+                        <span ng-show="item.active == 1" style="color: #5fba7d; font-weight:bold;">Đã kích hoạt</span>
+                        <span ng-show="item.active != 1" style="color: #d43f3a; font-weight:bold;">Chưa kích hoạt</span>
+                    </td>
+                    <td>
+
+                        <button ng-click="getItem(item.product_id)" data-toggle="modal" data-target="#edit-modal" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Sửa</button>
+                        <button ng-click="showDeleteModal(item)" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Xóa</button>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <div class="toolbar" ng-if="items.length > 0">
+            <div class="pager">
+                <div class="pages">
+                    <ul class="pagination" uib-pagination total-items="pagination.totalItems" previous-text="Trở về" next-text="Tiếp" items-per-page="pagination.itemsPerPage"
+                        ng-model="pagination.currentPage" ng-change="pageChanged()">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div id="add-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Thêm Danh Mục</h4>
+            </div>
+            <form name="ItemForm" id="addItemForm" class="form-horizontal">
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                            <div>
+                                <div class="alert alert-danger" role="alert" style="display:none" id="addErrorContainer"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lblItemName" class="col-sm-3 control-label">Danh Mục</label>
+                                <div class="col-sm-6">
+                                    <select name="itemName" ng-model="item.product_name" class="form-control">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lblItemName" class="col-sm-3 control-label">Tên Sản Phẩm</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="itemName" ng-model="item.product_name" class="form-control" placeholder="Tên Sản Phẩm">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lblItemImage" class="col-sm-3 control-label">Hình ảnh</label>
+                                <div id="upload">
+                                    <form action="/upload-target" class="dropzone dz-clickable"><div class="dz-default dz-message"><span>Click </span></div></form>
+                                    <input type="file" multiple="multiple" class="dz-hidden-input" style="visibility: hidden; position: absolute; top: 0px; left: 0px; height: 0px; width: 0px;">    
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lblItemDisplay" class="col-sm-3 control-label">Nơi hiển thị:</label>
+                                <div class="col-sm-6">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="itemDisplay" ng-model="item.display_mode" value="1"> TRANG SẢN PHẨM
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="itemDisplay" ng-model="item.display_mode" value="0"> TRANG CHỦ, TRANG SẢN PHẨM
+                                        </label>
+                                    </div>
+                                </div>                                
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lblItemDesc" class="col-sm-3 control-label">Mô tả:</label>
+                                <div class="col-sm-9">
+                                    <textarea type="text" name="itemDescription" ng-model="item.description" data-ck-editor class="form-control" id="txtItemDesc"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" name="categoryActive" ng-model="category.active" ng-true-value="1" ng-false-value="0" ng-checked="checkbox == 1"  id="chkActive"> Kích hoạt</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnClose" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    <button onclick="addItem()" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="description-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    <span ng-show="descriptionObject != null">Mô tả - {{descriptionObject.product_name}}</span>
+                    <span ng-show="descriptionObject == null"><content-loading-inline></content-loading-inline></span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div ng-show="descriptionObject != null" ng-bind-html="descriptionObject.description | unsafe" class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                    </div>
+                    <div ng-show="descriptionObject == null" class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                        <content-loading-inline></content-loading-inline>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Delete confirm modal-->
+<div id="delete-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    <span>Xác nhận</span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span id="deleteName"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnDeleteNo" class="btn btn-default" data-dismiss="modal">Không, cảm ơn</button>
+                <button ng-click="deleteItem()" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Delete confirm modal-->
+
+<script>
+    $(document).ready(function(){
+        $("div#upload").dropzone({ url: "/file/post" });
+    });
+    var getErrorMessage = function (message) {
+        var errorIcon = `<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> `;
+        return errorIcon + message;
+    }
+    var customRules = {
+        categoryName: {
+            required: true
+        },
+        categoryOrder: {
+            required: true,
+            digits: true,
+            min: 1
+        }
+
+    }
+
+    var customMessages = {
+        categoryName: {
+            required: getErrorMessage(`Tên danh mục không được bỏ trống.`)
+        },
+        categoryOrder: {
+            required: getErrorMessage(`Thứ tự không được bỏ trống.`),
+            digits: getErrorMessage(`Thứ tự phải là số. (VD: 1,2,3,...)`),
+            min: getErrorMessage(`Thứ tự phải là số lớn hơn 0.`)
+        }
+    }
+
+    var form = $("#addCategoryForm").validate({
+        errorLabelContainer: "#addErrorContainer",
+        wrapper: 'div',
+        //set this to false if you don't what to set focus on the first invalid input
+        focusInvalid: false,
+        //by default validation will run on input keyup and focusout
+        //set this to false to validate on submit only
+        onkeyup: false,
+        onfocusout: false,
+        rules: customRules,
+        messages: customMessages
+    });
+
+    var addCategory = function (formId) {
+        if ($("#addCategoryForm").valid()) {
+            angular.element($('#addCategoryForm')).scope().addCategory();
+            $('#btnClose').click();
+        }
+    }
+
+    var updateCategory = function (formId) {
+        if ($("#editCategoryForm").valid()) {
+            angular.element($('#editCategoryForm')).scope().updateCategory();
+            $('#btnUpdateClose').click();
+        }
+    }
+
+    var showDeleteModal = function (item) {
+        $('#deleteName').html(`Bạn chắc chắn muốn xóa <b>${item.product_name}</b>`);
+        $('#delete-modal').modal();
+    }
+
+    var deleteItem = function () {
+        angular.element($('#delete-modal')).scope().deleteItem();
+    }
+
+</script>
+<!-- /.row -->

@@ -99,4 +99,88 @@ module.exports = function (app) {
         conn.executeQuery(query, req, res);
         log.info("Execute " + query);
     });
+
+    //ADMIN
+    app.get('/admin/products/limit/:start/:limit', function(req, res){
+        //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+        var query = `SELECT * FROM products order by product_id desc limit ${req.params.start},${req.params.limit}`;
+        log.info("Preparing SQL: " + query);
+        conn.executeQuery(query, req, res);  
+        log.info("Get data from Products " + query);
+    });
+
+    app.get('/admin/products/search/:keyword/:start/:limit', function(req, res){
+        //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+        var query = `SELECT * FROM products where product_name like '%${req.params.keyword}%' order by product_id desc limit ${req.params.start},${req.params.limit}`;
+        log.info("Preparing SQL: " + query);
+        conn.executeQuery(query, req, res);  
+        log.info("Get data from products " + query);
+    });
+
+    app.get('/admin/products/count/search/:keyword', function(req, res){
+        //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+        var query = `SELECT count(product_id) item_count FROM products where product_name like '%${req.params.keyword}%'`;
+        log.info("Preparing SQL: " + query);
+        conn.executeQuery(query, req, res);  
+        log.info("Get data from products " + query);
+    });
+
+    app.get('/admin/products/count', function(req, res){
+        //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+        var query = `SELECT count(product_id) item_count FROM products`;
+        log.info("Preparing SQL: " + query);
+        conn.executeQuery(query, req, res);  
+        log.info("Get data from products " + query);
+    });
+
+    app.get('/admin/products/:id', function(req, res){
+        //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+        var query = `SELECT * FROM products WHERE id = ${req.params.id}`;
+        log.info("Preparing SQL: " + query);
+        conn.executeQuery(query, req, res);  
+        log.info("Execute " + query);
+    });
+
+    app.post('/admin/products',function(req, res){
+        /**
+         * Tách ra 2 dòng để build SQL vì xung đột dấu `
+         * QUAN TRỌNG: 
+         *    + INSERT thì phải insert CREATED_DATE
+         *    + Phải chỉ định rõ TÊN CỘT cần insert vào để tránh trường hợp sau này BỔ SUNG THÊM CỘT MỚI BỊ SAI INDEX
+         * Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+         */ 
+        
+        var query = "INSERT INTO products (`category_name`, `description`, `order`, `active`,`created_date`)";       
+        query += ` VALUES ('${req.body.category_name}','${req.body.description}', ${req.body.order}, ${req.body.active}, '${moment().format('YYYY-MM-DD HH:mm:ss')}')`;
+        log.info("Preparing SQL: " + query);
+        conn.executeQuery(query, req, res);  
+        log.info("Execute " + query);
+    });
+
+    app.put('/admin/products', function(req, res){
+        /**
+         * QUAN TRỌNG: UPDATE thì phải update UPDATED_DATE
+         * Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+         */ 
+        var query = `UPDATE products SET category_name = '${req.body.category_name}', \`order\`= '${req.body.order}', active = '${req.body.active}',description = '${req.body.description}', updated_date = '${moment().format('YYYY-MM-DD HH:mm:ss')}' WHERE id = ${req.body.id}`
+        log.info("Preparing SQL: " + query);
+        conn.executeQuery(query, req, res);  
+        log.info("Execute " + query);
+    });
+
+    app.delete('/admin/products/:id', function(req, res){
+        //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+        var query = `DELETE FROM products WHERE product_id = ${req.params.id}`;      
+        log.info("Preparing SQL: " + query);
+        conn.executeQuery(query, req, res);
+        log.info("Execute " + query);       
+    });
+
+    app.get('/admin/products/getDescription/:id', function(req, res){
+        //Tự động trả về kiểu JSON ra Browser. Code này đã được viết trong file backend\api\database\DBConnection.js
+        var query = `SELECT product_name, description FROM products where product_id = ${req.params.id}`;
+        log.info("Preparing SQL: " + query);
+        conn.executeQuery(query, req, res);  
+        log.info("Get data from products " + query);
+    });
 }

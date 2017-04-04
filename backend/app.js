@@ -20,6 +20,7 @@ var introductionAPI = require('./api/services/IntroductionAPI');
 var contactAPI = require('./api/services/ContactAPI');
 var footerAPI = require('./api/services/FooterAPI');
 var userAPI = require('./api/services/UsersAPI');
+var authAPI = require('./api/services/AuthenticationAPI');
 var app = express();
 
 // view engine setup
@@ -60,6 +61,7 @@ introductionAPI(app);
 contactAPI(app);
 footerAPI(app);
 userAPI(app);
+authAPI(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

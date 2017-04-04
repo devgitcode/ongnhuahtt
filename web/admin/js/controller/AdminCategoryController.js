@@ -99,14 +99,18 @@ app.controller('AdminCategoryController', function ($scope, $rootScope, $state, 
             showCategories();
 
         });
-        $scope.category = null;
+        $scope.category = {
+            active: 0
+        }
     }
 
     $scope.updateCategory = function () {
         AdminCategoryService.updateCategory($scope.category).then(function (res) {
             showCategories();
         });
-        $scope.category = null;
+        $scope.category = {
+            active: 0
+        }
     }
 
 
