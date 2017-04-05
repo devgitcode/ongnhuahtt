@@ -9,7 +9,7 @@
         <a class="navbar-brand" href="index.html">Hoàn Tuấn Thành</a>
     </div>
     <!-- /.navbar-header -->
-
+    <form id="logout" action="/user/logout" method="POST"></form>
     <ul class="nav navbar-top-links navbar-right">
        <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -21,7 +21,7 @@
                 <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                 </li>
                 <li class="divider"></li>
-                <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                <li><a href="#" onclick="document.getElementById('logout').submit();"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a>
                 </li>
             </ul>
             <!-- /.dropdown-user -->

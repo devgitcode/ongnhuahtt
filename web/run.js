@@ -71,6 +71,14 @@ app.post('/user/login', function (req, res) {
     
 });
 
+app.post('/user/logout', function (req, res) {
+    //writeLog(adminLogger, req.body.level, req.body.msyg);
+    
+    req.session.user = null;
+    res.redirect('/login');
+    
+});
+
 app.post('/ECommerceLogService', function (req, res) {
     writeLog(ecommerceLogger, req.body.level, req.body.msg);
     res.send("Update Log");

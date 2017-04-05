@@ -55,7 +55,7 @@
                             <div class="form-top-left">
                                 <h3>ĐĂNG NHẬP</h3>
                                 <p>Nhập tên tài khoản và mật khẩu bên dưới:</p>
-                                <p id="errorMessage" style="color: red;"></p>
+                                <p id="msg"></p>
                             </div>
                             <div class="form-top-right">
                                 <i class="fa fa-key"></i>
@@ -94,18 +94,28 @@
         <![endif]-->
     <script>
         $(document).ready(function () {
+            $(".login-form").keyup(function (event) {
+                if (event.keyCode == 13) {
+                    $("#btnLogin").click();
+                }
+            });
             $('#btnLogin').click(function () {
                 $.ajax({
                     url: $('form').attr('action'),
                     method: "POST",
                     data: { 'username': $('#username').val(), 'password': $('#password').val() },
                     success: function (data) {
-                        if(data == "LOGIN_FAILED"){
-                            $('#errorMessage').html("Sai tên đăng nhập hoặc mật khẩu. <br>Vui lòng đăng nhập lại.");
-                        }else{
-                            $('#errorMessage').html('');
+                        if (data == "LOGIN_FAILED") {
+                            $('#msg').css("color", 'red');
+                            $('#msg').html("Sai tên đăng nhập hoặc mật khẩu. <br>Vui lòng đăng nhập lại.");
+                        } else {
+                            $('#msg').html('');
                             location.href = data;
                         }
+                    },
+                    beforeSend: function(){
+                        $('#msg').css("color", '#888');
+                        $('#msg').html("Đang kiểm tra...");
                     }
                 });
             });
