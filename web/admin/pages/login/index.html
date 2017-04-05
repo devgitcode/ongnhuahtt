@@ -94,8 +94,8 @@
         <![endif]-->
     <script>
         $(document).ready(function () {
-            $(".login-form").keyup(function (event) {
-                if (event.keyCode == 13) {
+            $(".login-form").keypress(function (event) {
+                if (event.which == 13) {
                     $("#btnLogin").click();
                 }
             });
@@ -110,7 +110,9 @@
                             $('#msg').html("Sai tên đăng nhập hoặc mật khẩu. <br>Vui lòng đăng nhập lại.");
                         } else {
                             $('#msg').html('');
-                            location.href = data;
+                            location.href = data.url;
+                            sessionStorage.setItem('user', data);
+                            
                         }
                     },
                     beforeSend: function(){
