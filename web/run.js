@@ -7,9 +7,22 @@ var requestModule = require('request');
 var crypto = require('crypto');
 var md5sum = crypto.createHash('md5');
 var app = express();
+var session = require("express-session");
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(session({secret: "Shh, its a secret!"}));
+app.use("/login", express.static(__dirname + "/admin/pages/login"));
+app.use("/admin-cp/*",function(req, res, next){
+    
+    if(req.session.user == null){
+        req.session.requestUrl = req.url;
+        res.redirect('/login');
+    }
+    next();
+});
 app.use("/", express.static(__dirname + "/ecommerce"));
 app.use("/admin-cp", express.static(__dirname + "/admin"));
+
+
 if (server.port == "") {
     port = process.env.PORT;
 } else {
@@ -27,7 +40,7 @@ app.post('/AdminLogService', function (req, res) {
 });
 
 app.post('/user/login', function (req, res) {
-    //writeLog(adminLogger, req.body.level, req.body.msg);
+    //writeLog(adminLogger, req.body.level, req.body.msyg);
     
     var headers = {
         'User-Agent': 'Super Agent/0.0.1',
@@ -44,15 +57,14 @@ app.post('/user/login', function (req, res) {
     // Start the request
     requestModule(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            var obj = JSON.parse(body)[0];
-            console.log(JSON.parse(body)[0]);
-            // Print out the response body
-            var userCount = obj.user_count;
+            var user = JSON.parse(body)[0];
             
-            if(userCount == 1){
-                res.redirect('/admin-cp/pages/#/category');
+            
+            if(user != null && user != undefined){
+                req.session.user = user;
+                res.send('/admin-cp/pages/#/category');
             }else{
-                res.redirect('/admin-cp/pages/login');
+                res.send("LOGIN_FAILED");
             }
         }
     });
