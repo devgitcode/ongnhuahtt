@@ -9,13 +9,14 @@ app.controller('AdminProductController', function ($scope, $rootScope, $state, $
         active: 0
     }
     $scope.keyword = "";
-
     $scope.pagination = {
         maxSize: 5,
         totalItems: 0,
         currentPage: 1,
         itemsPerPage: 5
     };
+
+    $scope.categories;
     var start = ($scope.pagination.currentPage - 1) * $scope.pagination.itemsPerPage;
     $scope.start = start;
     /* END PROPERTY */
@@ -111,6 +112,17 @@ app.controller('AdminProductController', function ($scope, $rootScope, $state, $
         $scope.category = {
             active: 0
         }
+    }
+
+    $scope.isAddPageLoaded = false;
+    $scope.initAddPage = function(){
+        $scope.isAddPageLoaded = false;
+        AdminCategoryService.countCategories().then(function(res){
+            AdminCategoryService.getCategories(0, res.data[0].cate_count).then(function(response){
+                $scope.categories = response.data;
+                $scope.isAddPageLoaded = true;
+            });
+        });
     }
 
 
