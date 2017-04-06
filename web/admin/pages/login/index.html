@@ -111,8 +111,9 @@
                         } else {
                             $('#msg').html('');
                             location.href = data.url;
-                            sessionStorage.setItem('user', data);
-                            
+                            console.log(data.user);
+                            sessionStorage.setItem('user', data.user);
+                            console.log(sessionStorage.getItem('user'));
                         }
                     },
                     beforeSend: function(){

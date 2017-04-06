@@ -59,7 +59,7 @@
 </nav>
 <script>
     $(document).ready(function(){
-        var data = sessionStorage.getItem('user');
-        $('#fullname').text(data.fullname);
+        var data = JSON.parse(sessionStorage.getItem('user'));
+        $('#fullname').html(`<strong>${data.fullname}<strong>`);
     });
 </script>

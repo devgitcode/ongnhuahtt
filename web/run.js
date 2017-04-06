@@ -62,7 +62,7 @@ app.post('/user/login', function (req, res) {
             
             if(user != null && user != undefined){
                 req.session.user = user;
-                res.json({url: '/admin-cp/pages/#/category', user: user});
+                res.json({url: '/admin-cp/pages/#/category', user: JSON.stringify(user)});
             }else{
                 res.send("LOGIN_FAILED");
             }
